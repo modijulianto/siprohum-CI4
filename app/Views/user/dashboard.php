@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/sidebar_admin'); ?>
+<?= $this->extend('layouts/admin'); ?>
 
 <?= $this->section('content'); ?>
 <script language="JavaScript" type="text/javascript" src="/build/js/highcharts/highcharts.js"></script>

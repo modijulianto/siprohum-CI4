@@ -14,6 +14,8 @@ class M_auth extends Model
 
     public function getAkun($email)
     {
+        $this->select('*');
+        $this->select('tb_user.id AS id_user');
         $this->join('tb_unit', 'tb_unit.id_unit=tb_user.id_unit');
         $this->join('user_role', 'tb_user.role_id=user_role.id');
         return $this->where(['email' => $email])->first();

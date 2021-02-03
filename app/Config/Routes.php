@@ -32,10 +32,37 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/Admin', 'Admin::index', ['filter' => 'auth']);
-$routes->get('/Admin/(:any)', 'Admin::$1', ['filter' => 'auth']);
+
+$routes->get('/Dashboard', 'User::index', ['filter' => 'auth']);
+$routes->get('/Dashboard/(:any)', 'User::$1', ['filter' => 'auth']);
+
+$routes->get('/Profile', 'User::my_profile', ['filter' => 'auth']);
+$routes->post('/Profile/(:any)', 'User::$1', ['filter' => 'auth']);
+$routes->get('/Profile/(:any)', 'User::$1', ['filter' => 'auth']);
+
+$routes->get('/ChangePassword', 'User::change_password', ['filter' => 'auth']);
+$routes->post('/ChangePassword/(:any)', 'User::save_change_password', ['filter' => 'auth']);
+
+$routes->get('/Admin', 'Admin::index', ['filter' => 'isAdmin']);
+$routes->get('/Admin/(:any)', 'Admin::$1', ['filter' => 'isAdmin']);
+
+$routes->get('/Operator', 'Operator::index', ['filter' => 'isAdmin']);
+$routes->get('/Operator/(:any)', 'Operator::$1', ['filter' => 'isAdmin']);
+
+$routes->get('/Unit', 'Unit::index', ['filter' => 'isAdmin']);
+$routes->get('/Unit/(:any)', 'Unit::$1', ['filter' => 'isAdmin']);
+
+$routes->get('/MasterData', 'MasterData::index', ['filter' => 'isAdmin']);
+$routes->get('/MasterData/jenis/', 'MasterData::index', ['filter' => 'isAdmin']);
+$routes->get('/MasterData/jenis/(:any)', 'MasterData::$1', ['filter' => 'isAdmin']);
+
+$routes->get('/MasterData/kategori/', 'MasterData::kategori', ['filter' => 'isAdmin']);
+$routes->get('/MasterData/kategori/(:any)', 'MasterData::$1', ['filter' => 'isAdmin']);
+
+$routes->get('/MasterData/tentang/', 'MasterData::tentang', ['filter' => 'auth']);
+$routes->get('/MasterData/tentang/(:any)', 'MasterData::$1', ['filter' => 'auth']);
+
 $routes->get('/Auth', 'Auth::index');
-$routes->get('/Dashboard', 'User::index');
 
 /**
  * --------------------------------------------------------------------

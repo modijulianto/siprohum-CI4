@@ -99,6 +99,11 @@ class Auth extends BaseController
         return redirect()->to('/Auth');
     }
 
+    public function blocked()
+    {
+        return view('auth/blocked');
+    }
+
     public function logout()
     {
         session()->destroy();

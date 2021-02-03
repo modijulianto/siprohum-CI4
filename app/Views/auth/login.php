@@ -17,7 +17,7 @@
                     Email
                 </span>
                 <div class="wrap-input100 validate-input m-b-12" data-validate="Email is required">
-                    <input class="input100" type="email" name="email" id="email">
+                    <input class="input100" type="email" name="email" id="email" value="<?= old('email'); ?>">
                     <span class="focus-input100"></span>
                 </div>
 

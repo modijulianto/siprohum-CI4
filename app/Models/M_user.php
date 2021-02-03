@@ -6,6 +6,11 @@ use CodeIgniter\Model;
 
 class M_user extends Model
 {
+    protected $table = 'tb_user';
+    protected $primaryKey = 'id';
+    protected $useTimeStamps = FALSE;
+    protected $allowedFields = ['name', 'image', 'password'];
+
     public function getStatus()
     {
         $status = $this->db->table('tb_produk')

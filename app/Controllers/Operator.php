@@ -5,11 +5,11 @@ namespace App\Controllers;
 use App\Models\M_admin;
 use App\Models\M_auth;
 
-class Admin extends BaseController
+class Operator extends BaseController
 {
     protected $m_admin;
     protected $m_auth;
-    public function __construct()
+    function __construct()
     {
         $this->m_admin = new M_admin();
         $this->m_auth = new M_auth();
@@ -20,29 +20,26 @@ class Admin extends BaseController
     {
         $data = [
             'akun' => $this->m_auth->getAkun(session()->get('email')),
-            'title' => 'Data Administrator',
-            'meta' => 'Data Administrator',
+            'title' => 'Data Operator',
+            'meta' => 'Data Operator',
             'unit' => $this->m_admin->get_unit(),
-            'adm' => $this->m_admin->get_admin(),
+            'opr' => $this->m_admin->get_operator(),
             'validation' => $this->validation
         ];
 
-        return view('data_table/data_admin', $data);
+        return view('data_table/data_operator', $data);
     }
 
     public function save()
     {
         if (!$this->validate([
-            'nama' => [
-                'rules' => 'required',
-                'errors' => ['required' => 'Nama harus diisi']
-            ],
+            'nama' => 'required',
             'email' => [
                 'rules' => 'required|valid_email|is_unique[tb_user.email]',
                 'errors' => ['is_unique' => 'Email sudah terdaftar']
             ],
-            'admin' => [
-                'rules' => 'is_image[admin]|mime_in[admin,image/jpg,image/jpeg,image/png,image/JPG,image/JPEG,image/PNG]',
+            'operator' => [
+                'rules' => 'is_image[operator]|mime_in[operator,image/jpg,image/jpeg,image/png,image/JPG,image/JPEG,image/PNG]',
                 'errors' => [
                     'is_image' => 'File tidak valid, upload gambar.',
                     'mime_in' => 'Format gambar harus <i>jpg, jpeg, png, JPG, JPEG</i>.'
@@ -63,11 +60,11 @@ class Admin extends BaseController
                 ]
             ],
         ])) {
-            return redirect()->to('/Admin')->withInput();
+            return redirect()->to('/Operator')->withInput();
         }
 
         // ambil data file gambar
-        $fileFoto = $this->request->getFile('admin');
+        $fileFoto = $this->request->getFile('operator');
         if ($fileFoto->getError() == 4) {
             $namaFoto = "default.jpeg";
         } else {
@@ -82,18 +79,40 @@ class Admin extends BaseController
             'email' => $this->request->getVar('email'),
             'image' => $namaFoto,
             'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-            'role_id' => 1,
+            'role_id' => 2,
             'id_unit' => 1,
             'is_active' => 1,
             'date_created' => time(),
         ]);
 
-        session()->setFlashdata('admin', 'Ditambahkan');
+        session()->setFlashdata('operator', 'Ditambahkan');
 
-        return redirect()->to('/Admin');
+        return redirect()->to('/Operator');
     }
 
-    public function update_admin()
+    public function activate()
+    {
+        $data['active'] = $this->m_admin->get_user_wh($_POST['id']);
+        $is_active = $data['active']['is_active'];
+
+        if ($is_active == 1) {
+            $this->m_admin->save([
+                'id' => $_POST['id'],
+                'is_active' => 0
+            ]);
+            $msg = ['nonaktif' => "Dinonaktifkan."];
+        } else {
+            $this->m_admin->save([
+                'id' => $_POST['id'],
+                'is_active' => 1
+            ]);
+            $msg = ['aktif' => "Diaktifkan."];
+        }
+
+        echo json_encode($msg);
+    }
+
+    public function update_operator()
     {
         echo json_encode($this->m_admin->get_user_wh($_POST['id']));
     }
@@ -102,18 +121,18 @@ class Admin extends BaseController
     {
         if (!$this->validate([
             'nama' => 'required',
-            'admin' => [
-                'rules' => 'is_image[admin]|mime_in[admin,image/jpg,image/jpeg,image/png,image/JPG,image/JPEG,image/PNG]',
+            'operator' => [
+                'rules' => 'is_image[operator]|mime_in[operator,image/jpg,image/jpeg,image/png,image/JPG,image/JPEG,image/PNG]',
                 'errors' => [
                     'is_image' => 'File tidak valid, upload gambar.',
                     'mime_in' => 'Format gambar harus <i>jpg, jpeg, png, JPG, JPEG</i>.'
                 ]
             ],
         ])) {
-            return redirect()->to('/Admin')->withInput();
+            return redirect()->to('/Operator')->withInput();
         }
 
-        $fileFoto = $this->request->getFile('admin');
+        $fileFoto = $this->request->getFile('operator');
         $old_image = $this->request->getVar('old_image');
 
         // cek gambar, apakah tetap gambar yang lama
@@ -136,9 +155,9 @@ class Admin extends BaseController
             'image' => $namaFoto,
         ]);
 
-        session()->setFlashdata('admin', 'Diubah');
+        session()->setFlashdata('operator', 'Diubah');
 
-        return redirect()->to('/Admin');
+        return redirect()->to('/Operator');
     }
 
     public function delete($id)
@@ -156,7 +175,7 @@ class Admin extends BaseController
             }
 
             $this->m_admin->delete($user['id']);
-            session()->setFlashdata('admin', 'Dihapus');
+            session()->setFlashdata('operator', 'Dihapus');
         } else {
             session()->setFlashdata('message', '
             <script>
@@ -166,6 +185,6 @@ class Admin extends BaseController
             </script>
             ');
         }
-        return redirect()->to('/Admin');
+        return redirect()->to('/Operator');
     }
 }

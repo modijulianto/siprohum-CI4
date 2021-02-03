@@ -58,7 +58,7 @@ $(function () {
 	$(".tombolTambahJenis").on("click", function () {
 		$("#judulModal").html("Input Data Jenis Produk");
 		$(".modal-footer button[type=submit]").html("Add Data");
-		$(".modal-body form").attr("action", "/Master_data/save");
+		$(".modal-body form").attr("action", "/MasterData/save_jenis");
 
 		$("#id").val("");
 		$("#jenis").val("");
@@ -69,7 +69,7 @@ $(function () {
 	$(".tombolTambahKategori").on("click", function () {
 		$("#judulModal").html("Input Data Kategori");
 		$(".modal-footer button[type=submit]").html("Add Data");
-		$(".modal-body form").attr("action", "/Master_data/data_kategori/save");
+		$(".modal-body form").attr("action", "/MasterData/save_kategori");
 
 		$("#id").val("");
 		$("#kategori").val("");
@@ -80,7 +80,7 @@ $(function () {
 	$(".tombolTambahTentang").on("click", function () {
 		$("#judulModal").html("Input Data Tentang");
 		$(".modal-footer button[type=submit]").html("Add Data");
-		$(".modal-body form").attr("action", "/Tentang/save");
+		$(".modal-body form").attr("action", "/MasterData/save_tentang");
 
 		$("#id").val("");
 		$("#tentang").val("");

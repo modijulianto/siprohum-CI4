@@ -27,15 +27,23 @@ class M_admin extends Model
         return $this->findAll();
     }
 
-    public function get_admin_wh($id)
+    public function get_operator()
     {
-        $this->where(['id' => $id]);
-        return $this->first();
+        $this->join('tb_unit', 'tb_unit.id_unit=tb_user.id_unit');
+        $this->orderBy('id', 'DESC');
+        $this->where(['role_id' => 2]);
+        return $this->findAll();
     }
 
-    public function getAdmin_byId($id)
+    public function get_user_md5($id)
     {
         return $this->db->table('tb_user')
             ->where('md5(id)', $id)->get()->getRowArray();
+    }
+
+    public function get_user_wh($id)
+    {
+        $this->where(['id' => $id]);
+        return $this->first();
     }
 }
