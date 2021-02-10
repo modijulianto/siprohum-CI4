@@ -59,6 +59,15 @@ $routes->get('/MasterData/jenis/(:any)', 'MasterData::$1', ['filter' => 'isAdmin
 $routes->get('/MasterData/kategori/', 'MasterData::kategori', ['filter' => 'isAdmin']);
 $routes->get('/MasterData/kategori/(:any)', 'MasterData::$1', ['filter' => 'isAdmin']);
 
+// Untuk halaman operator
+$routes->get('/ProdukHukum/add', 'ProdukHukum::add', ['filter' => 'auth']);
+$routes->get('/ProdukHukum/update/(:any)', 'ProdukHukum::update/$1', ['filter' => 'auth']);
+$routes->get('/ProdukHukum/delete/(:any)', 'ProdukHukum::delete/$1', ['filter' => 'auth']);
+$routes->get('/ProdukHukum/detail/(:any)', 'ProdukHukum::detail/$1', ['filter' => 'auth']);
+$routes->get('/ProdukHukum', 'ProdukHukum::index', ['filter' => 'auth']);
+// Untuk halaman admin
+$routes->get('/ProdukHukum/(:any)', 'ProdukHukum::produk_hukum/$1', ['filter' => 'isAdmin']);
+
 $routes->get('/MasterData/tentang/', 'MasterData::tentang', ['filter' => 'auth']);
 $routes->get('/MasterData/tentang/(:any)', 'MasterData::$1', ['filter' => 'auth']);
 

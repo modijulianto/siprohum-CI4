@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\M_admin;
 use App\Models\M_auth;
-use App\Models\M_master_data;
+use App\Models\M_masterData;
 
 class MasterData extends BaseController
 {
@@ -15,7 +15,7 @@ class MasterData extends BaseController
     public function __construct()
     {
         $this->m_admin = new M_admin();
-        $this->m_md = new M_master_data();
+        $this->m_md = new M_masterData();
         $this->m_auth = new M_auth();
         $this->validation = \Config\Services::validation();
     }
@@ -192,11 +192,8 @@ class MasterData extends BaseController
     {
         if (!$this->validate([
             'tentang' => [
-                'rules' => 'required|is_unique[tb_tentang.nama_tentang]',
-                'errors' => [
-                    'required' => 'Nama tentang produk hukum harus diisi',
-                    'is_unique' => 'Nama tentang sudah terdaftar'
-                ]
+                'rules' => 'required',
+                'errors' => ['required' => 'Nama tentang produk hukum harus diisi',]
             ]
         ])) {
             return redirect()->to('/MasterData/tentang')->withInput();

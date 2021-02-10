@@ -94,7 +94,7 @@
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
                             <ul class="nav side-menu">
-                                <li><a href="User"><i class="fa fa-bar-chart"></i> DASHBOARD </a></li>
+                                <li><a href="/Dashboard"><i class="fa fa-bar-chart"></i> DASHBOARD </a></li>
                                 <?php if ($akun['role_id'] == 1) { ?>
                                     <li><a href="/Admin"><i class="fa fa-male"></i> DATA ADMIN </a></li>
                                     <li><a href="/Operator"><i class="fa fa-users"></i> DATA OPERATOR </a></li>
@@ -102,7 +102,7 @@
                                     <li><a><i class="fa fa-book"></i> PRODUK HUKUM <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <?php foreach ($unit as $val) { ?>
-                                                <li><a href="/Produk_hukum/data_prohum/<?= $val['id_unit'] ?>"><?= $val['nama_unit']; ?> </a></li>
+                                                <li><a href="/ProdukHukum/<?= md5($val['id_unit']) ?>"><?= $val['nama_unit']; ?> </a></li>
                                             <?php } ?>
                                         </ul>
                                     </li>
@@ -114,7 +114,7 @@
                                         </ul>
                                     </li>
                                 <?php } else { ?>
-                                    <li><a href="/Produk_hukum/data_produkhukum"><i class="fa fa-book"></i> DATA PRODUK HUKUM </a></li>
+                                    <li><a href="/Produk_hukum/<?= md5($akun['id_unit']); ?>"><i class="fa fa-book"></i> DATA PRODUK HUKUM </a></li>
                                     <li><a href="/tentang"><i class="fa fa-info"></i> Tentang </a></li>
                                 <?php } ?>
                                 <li><a href="/Profile"><i class="fa fa-user"></i> MY PROFILE </a></li>
@@ -285,7 +285,7 @@
             allowClear: true,
             placeholder: 'masukkan tentang',
             ajax: {
-                url: "<?php echo base_url(); ?>Produk_hukum/find_tentang",
+                url: "/ProdukHukum/find_tentang",
                 type: "post",
                 dataType: 'json',
                 delay: 250,
@@ -301,6 +301,7 @@
                 },
                 cache: true
             }
+
         });
 
         function previewFile() {

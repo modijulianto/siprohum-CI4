@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class M_master_data extends Model
+class M_masterData extends Model
 {
     // protected $table = 'tb_tentang';
     // protected $primaryKey = 'id_tentang';
