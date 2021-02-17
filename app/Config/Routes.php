@@ -70,6 +70,7 @@ $routes->get('/ProdukHukum/(:any)', 'ProdukHukum::produk_hukum/$1', ['filter' =>
 
 $routes->get('/MasterData/tentang/', 'MasterData::tentang', ['filter' => 'auth']);
 $routes->get('/MasterData/tentang/(:any)', 'MasterData::$1', ['filter' => 'auth']);
+$routes->get('/Tentang', 'MasterData::tentang', ['filter' => 'auth']);
 
 $routes->get('/Auth', 'Auth::index');
 

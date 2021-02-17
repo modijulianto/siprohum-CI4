@@ -8,7 +8,6 @@
 </div>
 
 <div class="clearfix"></div>
-
 <div class="row">
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
@@ -19,11 +18,11 @@
             <div class="x_content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <a href="Export/excel_admin" class="btn btn-primary" style="float: left">
+                        <a href="/Export/excel_admin" class="btn btn-primary" style="float: left">
                             <i class="fa fa-download"></i>
                             Excel
                         </a>
-                        <a href="Export/pdf_admin" class="btn btn-primary" style="float: left">
+                        <a href="/Export/pdf_admin" class="btn btn-primary" style="float: left">
                             <i class="fa fa-download"></i>
                             PDF
                         </a>

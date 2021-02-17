@@ -19,14 +19,6 @@
             <div class="x_content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <a href="Export/excel_unit" class="btn btn-primary" style="float: left">
-                            <i class="fa fa-download"></i>
-                            Excel
-                        </a>
-                        <a href="Export/pdf_unit" class="btn btn-primary" style="float: left">
-                            <i class="fa fa-download"></i>
-                            PDF
-                        </a>
                         <button type="button" id="tombolTambahUnit" class="btn btn-primary tombolTambahUnit" data-toggle="modal" data-target="#modalUnit" style="float: right">
                             <i class="fa fa-plus"></i>
                             Add Unit

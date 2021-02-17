@@ -114,8 +114,8 @@
                                         </ul>
                                     </li>
                                 <?php } else { ?>
-                                    <li><a href="/Produk_hukum/<?= md5($akun['id_unit']); ?>"><i class="fa fa-book"></i> DATA PRODUK HUKUM </a></li>
-                                    <li><a href="/tentang"><i class="fa fa-info"></i> Tentang </a></li>
+                                    <li><a href="/ProdukHukum"><i class="fa fa-book"></i> DATA PRODUK HUKUM </a></li>
+                                    <li><a href="/Tentang"><i class="fa fa-info"></i> Tentang </a></li>
                                 <?php } ?>
                                 <li><a href="/Profile"><i class="fa fa-user"></i> MY PROFILE </a></li>
                                 <li><a href="/ChangePassword"><i class="fa fa-key"></i> CHANGE PASSWORD </a></li>

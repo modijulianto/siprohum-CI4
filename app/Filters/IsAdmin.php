@@ -16,7 +16,7 @@ class IsAdmin implements FilterInterface
         } else {
             // jika sudah login, cek apakah dia seorang admin
             if (session()->get('role_id') != 1) {
-                return redirect()->to('Auth/blocked');
+                return redirect()->to('/Auth/blocked');
             }
         }
     }

@@ -29,21 +29,26 @@ class Auth extends BaseController
         $akun = $this->m_auth->getAkun($email);
 
         if ($akun) {
-            if (password_verify($password, $akun['password'])) {
-                // dd($akun);
-                $data = [
-                    'id_akun' => $akun['id'],
-                    'nama' => $akun['name'],
-                    'email' => $akun['email'],
-                    'foto' => $akun['image'],
-                    'role_id' => $akun['role_id'],
-                    'id_unit' => $akun['id_unit'],
-                    'date_created' => $akun['date_created'],
-                ];
-                session()->set($data);
-                return redirect()->to('/Dashboard');
+            if ($akun['is_active'] == 1) {
+                if (password_verify($password, $akun['password'])) {
+                    // dd($akun);
+                    $data = [
+                        'id_akun' => $akun['id'],
+                        'nama' => $akun['name'],
+                        'email' => $akun['email'],
+                        'foto' => $akun['image'],
+                        'role_id' => $akun['role_id'],
+                        'id_unit' => $akun['id_unit'],
+                        'date_created' => $akun['date_created'],
+                    ];
+                    session()->set($data);
+                    return redirect()->to('/Dashboard');
+                } else {
+                    session()->setFlashdata('registered', '<div class="alert alert-warning" role="alert"><b>Failed!</b> wrong password!</div>');
+                    return redirect()->to('/Auth');
+                }
             } else {
-                session()->setFlashdata('registered', '<div class="alert alert-warning" role="alert"><b>Failed!</b> wrong password!</div>');
+                session()->setFlashdata('registered', '<div class="alert alert-warning" role="alert"><b>Failed!</b> your email is not activated!</div>');
                 return redirect()->to('/Auth');
             }
         } else {

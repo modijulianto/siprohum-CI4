@@ -27,12 +27,24 @@ class M_admin extends Model
         return $this->findAll();
     }
 
+    public function get_num_rows_admin()
+    {
+        $this->where(['role_id' => 1]);
+        return $this->countAllResults();
+    }
+
     public function get_operator()
     {
         $this->join('tb_unit', 'tb_unit.id_unit=tb_user.id_unit');
         $this->orderBy('id', 'DESC');
         $this->where(['role_id' => 2]);
         return $this->findAll();
+    }
+
+    public function get_num_rows_operator()
+    {
+        $this->where(['role_id' => 2]);
+        return $this->countAllResults();
     }
 
     public function get_user_md5($id)
