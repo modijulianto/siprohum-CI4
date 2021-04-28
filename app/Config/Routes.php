@@ -31,7 +31,19 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+// ROUTES HOME
 $routes->get('/', 'Home::index');
+
+$routes->get('/statistik', 'Home::statistik');
+$routes->get('/statistik/(:any)', 'Home::$1');
+
+$routes->get('/Jdih/unit', 'Home::index');
+$routes->get('/Jdih/unit/(:any)', 'Home::unit/$1');
+
+$routes->get('/Jdih/kategori', 'Home::index');
+$routes->get('/Jdih/kategori/(:any)', 'Home::kategori/$1');
+// END ROUTES HOME
 
 $routes->get('/Dashboard', 'User::index', ['filter' => 'auth']);
 $routes->get('/Dashboard/(:any)', 'User::$1', ['filter' => 'auth']);
