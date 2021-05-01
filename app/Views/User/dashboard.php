@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/admin'); ?>
+<?= $this->extend('Layouts/admin'); ?>
 
 <?= $this->section('content'); ?>
 <script language="JavaScript" type="text/javascript" src="/build/js/highcharts/highcharts.js"></script>

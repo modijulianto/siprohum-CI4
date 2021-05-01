@@ -20,7 +20,7 @@ class Home extends BaseController
 		$data['kategori'] = $this->m_home->get_kategori();
 		$data['tahun'] = $this->m_home->get_tahun();
 		$data['status'] = $this->m_home->get_status();
-		return view('home/beranda', $data);
+		return view('Home/Views/beranda', $data);
 	}
 
 	public function statistik()
@@ -29,7 +29,7 @@ class Home extends BaseController
 		$data['unit'] = $this->m_home->get_unit();
 		$data['jenis'] = $this->m_home->get_statistik_by_jenis();
 		$data['tahun'] = $this->m_home->get_statistik_by_tahun();
-		return view('home/statistik', $data);
+		return view('Home/Views/statistik', $data);
 	}
 
 	public function unit($id)
@@ -44,7 +44,7 @@ class Home extends BaseController
 		$data['kategori'] = $this->m_home->get_kategori();
 		$data['tahun'] = $this->m_home->get_tahun();
 		$data['status'] = $this->m_home->get_status();
-		return view('home/unit', $data);
+		return view('Home/Views/unit', $data);
 	}
 
 	public function kategori($id)
@@ -58,7 +58,7 @@ class Home extends BaseController
 		$data['kategori'] = $this->m_home->get_kategori();
 		$data['tahun'] = $this->m_home->get_tahun();
 		$data['status'] = $this->m_home->get_status();
-		return view('home/kategori', $data);
+		return view('Home/Views/kategori', $data);
 	}
 
 	public function cari($cari = null)
@@ -72,7 +72,7 @@ class Home extends BaseController
 		$data['kategori'] = $this->m_home->get_kategori();
 		$data['tahun'] = $this->m_home->get_tahun();
 		$data['status'] = $this->m_home->get_status();
-		return view('home/hasil_cari', $data);
+		return view('Home/Views/hasil_cari', $data);
 	}
 
 	//--------------------------------------------------------------------

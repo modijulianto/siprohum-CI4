@@ -27,7 +27,7 @@ class Admin extends BaseController
             'validation' => $this->validation
         ];
 
-        return view('data_table/data_admin', $data);
+        return view('DataTable/data_admin', $data);
     }
 
     public function save()

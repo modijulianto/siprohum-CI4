@@ -32,7 +32,7 @@ class MasterData extends BaseController
             'validation' => $this->validation,
         ];
 
-        return view('data_table/data_jenis_produk', $data);
+        return view('DataTable/data_jenis_produk', $data);
     }
 
     public function save_jenis()
@@ -111,7 +111,7 @@ class MasterData extends BaseController
             'validation' => $this->validation,
         ];
 
-        return view('data_table/data_kategori', $data);
+        return view('DataTable/data_kategori', $data);
     }
 
     public function save_kategori()
@@ -185,7 +185,7 @@ class MasterData extends BaseController
             'validation' => $this->validation,
         ];
 
-        return view('data_table/data_tentang', $data);
+        return view('DataTable/data_tentang', $data);
     }
 
     public function save_tentang()

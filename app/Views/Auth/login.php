@@ -1,4 +1,4 @@
-<?= $this->extend('auth/template'); ?>
+<?= $this->extend('Auth/template'); ?>
 
 <?= $this->section('content'); ?>
 <div class="limiter">

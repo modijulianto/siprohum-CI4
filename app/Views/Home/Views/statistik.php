@@ -1,4 +1,4 @@
-<?= $this->extend('home/layout'); ?>
+<?= $this->extend('Home/Layout/layout'); ?>
 
 <?= $this->section('content'); ?>
 <script language="JavaScript" type="text/javascript" src="/build/js/highcharts/highcharts.js"></script>

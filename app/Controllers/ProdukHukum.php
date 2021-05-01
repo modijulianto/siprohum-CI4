@@ -35,7 +35,7 @@ class ProdukHukum extends BaseController
             'validation' => $this->validation
         ];
 
-        return view('data_table/data_produk_hukum', $data);
+        return view('DataTable/data_produk_hukum', $data);
     }
 
     public function produk_hukum($id_unit)
@@ -51,7 +51,7 @@ class ProdukHukum extends BaseController
             'validation' => $this->validation,
         ];
 
-        return view('data_table/data_produk_hukum', $data);
+        return view('DataTable/data_produk_hukum', $data);
     }
 
     public function detail($id)
@@ -64,7 +64,7 @@ class ProdukHukum extends BaseController
             'prohum' => $this->m_prohum->get_produk_hukum_by_id($id),
         ];
 
-        return view('detail/detail_produk_hukum', $data);
+        return view('Detail/detail_produk_hukum', $data);
     }
 
     public function find_tentang()
@@ -110,7 +110,7 @@ class ProdukHukum extends BaseController
             'validation' => $this->validation,
         ];
 
-        return view('form/input_produk_hukum', $data);
+        return view('Form/input_produk_hukum', $data);
     }
 
     public function save()
@@ -193,7 +193,7 @@ class ProdukHukum extends BaseController
             'validation' => $this->validation,
         ];
 
-        return view('form/update_produk_hukum', $data);
+        return view('Form/update_produk_hukum', $data);
     }
 
     public function save_update()

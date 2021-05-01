@@ -27,7 +27,7 @@ class Operator extends BaseController
             'validation' => $this->validation
         ];
 
-        return view('data_table/data_operator', $data);
+        return view('DataTable/data_operator', $data);
     }
 
     public function save()

@@ -1,5 +1,4 @@
-<?= $this->extend('home/layout'); ?>
-
+<?= $this->extend('/Home/Layout/layout'); ?>
 <?= $this->section('content'); ?>
 <div class="row bg-white rounded-lg shadow">
     <div class="col-md-8">
@@ -32,7 +31,7 @@
         </div>
     </div>
     <div class="col-md-4 text-dark">
-        <?= $this->include('home/cari') ?>
+        <?= $this->include('Home/Views/cari') ?>
     </div>
 </div>
 
@@ -40,11 +39,15 @@
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-book"></i>&ensp; PRODUK HUKUM TERBARU <a href="" class="float-right">Lihat semua</a></p>
+                <p class="pl-3"><i class="fa fa-book"></i>&ensp; PRODUK HUKUM <?= strtoupper($nama_kategori['nama_kategori']); ?></p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
-                <?php foreach ($baru as $row) { ?>
+                <?php
+
+                use App\Models\M_home;
+
+                foreach ($prohum as $row) { ?>
                     <div class="card prohum mb-3">
                         <div class="media position-relative">
                             <i class="fa fa-book text-center align-middle" style="max-width: 200px; font-size: 50px; padding: 30px 20px 20px 20px;"></i>
@@ -63,11 +66,63 @@
                         </div>
                     </div>
                 <?php } ?>
+                <?php if ($prohum == null) { ?>
+                    <div class="card mb-3 bg-transparent">
+                        <div class="media position-relative">
+                            <i class="fa fa-times text-center align-middle text-secondary" style="max-width: 200px; font-size: 50px; padding: 20px 20px 20px 20px;"></i>
+                            <div class="media-body pt-2">
+                                <div class="text-secondary mt-4">
+                                    <font size="5">
+                                        Produk Hukum Tidak Ditemukan
+                                    </font>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php } ?>
 
             </div>
         </div>
     </div>
     <div class="col-md-4">
+        <div class="row mb-5">
+            <div class="col-md-12 text-secondary">
+                <p class="pl-3"><i class="fa fa-list-ul"></i>&ensp; KATEGORI PRODUK HUKUM</p>
+                <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <?php foreach ($kategori as $row) { ?>
+                            <li class="unit list-group-item">
+                                <span class="span-unit"></span>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <center>
+                                            <i class="fa fa-th-large"></i>
+                                        </center>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <?= $row['nama_kategori']; ?>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <?php
+                                        $this->m_home = new M_home();
+                                        $jml = $this->m_home->get_jml_produk_by_kategori($row['id_kategori']);
+                                        ?>
+                                        <center>
+                                            <span class="badge badge-info float-right"><?= $jml; ?></span>
+                                        </center>
+                                    </div>
+                                </div>
+                                <a href="/Jdih/kategori/<?= md5($row['id_kategori']); ?>" class="stretched-link"></a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12 text-secondary">
                 <p class="pl-3"><i class="fa fa-institution"></i>&ensp; UNIT</p>
@@ -89,8 +144,12 @@
                                         <?= $row['nama_unit']; ?>
                                     </div>
                                     <div class="col-md-2">
+                                        <?php
+                                        $this->m_home = new M_home();
+                                        $jml = $this->m_home->get_jml_produk_by_unit($row['id_unit']);
+                                        ?>
                                         <center>
-                                            <span class="badge badge-info float-right">2</span>
+                                            <span class="badge badge-info float-right"><?= $jml; ?></span>
                                         </center>
                                     </div>
                                 </div>

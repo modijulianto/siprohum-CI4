@@ -26,7 +26,7 @@ class Unit extends BaseController
             'validation' => $this->validation
         ];
 
-        return view('data_table/data_unit', $data);
+        return view('DataTable/data_unit', $data);
     }
 
     public function save()

@@ -38,7 +38,7 @@ class User extends BaseController
             'katProduk' => $this->m_user->getKatProduk()
         ];
 
-        return view('/user/dashboard', $data);
+        return view('/User/dashboard', $data);
     }
 
     public function my_profile()
@@ -51,7 +51,7 @@ class User extends BaseController
             'validation' => $this->validation
         ];
 
-        return view('/user/my_profile', $data);
+        return view('/User/my_profile', $data);
     }
 
     public function update_profile()
@@ -120,7 +120,7 @@ class User extends BaseController
             'validation' => $this->validation
         ];
 
-        return view('/user/change_password', $data);
+        return view('/User/change_password', $data);
     }
 
     public function save_change_password()

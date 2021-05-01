@@ -18,7 +18,7 @@ class Auth extends BaseController
         $data = [
             'title' => 'Login'
         ];
-        return view('auth/login', $data);
+        return view('Auth/login', $data);
     }
 
     public function login()
@@ -63,7 +63,7 @@ class Auth extends BaseController
             'title' => 'Registrasi | YukNgotel',
             'validation' => \Config\Services::validation()
         ];
-        return view('auth/registration', $data);
+        return view('Auth/registration', $data);
     }
 
     public function regis()
@@ -106,7 +106,7 @@ class Auth extends BaseController
 
     public function blocked()
     {
-        return view('auth/blocked');
+        return view('Auth/blocked');
     }
 
     public function logout()

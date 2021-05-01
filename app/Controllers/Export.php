@@ -27,7 +27,7 @@ class Export extends BaseController
             'tot_admin' => $this->m_admin->get_num_rows_admin()
         ];
 
-        $html = view('export/pdf/admin', $data);
+        $html = view('Export/Pdf/admin', $data);
         // $html = "awokawokaowk";
 
         $this->pdf->SetCreator(PDF_CREATOR);
@@ -55,7 +55,7 @@ class Export extends BaseController
             'tot_opr' => $this->m_admin->get_num_rows_operator()
         ];
 
-        $html = view('export/pdf/operator', $data);
+        $html = view('Export/Pdf/operator', $data);
         // $html = "awokawokaowk";
 
         $this->pdf->SetCreator(PDF_CREATOR);
@@ -99,9 +99,9 @@ class Export extends BaseController
         }
 
         if ($filterUnit == 2) {
-            $html = view('export/pdf/produk_hukum_withUnit', $data);
+            $html = view('Export/Pdf/produk_hukum_withUnit', $data);
         } else {
-            $html = view('export/pdf/produk_hukum', $data);
+            $html = view('Export/Pdf/produk_hukum', $data);
         }
 
         $this->pdfLandscape->SetCreator(PDF_CREATOR);
@@ -129,7 +129,7 @@ class Export extends BaseController
         $data['title'] = 'Laporan Data Admin';
         $data['admin'] = $this->m_admin->get_admin();
         $data['tot_admin'] = $this->m_admin->get_num_rows_admin();
-        return view('export/excel/admin', $data);
+        return view('Export/Excel/admin', $data);
     }
 
     public function excel_operator()
@@ -137,7 +137,7 @@ class Export extends BaseController
         $data['title'] = 'Laporan Data Operator';
         $data['opr'] = $this->m_admin->get_operator();
         $data['tot_opr'] = $this->m_admin->get_num_rows_operator();
-        return view('export/excel/operator', $data);
+        return view('Export/Excel/operator', $data);
     }
 
     public function excel_prohum()
@@ -163,9 +163,9 @@ class Export extends BaseController
         }
 
         if ($filterUnit == 2) {
-            return view('export/excel/produk_hukum_withUnit', $data);
+            return view('Export/Excel/produk_hukum_withUnit', $data);
         } else {
-            return view('export/excel/produk_hukum', $data);
+            return view('Export/Excel/produk_hukum', $data);
         }
     }
     //////////////////////// END EXCEL ////////////////////////

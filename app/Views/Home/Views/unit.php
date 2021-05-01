@@ -1,4 +1,4 @@
-<?= $this->extend('/home/layout'); ?>
+<?= $this->extend('/Home/Layout/layout'); ?>
 <?= $this->section('content'); ?>
 <div class="row bg-white rounded-lg shadow">
     <div class="col-md-8">
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="col-md-4 text-dark">
-        <?= $this->include('home/cari') ?>
+        <?= $this->include('Home/Views/cari') ?>
     </div>
 </div>
 
@@ -39,7 +39,7 @@
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-book"></i>&ensp; HASIL PENCARIAN</p>
+                <p class="pl-3"><i class="fa fa-book"></i>&ensp; PRODUK HUKUM <?= strtoupper($nama_unit['nama_unit']); ?></p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
