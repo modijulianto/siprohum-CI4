@@ -43,6 +43,8 @@ $routes->get('/Jdih/unit/(:any)', 'Home::unit/$1');
 
 $routes->get('/Jdih/kategori', 'Home::index');
 $routes->get('/Jdih/kategori/(:any)', 'Home::kategori/$1');
+
+$routes->get('/Jdih/cari', 'Home::cari');
 // END ROUTES HOME
 
 $routes->get('/Dashboard', 'User::index', ['filter' => 'auth']);

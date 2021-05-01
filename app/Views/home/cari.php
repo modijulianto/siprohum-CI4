@@ -2,7 +2,7 @@
     <div class="card-body">
         <h5 class="card-title pb-2">Cari Produk Hukum</h5>
         <hr>
-        <form action="">
+        <form action="/Jdih/cari" method="GET">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <input type="text" class="form-control" id="prohum" name="prohum" placeholder="Cari produk hukum" autocomplete="off">
@@ -12,7 +12,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="form-group">
                         <label for="no">Nomor</label>
-                        <input type="text" class="form-control" id="no" name="no" placeholder="Nomor">
+                        <input type="text" class="form-control" id="no" autocomplete="off" name="no" placeholder="Nomor">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">

@@ -6,6 +6,18 @@ use CodeIgniter\Model;
 
 class M_home extends Model
 {
+    protected $table = 'tb_produk';
+    protected $primaryKey = 'id_produk';
+    protected $useTimestamps = false;
+
+    public function cari($cari)
+    {
+        $this->join('tb_tentang', 'tb_tentang.id_tentang=tb_produk.id_tentang');
+        $this->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit');
+        $this->like('judul', $cari['prohum']);
+        return $this->paginate(2, 'tb_produk');
+    }
+
     public function get_unit()
     {
         $unit = $this->db->table('tb_unit')
@@ -72,14 +84,14 @@ class M_home extends Model
 
     public function get_prohum_by_id_unit($id)
     {
-        return $this->db->table('tb_produk')
-            ->orderBy('tahun', 'DESC')
-            ->join('tb_kategori', 'tb_kategori.id_kategori=tb_produk.id_kategori')
-            ->join('tb_jenis_produk', 'tb_jenis_produk.id_jenis=tb_kategori.id_jenis')
-            ->join('tb_tentang', 'tb_tentang.id_tentang=tb_produk.id_tentang')
-            ->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit')
-            ->where('md5(tb_produk.id_unit)', $id)
-            ->get()->getResultArray();
+
+        $this->orderBy('tahun', 'DESC');
+        $this->join('tb_kategori', 'tb_kategori.id_kategori=tb_produk.id_kategori');
+        $this->join('tb_jenis_produk', 'tb_jenis_produk.id_jenis=tb_kategori.id_jenis');
+        $this->join('tb_tentang', 'tb_tentang.id_tentang=tb_produk.id_tentang');
+        $this->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit');
+        $this->where('md5(tb_produk.id_unit)', $id);
+        return $this->paginate(2, 'tb_produk');
     }
 
     public function get_prohum_by_id_kategori($id)

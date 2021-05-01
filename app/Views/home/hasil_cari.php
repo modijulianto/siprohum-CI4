@@ -39,7 +39,7 @@
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-book"></i>&ensp; PRODUK HUKUM <?= strtoupper($nama_unit['nama_unit']); ?></p>
+                <p class="pl-3"><i class="fa fa-book"></i>&ensp; HASIL PENCARIAN</p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">

@@ -37,6 +37,7 @@ class Home extends BaseController
 		$data['nama_unit'] = $this->m_home->get_unit_by_id($id);
 		$data['title'] = 'Unit ' . $data['nama_unit']['nama_unit'] . ' - Sistem Informasi Produk Hukum Undiksha';
 		$data['prohum'] = $this->m_home->get_prohum_by_id_unit($id);
+		$data['pager'] = $this->m_home->pager;
 		$data['kategori'] = $this->m_home->get_kategori();
 
 		$data['unit'] = $this->m_home->get_unit();
@@ -60,7 +61,19 @@ class Home extends BaseController
 		return view('home/kategori', $data);
 	}
 
+	public function cari($cari = null)
+	{
+		$data['title'] = 'Hasil Pencarian - Sistem Informasi Produk Hukum Undiksha';
+		$data['prohum'] = $this->m_home->cari($this->request->getVar());
+		$data['pager'] = $this->m_home->pager;
+		$data['kategori'] = $this->m_home->get_kategori();
 
+		$data['unit'] = $this->m_home->get_unit();
+		$data['kategori'] = $this->m_home->get_kategori();
+		$data['tahun'] = $this->m_home->get_tahun();
+		$data['status'] = $this->m_home->get_status();
+		return view('home/hasil_cari', $data);
+	}
 
 	//--------------------------------------------------------------------
 
