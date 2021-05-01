@@ -23,11 +23,12 @@
         <div class="row">
             <div class="col-md-12 bg-dark text-light pt-2 pb-2 pl-5 ">
                 Informasi dan Layanan &emsp;
-                <i class="fa fa-phone"></i>&ensp; (0362) 22570 &emsp;
-                <i class="fa fa-envelope-o"></i>&ensp; humas@undiksha.ac.id
+                <i class="fa fa-phone">&ensp; (0362) 22570</i> &emsp;
+                <i class="fa fa-envelope-o">&ensp; humas@undiksha.ac.id</i>
             </div>
         </div>
     </div>
+    <?= $this->include('Home/Layout/navbar'); ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow p-3 mb-4 bg-white rounded">
         <div class="container-fluid">
             <img src="/images/new-LOGO.png" class="img-fluid brand-logo navbar-brand" alt="Responsive image">
