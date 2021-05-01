@@ -15,6 +15,11 @@ class M_home extends Model
         $this->join('tb_tentang', 'tb_tentang.id_tentang=tb_produk.id_tentang');
         $this->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit');
         $this->like('judul', $cari['prohum']);
+        $this->like('no', $cari['no']);
+        $this->like('tahun', $cari['tahun']);
+        $this->like('tb_produk.id_unit', $cari['id_unit']);
+        $this->like('id_kategori', $cari['id_kategori']);
+        $this->like('status', $cari['status']);
         return $this->paginate(10, 'tb_produk');
     }
 

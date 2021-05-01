@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="col-md-4 text-dark">
-        <?= $this->include('Home/Views/cari') ?>
+        <?= $this->include('Home/Component/cari') ?>
     </div>
 </div>
 
@@ -129,35 +129,7 @@
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
-                <div class="card">
-                    <ul class="list-group list-group-flush">
-                        <?php foreach ($unit as $row) { ?>
-                            <li class="unit list-group-item">
-                                <span class="span-unit"></span>
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <center>
-                                            <i class="fa fa-institution"></i>
-                                        </center>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <?= $row['nama_unit']; ?>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <?php
-                                        $this->m_home = new M_home();
-                                        $jml = $this->m_home->get_jml_produk_by_unit($row['id_unit']);
-                                        ?>
-                                        <center>
-                                            <span class="badge badge-info float-right"><?= $jml; ?></span>
-                                        </center>
-                                    </div>
-                                </div>
-                                <a href="/Jdih/unit/<?= md5($row['id_unit']); ?>" class="stretched-link"></a>
-                            </li>
-                        <?php } ?>
-                    </ul>
-                </div>
+                <?= $this->include('Home/Component/list_unit'); ?>
             </div>
         </div>
     </div>
