@@ -111,6 +111,17 @@ class M_home extends Model
             ->get()->getResultArray();
     }
 
+    public function get_prohum_by_id_produk($id)
+    {
+        $this->join('tb_kategori', 'tb_kategori.id_kategori=tb_produk.id_kategori');
+        $this->join('tb_jenis_produk', 'tb_jenis_produk.id_jenis=tb_kategori.id_jenis');
+        $this->join('tb_tentang', 'tb_tentang.id_tentang=tb_produk.id_tentang');
+        $this->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit');
+        $this->orderBy('tahun', 'DESC');
+        $this->where('md5(id_produk)', $id);
+        return $this->first();
+    }
+
     public function get_kategori()
     {
         return $this->db->table('tb_kategori')->get()->getResultArray();

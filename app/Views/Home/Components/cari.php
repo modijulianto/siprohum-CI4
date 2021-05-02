@@ -9,13 +9,13 @@
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col-lg-6 col-md-6">
+                <div class="col-6">
                     <div class="form-group">
                         <label for="no">Nomor</label>
                         <input type="text" class="form-control" id="no" autocomplete="off" name="no" placeholder="Nomor">
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-6">
                     <div class="form-group">
                         <label for="tahun">Tahun</label>
                         <select name="tahun" id="tahun" class="form-control custom-select">
@@ -39,7 +39,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-6">
                     <div class="form-group">
                         <label for="id_kategori">Kategori</label>
                         <select name="id_kategori" id="id_kategori" class="form-control custom-select">
@@ -50,7 +50,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-6">
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control custom-select">

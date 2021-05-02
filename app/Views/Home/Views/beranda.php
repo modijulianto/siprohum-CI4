@@ -3,44 +3,18 @@
 <?= $this->section('content'); ?>
 <div class="row bg-white rounded-lg shadow">
     <div class="col-md-8">
-        <!-- <img src="..." class="card-img-top" alt="..."> -->
-        <div id="carouselExampleIndicators" class="carousel slide mt-3 mb-3" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="/images/FTK.jpg" class="d-block w-100 rounded-lg" alt="..." style="background-size: cover; max-height:453px;">
-                </div>
-                <div class="carousel-item">
-                    <img src="/images/FTK.jpg" class="d-block w-100 rounded-lg" alt="..." style="background-size: cover; max-height: 453px;">
-                </div>
-                <div class="carousel-item">
-                    <img src="/images/FTK.jpg" class="d-block w-100 rounded-lg" alt="..." style="background-size: cover; max-height: 453px;">
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
+        <?= $this->include('Home/Components/carousel') ?>
     </div>
     <div class="col-md-4 text-dark">
-        <?= $this->include('Home/Component/cari') ?>
+        <?= $this->include('Home/Components/cari') ?>
     </div>
 </div>
 
-<div class="row mt-5">
+<div class="row mr-0 mt-5">
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-book"></i>&ensp; PRODUK HUKUM TERBARU <a href="" class="float-right">Lihat semua</a></p>
+                <p class="pl-3"><i class="fa fa-book"></i>&ensp; PRODUK HUKUM TERBARU</p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
@@ -74,7 +48,7 @@
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
-                <?= $this->include('Home/Views/Component/list_unit') ?>
+                <?= $this->include('Home/Components/list_unit') ?>
             </div>
         </div>
     </div>

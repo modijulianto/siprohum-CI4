@@ -12,11 +12,14 @@
             <li class="unit list-group-item">
                 <span class="span-unit"></span>
                 <div class="row">
-                    <div class="col-sm-1 ">
+                    <div class="col-1 ">
                         <i class="fa fa-institution float-left"></i>
                     </div>
-                    <div class="col-sm-10 ">
-                        <?= $row['nama_unit']; ?> <span class="badge badge-info float-right"><?= $jml; ?></span>
+                    <div class="col-10 ">
+                        <?= $row['nama_unit']; ?>
+                    </div>
+                    <div class="col-1">
+                        <span class="badge badge-info float-right"><?= $jml; ?></span>
                     </div>
                 </div>
                 <a href="/Jdih/unit/<?= md5($row['id_unit']); ?>" class="stretched-link"></a>

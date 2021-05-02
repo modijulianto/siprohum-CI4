@@ -28,8 +28,8 @@
             </div>
         </div>
     </div>
-    <?= $this->include('Home/Layout/navbar'); ?>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow p-3 mb-4 bg-white rounded">
+    <?= $this->include('Home/Components/navbar'); ?>
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-white shadow p-3 mb-4 bg-white rounded">
         <div class="container-fluid">
             <img src="/images/new-LOGO.png" class="img-fluid brand-logo navbar-brand" alt="Responsive image">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </nav> -->
 
     <div class="container-fluid">
         <?= $this->renderSection('content'); ?>

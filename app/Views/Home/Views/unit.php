@@ -2,36 +2,10 @@
 <?= $this->section('content'); ?>
 <div class="row bg-white rounded-lg shadow">
     <div class="col-md-8">
-        <!-- <img src="..." class="card-img-top" alt="..."> -->
-        <div id="carouselExampleIndicators" class="carousel slide mt-3 mb-3" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="/images/FTK.jpg" class="d-block w-100 rounded-lg" alt="..." style="background-size: cover; max-height:453px;">
-                </div>
-                <div class="carousel-item">
-                    <img src="/images/FTK.jpg" class="d-block w-100 rounded-lg" alt="..." style="background-size: cover; max-height: 453px;">
-                </div>
-                <div class="carousel-item">
-                    <img src="/images/FTK.jpg" class="d-block w-100 rounded-lg" alt="..." style="background-size: cover; max-height: 453px;">
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
+        <?= $this->include('Home/Components/carousel') ?>
     </div>
     <div class="col-md-4 text-dark">
-        <?= $this->include('Home/Component/cari') ?>
+        <?= $this->include('Home/Components/cari') ?>
     </div>
 </div>
 
@@ -43,11 +17,7 @@
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
-                <?php
-
-                use App\Models\M_home;
-
-                foreach ($prohum as $row) { ?>
+                <?php foreach ($prohum as $row) { ?>
                     <div class="card prohum mb-3">
                         <div class="media position-relative">
                             <i class="fa fa-book text-center align-middle" style="max-width: 200px; font-size: 50px; padding: 30px 20px 20px 20px;"></i>
@@ -92,35 +62,7 @@
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
-                <div class="card">
-                    <ul class="list-group list-group-flush">
-                        <?php foreach ($kategori as $row) { ?>
-                            <li class="unit list-group-item">
-                                <span class="span-unit"></span>
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <center>
-                                            <i class="fa fa-th-large"></i>
-                                        </center>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <?= $row['nama_kategori']; ?>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <?php
-                                        $this->m_home = new M_home();
-                                        $jml = $this->m_home->get_jml_produk_by_kategori($row['id_kategori']);
-                                        ?>
-                                        <center>
-                                            <span class="badge badge-info float-right"><?= $jml; ?></span>
-                                        </center>
-                                    </div>
-                                </div>
-                                <a href="/Jdih/kategori/<?= md5($row['id_kategori']); ?>" class="stretched-link"></a>
-                            </li>
-                        <?php } ?>
-                    </ul>
-                </div>
+                <?= $this->include('Home/Components/list_kategori'); ?>
             </div>
         </div>
         <div class="row">
@@ -129,7 +71,7 @@
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
-                <?= $this->include('Home/Component/list_unit'); ?>
+                <?= $this->include('Home/Components/list_unit'); ?>
             </div>
         </div>
     </div>

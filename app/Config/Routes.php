@@ -45,6 +45,9 @@ $routes->get('/Jdih/kategori', 'Home::index');
 $routes->get('/Jdih/kategori/(:any)', 'Home::kategori/$1');
 
 $routes->get('/Jdih/cari', 'Home::cari');
+
+$routes->get('/Jdih/produk', 'Home::index');
+$routes->get('/Jdih/produk/(:any)', 'Home::produk/$1');
 // END ROUTES HOME
 
 $routes->get('/Dashboard', 'User::index', ['filter' => 'auth']);
