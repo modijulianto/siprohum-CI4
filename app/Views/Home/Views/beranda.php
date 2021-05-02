@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="row mr-0 mt-5">
+<div class="row mt-5 mb-4">
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-12 text-secondary">
@@ -48,11 +48,9 @@
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
-                <?= $this->include('Home/Components/list_unit') ?>
+                <?= $this->include('Home/Components/list_unit'); ?>
             </div>
         </div>
     </div>
 </div>
-
-<br><br><br><br><br><br><br>
 <?= $this->endSection(); ?>

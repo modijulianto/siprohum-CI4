@@ -1,6 +1,6 @@
 <?= $this->extend('/Home/Layout/layout'); ?>
 <?= $this->section('content'); ?>
-<div class="row mr-0 bg-white rounded-lg shadow">
+<div class="row bg-white rounded-lg shadow">
     <div class="col-md-8">
         <?= $this->include('Home/Components/carousel') ?>
     </div>
@@ -9,8 +9,8 @@
     </div>
 </div>
 
-<div class="row mr-0 mt-5">
-    <div class="col-md-6">
+<div class="row">
+    <div class="col-md-6 mt-5">
         <div class="row">
             <div class="col-md-12 text-secondary">
                 <p class="pl-3"><i class="fa fa-book"></i>&ensp; DOKUMEN PRODUK HUKUM</p>
@@ -35,13 +35,11 @@
                             </div>
                         </div>
                     </div>
-
                 <?php } ?>
-
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 mt-5">
         <div class="row mb-5">
             <div class="col-md-12 text-secondary">
                 <p class="pl-3"><i class="fa fa-book"></i>&ensp; DETAIL PRODUK HUKUM</p>
@@ -137,6 +135,4 @@
         </div>
     </div>
 </div>
-
-<br><br><br><br><br><br><br>
 <?= $this->endSection(); ?>

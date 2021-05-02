@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<div class="row mr-0 mt-5">
+<div class="row mt-5 mb-4">
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-12 text-secondary">
@@ -76,6 +76,4 @@
         </div>
     </div>
 </div>
-
-<br><br><br><br><br><br><br>
 <?= $this->endSection(); ?>
