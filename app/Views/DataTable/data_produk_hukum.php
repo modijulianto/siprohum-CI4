@@ -40,7 +40,6 @@
                             <div class="tab-pane fade show active" id="tervalidasi" role="tabpanel" aria-labelledby="tervalidasi-tab">
                                 <div class="card-box table-responsive">
                                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
-                                        <?= session()->getflashdata('message'); ?>
                                         <div class="flash-data" data-flashdata="<?= session()->getFlashdata('prohum'); ?>"></div>
                                         <br><br><br>
                                         <thead>
