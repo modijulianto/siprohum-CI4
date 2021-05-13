@@ -51,7 +51,7 @@
                     </div>
 
                 <?php } ?>
-
+                <?= $pager->links('tb_produk', 'prohum_pagination'); ?>
             </div>
         </div>
     </div>

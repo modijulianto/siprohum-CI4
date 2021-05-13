@@ -55,6 +55,7 @@ class Home extends BaseController
 		$data['title'] = 'Kategori ' . $data['nama_kategori']['nama_kategori'] . ' - Sistem Informasi Produk Hukum Undiksha';
 		$data['title_navbar'] = 'Kategori ' . $data['nama_kategori']['nama_kategori'];
 		$data['prohum'] = $this->m_home->get_prohum_by_id_kategori($id);
+		$data['pager'] = $this->m_home->pager;
 
 		$data['unit'] = $this->m_home->get_unit();
 		$data['kategori'] = $this->m_home->get_kategori();
