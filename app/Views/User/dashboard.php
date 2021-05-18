@@ -10,7 +10,7 @@
 </script>
 
 <?php foreach ($status as $sts) { ?>
-    <div class="animated flipInY col-lg-6 col-md-6 col-sm-6">
+    <div class="animated flipInY col-6">
         <div class="tile-stats">
             <div class="icon"><i class="fa fa-book"></i></div>
             <div class="count">
