@@ -1,3 +1,12 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 bg-dark text-light pt-2 pb-2 pl-5 ">
+            Informasi dan Layanan &emsp;
+            <i class="fa fa-phone">&ensp; (0362) 22570</i> &emsp;
+            <i class="fa fa-envelope-o">&ensp; humas@undiksha.ac.id</i>
+        </div>
+    </div>
+</div>
 <div class="shadow mb-4 bg-color-custom">
     <div class="col-md-12 ">
         <div class="row bg-image">

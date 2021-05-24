@@ -19,15 +19,6 @@
 </head>
 
 <body class="bg-light">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 bg-dark text-light pt-2 pb-2 pl-5 ">
-                Informasi dan Layanan &emsp;
-                <i class="fa fa-phone">&ensp; (0362) 22570</i> &emsp;
-                <i class="fa fa-envelope-o">&ensp; humas@undiksha.ac.id</i>
-            </div>
-        </div>
-    </div>
     <?= $this->include('Home/Components/navbar'); ?>
 
     <div class="container-fluid">
@@ -52,7 +43,7 @@
                         <hr color="white">
                         <ul>
                             <?php foreach ($unit as $row) { ?>
-                                <li style="line-height: 5px;" class="mb-3"><a class="text-light" href="/Jdih/unit/<?= md5($row['id_unit']); ?>"><?= $row['nama_unit']; ?></a></li>
+                                <li class="mb-0"><a class="text-light" href="/Jdih/unit/<?= md5($row['id_unit']); ?>"><?= $row['nama_unit']; ?></a></li>
                             <?php } ?>
                         </ul>
                     </div>
@@ -68,22 +59,6 @@
     <script src="/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom Style -->
     <script src="/build/js/custom-home.js"></script>
-
-
-    <!-- font aksara bali -->
-    <!-- <script src='https://s.keyman.com/kmw/engine/14.0.271/keymanweb.js'></script>
-    <script src='https://s.keyman.com/kmw/engine/14.0.271/kmwuitoggle.js'></script>
-    <script>
-        (function(kmw) {
-            kmw.init({
-                attachType: 'auto'
-            });
-            // kmw.addKeyboards('@en'); // Loads default English keyboard from Keyman Cloud (CDN)
-            // kmw.addKeyboards('@th'); // Loads default Thai keyboard from Keyman Cloud (CDN)
-            kmw.addKeyboards('@ban-bali'); // Loads default Thai keyboard from Keyman Cloud (CDN)
-        })(keyman);
-    </script> -->
-    <!-- end font aksara bali -->
 </body>
 
 </html>
