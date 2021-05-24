@@ -9,7 +9,7 @@
             <?php endif; ?>
             <form action="/Auth/login" method="POST" class="login100-form validate-form flex-sb flex-w">
                 <span class="login100-form-title p-b-32">
-                    <center><a href="/Jdih"><img src="/images/Undiksha.png" width="200px"></a></center>
+                    <center><a href="/"><img src="/images/Undiksha.png" width="200px"></a></center>
                     <center class="p-t-10">LOGIN</center>
                 </span>
 
