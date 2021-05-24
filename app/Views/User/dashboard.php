@@ -9,17 +9,19 @@
     });
 </script>
 
-<?php foreach ($status as $sts) { ?>
-    <div class="animated flipInY col-6">
-        <div class="tile-stats">
-            <div class="icon"><i class="fa fa-book"></i></div>
-            <div class="count">
-                <font size="5">Produk Hukum <?= $sts['status']; ?></font>
+<div class="row">
+    <?php foreach ($status as $sts) { ?>
+        <div class="animated flipInY col-6">
+            <div class="tile-stats">
+                <div class="icon"><i class="fa fa-book"></i></div>
+                <div class="count">
+                    <font size="5">Produk Hukum <?= $sts['status']; ?></font>
+                </div>
+                <h4 style="margin-left: 10px">Total : <?= $sts['jumlah']; ?></h4>
             </div>
-            <h4 style="margin-left: 10px">Total : <?= $sts['jumlah']; ?></h4>
         </div>
-    </div>
-<?php } ?>
+    <?php } ?>
+</div>
 
 <?php if ($akun['role_id'] == 1) { ?>
     <div class="animated flipInY  col-lg-4 col-md-4 col-sm-6">
