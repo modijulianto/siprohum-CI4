@@ -20,6 +20,7 @@ class ProdukHukum extends BaseController
         $this->m_prohum = new M_produkHukum();
         $this->m_md = new M_masterData();
         $this->validation = \Config\Services::validation();
+        $this->request = \Config\Services::request();
     }
 
     public function index()
@@ -32,8 +33,10 @@ class ProdukHukum extends BaseController
             'prohum' => $this->m_prohum->get_produk_hukum(md5(session()->get('id_unit'))),
             'prohum_blmValid' => $this->m_prohum->get_prohum_blmValid(),
             'opt_tahun' => $this->m_prohum->get_tahun(),
-            'validation' => $this->validation
+            'validation' => $this->validation,
+            'request' => $this->request,
         ];
+
 
         return view('DataTable/data_produk_hukum', $data);
     }
@@ -49,6 +52,7 @@ class ProdukHukum extends BaseController
             'prohum_blmValid' => $this->m_prohum->get_prohum_blmValid(),
             'opt_tahun' => $this->m_prohum->get_tahun(),
             'validation' => $this->validation,
+            'request' => $this->request,
         ];
 
         return view('DataTable/data_produk_hukum', $data);
@@ -77,6 +81,26 @@ class ProdukHukum extends BaseController
 
 
         echo json_encode($data_tindakan);
+    }
+
+    public function validasi_prohum()
+    {
+        if (!isset($_POST['id'])) {
+            session()->setFlashdata(
+                'message',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    Pilih produk hukum yang akan di validasi.
+                </div>'
+            );
+            return redirect()->to('/ProdukHukum/' . $this->request->getVar('id_unit'))->withInput();
+        } else {
+            $this->m_prohum->validasi_prohum();
+            session()->setFlashdata('prohum', 'Tervalidasi');
+            return redirect()->to('/ProdukHukum/' . $this->request->getVar('id_unit'));
+        }
     }
 
     public function save_tentang_baru()

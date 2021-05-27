@@ -59,4 +59,13 @@ class M_produkHukum extends Model
         $this->orderBy('tahun', 'ASC');
         return $this->findAll();
     }
+
+    public function validasi_prohum()
+    {
+        $ids = $_POST['id'];
+        return $this->db->table('tb_produk')
+            ->whereIn('id_produk', $ids)
+            ->set('validasi', '1')
+            ->update();
+    }
 }

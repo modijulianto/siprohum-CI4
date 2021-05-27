@@ -18,7 +18,7 @@
             <div class="x_content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <?= $validation->getError('id[]'); ?>
+                        <?= session()->getFlashdata('message'); ?>
 
                         <a href="/Export/pdf_prohum" data-toggle="modal" data-target="#modalExport" class="btn btn-primary" style="float: left">
                             <i class="fa fa-download"></i>
@@ -85,10 +85,10 @@
                             </div>
                             <div class="tab-pane fade" id="blmTervalidasi" role="tabpanel" aria-labelledby="blmTervalidasi-tab">
                                 <div class="card-box table-responsive">
-                                    <form action="/ProdukHukum/validate" method="POST">
+                                    <form action="/ProdukHukum/validasi_prohum" method="POST">
+                                        <input type="hidden" name="id_unit" value="<?= $request->uri->getSegment(2); ?>">
 
                                         <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
-                                            <?= session()->getflashdata('message'); ?>
                                             <div class="flash-data" data-flashdata="<?= session()->getFlashdata('prohum'); ?>"></div>
                                             <br><br><br>
                                             <thead>
