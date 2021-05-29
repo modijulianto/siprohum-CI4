@@ -31,6 +31,10 @@ class M_produkHukum extends Model
         if (session()->get('role_id') != 1) {
             $id_unit = session()->get('id_unit');
             $this->where('tb_produk.id_unit', $id_unit);
+        } else {
+            $request = \Config\Services::request();
+            $id_unit = $request->uri->getSegment('2');;
+            $this->where('md5(tb_produk.id_unit)', $id_unit);
         }
 
         $this->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit');
