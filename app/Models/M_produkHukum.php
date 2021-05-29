@@ -8,7 +8,7 @@ class M_produkHukum extends Model
 {
     protected $table = 'tb_produk';
     protected $primaryKey = 'id_produk';
-    protected $useTimeStamps = FALSE;
+    protected $useTimestamps = true;
     protected $allowedFields = ['no', 'id_kategori', 'id_tentang', 'judul', 'tahun', 'status', 'keterangan', 'file', 'id_unit', 'validasi'];
 
     public function get_produk_hukum($id_unit)
