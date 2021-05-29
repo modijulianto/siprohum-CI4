@@ -139,6 +139,7 @@ class M_home extends Model
     public function get_jml_produk_by_unit($id_unit)
     {
         return $this->db->table('tb_produk')
+            ->where('validasi', 1)
             ->where('id_unit', $id_unit)
             ->countAllResults();
     }
