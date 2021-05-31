@@ -53,6 +53,9 @@ $routes->get('/Jdih/produk/(:any)', 'Home::produk/$1');
 $routes->get('/Dashboard', 'User::index', ['filter' => 'auth']);
 $routes->get('/Dashboard/(:any)', 'User::$1', ['filter' => 'auth']);
 
+$routes->get('/Upload', 'Upload::index', ['filter' => 'auth']);
+$routes->get('/Upload/(:any)', 'Upload::$1', ['filter' => 'auth']);
+
 $routes->get('/Profile', 'User::my_profile', ['filter' => 'auth']);
 $routes->post('/Profile/(:any)', 'User::$1', ['filter' => 'auth']);
 $routes->get('/Profile/(:any)', 'User::$1', ['filter' => 'auth']);
