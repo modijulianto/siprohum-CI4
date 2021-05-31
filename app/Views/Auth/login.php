@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div class="limiter">
     <div class="container-login100">
-        <div class="wrap-login100 p-l-50 p-r-50 p-t-20 p-b-55">
+        <div class="wrap-login100 p-l-50 p-r-50 p-t-20 p-b-20">
             <?php if (session()->getFlashdata('registered')) : ?>
                 <?= session()->getFlashdata('registered'); ?>
             <?php endif; ?>
@@ -34,17 +34,7 @@
 
                 <div class="login100-form-title">
                     <center><button class="login100-form-btn" type="submit">Login</button></center>
-                    <hr>
-                    <center>
-                        <!-- <a class="txt1" href="<?= base_url() ?>auth/registration">
-							Create an account?
-						</a>&ensp; -->
-                        <a class="txt1" href="/auth/forgotPassword">
-                            Forgot Password?
-                        </a>
-                    </center>
                 </div>
-
             </form>
         </div>
     </div>
