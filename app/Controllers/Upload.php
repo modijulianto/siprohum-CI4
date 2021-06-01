@@ -26,7 +26,43 @@ class Upload extends BaseController
         $data['akun'] = $this->m_auth->getAkun(session()->get('email'));
         $data['title'] = "Galeri";
         $data['unit'] = $this->m_admin->get_unit();
+        $data['validation'] = $this->validation;
 
         return view('User/upload', $data);
+    }
+
+    public function save()
+    {
+        $ket = $this->request->getVar('keterangan');
+        $files = $this->request->getFiles();
+
+        if ($files) {
+            $id_upload_terakhir = $this->m_upload->cek_id_upload();
+            $id_upload = $id_upload_terakhir['id'] + 1;
+
+            $data_uploads = [
+                'id_upload' => $id_upload,
+                'id_produk' => 1,
+                'id_unit' => 1,
+                'ket_upload' => $ket,
+            ];
+            $this->m_upload->insert_upload($data_uploads);
+
+            foreach ($files['media'] as $key => $img) {
+                $randomName = $img->getRandomName();
+                $data_galeri = [
+                    'id_upload' => $id_upload,
+                    'file' => $randomName
+                ];
+                $this->m_upload->insert_galeri($data_galeri);
+                $img->move('upload/galeri', $randomName);
+            }
+
+            session()->setFlashdata('upload', 'Ditambahkan');
+            return redirect()->to('/Upload');
+        } else {
+            session()->setFlashdata('message', '<div class="alert alert-danger" role="alert"><b>Failed!</b> Ukuran file terlalu besar atau Anda belum memilih file yang akan diupload!</div>');
+            return redirect()->to('/Upload');
+        }
     }
 }

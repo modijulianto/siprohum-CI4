@@ -40,191 +40,35 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
+                <?= session()->getflashdata('message'); ?>
+                <div class="flash-data" data-flashdata="<?= session()->getFlashdata('upload'); ?>"></div>
                 <div class="row">
-                    <div class="col-md-55">
-                        <div class="thumbnail">
-                            <div class="image view view-first">
-                                <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
-                                <div class="mask">
-                                    <p>Your Text</p>
-                                    <div class="tools tools-bottom">
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="caption">
-                                <p>Snow and Ice Incoming for the South</p>
-                            </div>
-                        </div>
+                    <div class="col-12">
+                        <button type="button" id="tombolTambahMedia" class="btn btn-primary tombolTambahMedia" data-toggle="modal" data-target="#modalMedia" style="float: right">
+                            <i class="fa fa-plus"></i>
+                            Tambah Media
+                        </button>
                     </div>
-                    <div class="col-md-55">
-                        <div class="thumbnail">
-                            <div class="image view view-first">
-                                <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
-                                <div class="mask">
-                                    <p>Your Text</p>
-                                    <div class="tools tools-bottom">
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
+                    <div class="col-12 mt-4">
+                        <div class="row">
+                            <div class="col-md-55">
+                                <div class="thumbnail">
+                                    <div class="image view view-first">
+                                        <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
+                                        <div class="mask no-caption">
+                                            <div class="tools tools-bottom">
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                                <a href="#"><i class="fa fa-pencil"></i></a>
+                                                <a href="#"><i class="fa fa-times"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="caption">
+                                        <p><strong>Image Name</strong>
+                                        </p>
+                                        <p>Snow and Ice Incoming</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="caption">
-                                <p>Snow and Ice Incoming for the South</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-55">
-                        <div class="thumbnail">
-                            <div class="image view view-first">
-                                <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
-                                <div class="mask">
-                                    <p>Your Text</p>
-                                    <div class="tools tools-bottom">
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="caption">
-                                <p>Snow and Ice Incoming for the South</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-55">
-                        <div class="thumbnail">
-                            <div class="image view view-first">
-                                <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
-                                <div class="mask">
-                                    <p>Your Text</p>
-                                    <div class="tools tools-bottom">
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="caption">
-                                <p>Snow and Ice Incoming for the South</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-55">
-                        <div class="thumbnail">
-                            <div class="image view view-first">
-                                <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
-                                <div class="mask">
-                                    <p>Your Text</p>
-                                    <div class="tools tools-bottom">
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="caption">
-                                <p>Snow and Ice Incoming for the South</p>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-55">
-                        <div class="thumbnail">
-                            <div class="image view view-first">
-                                <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
-                                <div class="mask no-caption">
-                                    <div class="tools tools-bottom">
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="caption">
-                                <p><strong>Image Name</strong>
-                                </p>
-                                <p>Snow and Ice Incoming</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-55">
-                        <div class="thumbnail">
-                            <div class="image view view-first">
-                                <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
-                                <div class="mask no-caption">
-                                    <div class="tools tools-bottom">
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="caption">
-                                <p><strong>Image Name</strong>
-                                </p>
-                                <p>Snow and Ice Incoming</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-55">
-                        <div class="thumbnail">
-                            <div class="image view view-first">
-                                <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
-                                <div class="mask no-caption">
-                                    <div class="tools tools-bottom">
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="caption">
-                                <p><strong>Image Name</strong>
-                                </p>
-                                <p>Snow and Ice Incoming</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-55">
-                        <div class="thumbnail">
-                            <div class="image view view-first">
-                                <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
-                                <div class="mask no-caption">
-                                    <div class="tools tools-bottom">
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="caption">
-                                <p><strong>Image Name</strong>
-                                </p>
-                                <p>Snow and Ice Incoming</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-55">
-                        <div class="thumbnail">
-                            <div class="image view view-first">
-                                <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
-                                <div class="mask no-caption">
-                                    <div class="tools tools-bottom">
-                                        <a href="#"><i class="fa fa-link"></i></a>
-                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="caption">
-                                <p><strong>Image Name</strong>
-                                </p>
-                                <p>Snow and Ice Incoming</p>
                             </div>
                         </div>
                     </div>
@@ -233,4 +77,49 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalMedia" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="judulModal">Tambah Media</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Upload/save" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" id="id" name="id">
+                    <div class="row form-group">
+                        <label class="col-form-label col-md-2 col-sm-2">Keterangan<font color="red">*</font></label>
+                        <div class="col-md col-sm">
+                            <input type="text" class="form-control" name="keterangan" id="keterangan" required="required" value="<?= old('keterangan'); ?>" />
+                            <font color="red"><?= $validation->getError('keterangan'); ?></font>
+
+                        </div>
+                    </div>
+                    <div class="row form-group mt-3">
+                        <label class="col-form-label col-md-2 col-sm-2">Media</label>
+                        <div class="col-md col-sm">
+                            <input type="file" multiple name="media[]" /> <br>
+                            <font color="red"><?= $validation->getError('media'); ?></font>
+                        </div>
+                    </div>
+                    <div class="row form-group mt-3">
+                        <div class="input-group">
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Tambah Data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?= $this->endSection(); ?>
