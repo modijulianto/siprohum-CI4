@@ -50,27 +50,46 @@
                         </button>
                     </div>
                     <div class="col-12 mt-4">
-                        <div class="row">
-                            <div class="col-md-55">
-                                <div class="thumbnail">
-                                    <div class="image view view-first">
-                                        <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
-                                        <div class="mask no-caption">
-                                            <div class="tools tools-bottom">
-                                                <a href="#"><i class="fa fa-link"></i></a>
-                                                <a href="#"><i class="fa fa-pencil"></i></a>
-                                                <a href="#"><i class="fa fa-times"></i></a>
-                                            </div>
+                        <?php foreach ($galeri as $row) { ?>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4> <?= $row['ket']; ?> </h4>
+                                </div>
+                                <div class="col">
+                                    <hr>
+                                </div>
+                                <div class="col-1">
+                                    <button class="btn btn-transparent float-right button-collapse" type="button" data-toggle="collapse" data-target="#collapse<?= $row['id_upload']; ?>" aria-expanded="false" aria-controls="collapse<?= $row['id_upload']; ?>">
+                                        <i class="fa fa-chevron-down"></i>
+                                    </button>
+                                </div>
+                                <div class="col-12">
+                                    <div class="collapse" id="collapse<?= $row['id_upload']; ?>">
+                                        <div class="row">
+                                            <?php foreach ($row[0] as $gal) { ?>
+                                                <div class="col-md-55">
+                                                    <div class="thumbnail">
+                                                        <div class="image view view-first">
+                                                            <img style="width: 100%; display: block;" src="/upload/galeri/<?= $gal['file']; ?>" alt="image" />
+                                                            <div class="mask no-caption">
+                                                                <div class="tools tools-bottom">
+                                                                    <a href="#"><i class="fa fa-trash"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="caption">
+                                                            <p><strong>Image Name</strong>
+                                                            </p>
+                                                            <p>Snow and Ice Incoming</p>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
                                         </div>
-                                    </div>
-                                    <div class="caption">
-                                        <p><strong>Image Name</strong>
-                                        </p>
-                                        <p>Snow and Ice Incoming</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -122,4 +141,15 @@
     </div>
 </div>
 
+<script>
+    // $('.button-collapse').click(function() {
+    //     if ($(this).val() == "0") {
+    //         $(this).val("1")
+    //         $(this).html('<i class="fa fa-chevron-up"></i>');
+    //     } else {
+    //         $(this).val("0")
+    //         $(this).html('<i class="fa fa-chevron-down"></i>');
+    //     }
+    // });
+</script>
 <?= $this->endSection(); ?>

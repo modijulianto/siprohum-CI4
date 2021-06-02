@@ -16,6 +16,21 @@ class M_upload extends Model
             ->get()->getRowArray();
     }
 
+    public function get_upload()
+    {
+        $this->orderBy('id_upload', 'ASC');
+        return $this->findAll();
+    }
+
+    public function get_galeri($id)
+    {
+        return $this->db->table('tb_galeri')
+            // ->join('tb_upload', 'tb_upload.id_upload=tb_galeri.id_upload')
+            ->where('id_upload', $id)
+            ->orderBy('id_upload', 'ASC')
+            ->get()->getResultArray();
+    }
+
     public function insert_upload($data)
     {
         return $this->insert($data);

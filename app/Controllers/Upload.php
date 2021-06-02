@@ -28,6 +28,20 @@ class Upload extends BaseController
         $data['unit'] = $this->m_admin->get_unit();
         $data['validation'] = $this->validation;
 
+        $id_upload = $this->m_upload->get_upload();
+        $array = [];
+
+        foreach ($id_upload as $up) {
+            $files = [
+                'id_upload' => $up['id_upload'],
+                'ket' => $up['ket_upload']
+            ];
+            $gal = $this->m_upload->get_galeri($up['id_upload']);
+            array_push($files, $gal);
+            array_push($array, $files);
+        }
+        $data['galeri'] = $array;
+
         return view('User/upload', $data);
     }
 
@@ -42,8 +56,8 @@ class Upload extends BaseController
 
             $data_uploads = [
                 'id_upload' => $id_upload,
-                'id_produk' => 1,
-                'id_unit' => 1,
+                'id_produk' => '',
+                'id_unit' => session()->get('id_unit'),
                 'ket_upload' => $ket,
             ];
             $this->m_upload->insert_upload($data_uploads);
