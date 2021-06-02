@@ -85,6 +85,7 @@ $routes->get('/ProdukHukum/update/(:any)', 'ProdukHukum::update/$1', ['filter' =
 $routes->get('/ProdukHukum/delete/(:any)', 'ProdukHukum::delete/$1', ['filter' => 'auth']);
 $routes->get('/ProdukHukum/detail/(:any)', 'ProdukHukum::detail/$1', ['filter' => 'auth']);
 $routes->get('/ProdukHukum', 'ProdukHukum::index', ['filter' => 'auth']);
+$routes->get('/ProdukHukum/save_media', 'ProdukHukum::save_media', ['filter' => 'auth']);
 // Untuk halaman admin
 $routes->get('/ProdukHukum/(:any)', 'ProdukHukum::produk_hukum/$1', ['filter' => 'isAdmin']);
 

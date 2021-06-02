@@ -7,6 +7,8 @@
     </div>
 </div>
 <div class="clearfix"></div>
+<a href="/ProdukHukum/update/<?= md5($prohum['id_produk']) ?>" class="btn btn-success mb-4"><i class="fa fa-pencil">&ensp;<b> EDIT</b></i></a>
+<a href="/ProdukHukum/delete/<?= md5($prohum['id_produk']) ?>" class="btn btn-danger mb-4 tombol-hapus"><i class="fa fa-trash">&ensp;<b> HAPUS</b></i></a>
 
 <div class="row">
     <div class="col-md-6 col-sm-6 ">
@@ -106,7 +108,7 @@
                         <b>
                             <font size="3">Dokumen</font>
                         </b>
-                        <div class="input-group mb-5">
+                        <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text" id="btnGroupAddonDokumen"><i class="fa fa-file-pdf-o"></i></div>
                             </div>
@@ -114,12 +116,89 @@
                                 <font size="3" color="black">Download</font>
                             </a>
                         </div>
-                        <center>
-                            <a href="/ProdukHukum/update/<?= md5($prohum['id_produk']) ?>" class="btn btn-sm btn-success mb-4"><i class="fa fa-pencil">&ensp;<b> EDIT</b></i></a>
-                            <a href="/ProdukHukum/delete/<?= md5($prohum['id_produk']) ?>" class="btn btn-sm btn-danger mb-4 tombol-hapus"><i class="fa fa-trash">&ensp;<b> HAPUS</b></i></a>
-                        </center>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Galleri</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <?= session()->getflashdata('message'); ?>
+                <div class="flash-data" data-flashdata="<?= session()->getFlashdata('upload'); ?>"></div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" id="tombolTambahMedia" class="btn rounded btn-primary shadow tombolTambahMedia" data-toggle="modal" title="Tambah Media" data-target="#modalMedia">
+                            <i class="fa fa-plus"></i>&ensp;
+                            Tambah Media
+                        </button>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <?php foreach ($galeri as $row) { ?>
+                            <div class="row">
+                                <?php foreach ($row[0] as $gal) { ?>
+                                    <div class="col-md-55">
+                                        <div class="thumbnail">
+                                            <div class="image view view-first">
+                                                <img style="width: 100%; display: block;" src="/upload/galeri/<?= $gal['file']; ?>" alt="image" />
+                                                <div class="mask no-caption">
+                                                    <div class="tools tools-bottom">
+                                                        <a href="#"><i class="fa fa-trash"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Tambah Media -->
+<div class="modal fade" id="modalMedia" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="judulModal">Tambah Media</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/ProdukHukum/save_media" method="POST" enctype="multipart/form-data" class="form-tambah-media">
+                    <input type="hidden" id="id" name="id">
+                    <input type="hidden" id="ket" name="ket" value="<?= $prohum['judul']; ?>">
+                    <input type="hidden" id="id_produk" name="id_produk" value="<?= $prohum['id_produk']; ?>">
+                    <input type="hidden" id="id_unit" name="id_unit" value="<?= $prohum['id_unit']; ?>">
+                    <div class="row form-group mt-3">
+                        <label class="col-form-label col-md-2 col-sm-2">Media</label>
+                        <div class="col-md col-sm">
+                            <input type="file" multiple name="media[]" /> <br>
+                        </div>
+                    </div>
+                    <div class="row form-group mt-3">
+                        <div class="input-group">
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Tambah Media</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ use App\Models\M_auth;
 use App\Models\M_admin;
 use App\Models\M_produkHukum;
 use App\Models\M_masterData;
+use M_upload;
 
 class ProdukHukum extends BaseController
 {
@@ -13,12 +14,14 @@ class ProdukHukum extends BaseController
     protected $m_admin;
     protected $m_prohum;
     protected $m_md;
+    protected $m_upload;
     public function __construct()
     {
         $this->m_auth = new M_auth();
         $this->m_admin = new M_admin();
         $this->m_prohum = new M_produkHukum();
         $this->m_md = new M_masterData();
+        $this->m_upload = new M_upload();
         $this->validation = \Config\Services::validation();
         $this->request = \Config\Services::request();
     }
@@ -68,7 +71,66 @@ class ProdukHukum extends BaseController
             'prohum' => $this->m_prohum->get_produk_hukum_by_id($id),
         ];
 
+        $id_upload = $this->m_upload->get_upload_by_id_produk($id);
+        $array = [];
+
+        foreach ($id_upload as $up) {
+            $files = [
+                'id_upload' => $up['id_upload'],
+                'ket' => $up['ket_upload']
+            ];
+            $gal = $this->m_upload->get_galeri($up['id_upload']);
+            array_push($files, $gal);
+            array_push($array, $files);
+        }
+        $data['galeri'] = $array;
+
+        // dd($array);
+        // if ($array) {
+        //     echo 'ada data';
+        // } else {
+        //     echo 'gk ada data cok';
+        // }
+
         return view('Detail/detail_produk_hukum', $data);
+    }
+
+    public function save_media()
+    {
+        $id_produk = $this->request->getVar('id_produk');
+        $id_unit = $this->request->getVar('id_unit');
+        $ket = $this->request->getVar('ket');
+        $files = $this->request->getFiles();
+
+        if ($files) {
+            // cek id_upload terakhir pada table tb_upload
+            $id_upload_terakhir = $this->m_upload->cek_id_upload();
+            $id_upload = $id_upload_terakhir['id'] + 1;
+
+            $data_uploads = [
+                'id_upload' => $id_upload,
+                'id_produk' => $id_produk,
+                'id_unit' => $id_unit,
+                'ket_upload' => $ket,
+            ];
+            $this->m_upload->insert_upload($data_uploads);
+
+            foreach ($files['media'] as $key => $img) {
+                $randomName = $img->getRandomName();
+                $data_galeri = [
+                    'id_upload' => $id_upload,
+                    'file' => $randomName
+                ];
+                $this->m_upload->insert_galeri($data_galeri);
+                $img->move('upload/galeri', $randomName);
+            }
+
+            session()->setFlashdata('upload', 'Ditambahkan');
+            return redirect()->to('/ProdukHukum/detail/' . md5($id_produk));
+        } else {
+            session()->setFlashdata('message', '<div class="alert alert-danger" role="alert"><b>Failed!</b> Ukuran file terlalu besar atau Anda belum memilih file yang akan diupload!</div>');
+            return redirect()->to('/ProdukHukum/detail/' . md5($id_produk));
+        }
     }
 
     public function find_tentang()

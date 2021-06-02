@@ -2,18 +2,7 @@
 <?= $this->section('content'); ?>
 <div class="page-title">
     <div class="title_left">
-        <h3> Media Gallery <small> gallery design</small> </h3>
-    </div>
-
-    <div class="title_right">
-        <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Go!</button>
-                </span>
-            </div>
-        </div>
+        <h3> Galleri </h3>
     </div>
 </div>
 
@@ -23,20 +12,7 @@
     <div class="col-md-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Media Gallery <small> gallery design </small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                        </div>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                </ul>
+                <h2>Galleri</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -44,22 +20,28 @@
                 <div class="flash-data" data-flashdata="<?= session()->getFlashdata('upload'); ?>"></div>
                 <div class="row">
                     <div class="col-12">
-                        <button type="button" id="tombolTambahMedia" class="btn btn-primary tombolTambahMedia" data-toggle="modal" data-target="#modalMedia" style="float: right">
+                        <button type="button" id="tombolTambahGaleri" class="btn btn-primary tombolTambahGaleri" data-toggle="modal" data-target="#modalGaleri" style="float: right">
                             <i class="fa fa-plus"></i>
-                            Tambah Media
+                            Tambah Galeri
                         </button>
                     </div>
                     <div class="col-12 mt-4">
                         <?php foreach ($galeri as $row) { ?>
                             <div class="row">
                                 <div class="col-12">
-                                    <h4> <?= $row['ket']; ?> </h4>
+                                    <h4><?= $row['ket']; ?> &emsp;
+                                        <button type="button" id="tombolTambahMedia" data-id="<?= $row['id_upload']; ?>" class="btn btn-sm rounded btn-transparent border-primary shadow tombolTambahMedia" data-toggle="modal" title="Tambah Media" data-target="#modalMedia">
+                                            <i class="fa fa-plus-square"></i>
+                                        </button>
+                                        <button href="/Upload/delete/<?= $row['id_upload'] ?>" type="button" class="btn btn-transparent border-danger btn-sm shadow tombol-hapus" title="Hapus Galeri"><i class="fa fa-trash"></i></button>
+                                    </h4>
+
                                 </div>
                                 <div class="col">
                                     <hr>
                                 </div>
                                 <div class="col-1">
-                                    <button class="btn btn-transparent float-right button-collapse" type="button" data-toggle="collapse" data-target="#collapse<?= $row['id_upload']; ?>" aria-expanded="false" aria-controls="collapse<?= $row['id_upload']; ?>">
+                                    <button class="btn btn-sm btn-transparent button-collapse" type="button" data-toggle="collapse" data-target="#collapse<?= $row['id_upload']; ?>" aria-expanded="false" aria-controls="collapse<?= $row['id_upload']; ?>">
                                         <i class="fa fa-chevron-down"></i>
                                     </button>
                                 </div>
@@ -97,12 +79,12 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="modalMedia" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
+<!-- Modal Tambah Galeri -->
+<div class="modal fade" id="modalGaleri" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="judulModal">Tambah Media</h5>
+                <h5 class="modal-title" id="judulModal">Tambah Galeri</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -141,6 +123,42 @@
     </div>
 </div>
 
+<!-- Modal Tambah Media -->
+<div class="modal fade" id="modalMedia" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="judulModal">Tambah Media</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Upload/tambah_media" method="POST" enctype="multipart/form-data" class="form-tambah-media">
+                    <input type="hidden" id="id" name="id">
+                    <div class="row form-group mt-3">
+                        <label class="col-form-label col-md-2 col-sm-2">Media</label>
+                        <div class="col-md col-sm">
+                            <input type="file" multiple name="media[]" /> <br>
+                            <font color="red"><?= $validation->getError('media'); ?></font>
+                        </div>
+                    </div>
+                    <div class="row form-group mt-3">
+                        <div class="input-group">
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Tambah Media</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     // $('.button-collapse').click(function() {
     //     if ($(this).val() == "0") {
@@ -151,5 +169,9 @@
     //         $(this).html('<i class="fa fa-chevron-down"></i>');
     //     }
     // });
+    $('.tombolTambahMedia').click(function() {
+        const id = $(this).data('id');
+        $('.form-tambah-media').attr('action', '/Upload/tambah_media/' + id);
+    });
 </script>
 <?= $this->endSection(); ?>

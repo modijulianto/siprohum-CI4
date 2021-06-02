@@ -51,6 +51,7 @@ class Upload extends BaseController
         $files = $this->request->getFiles();
 
         if ($files) {
+            // cek id_upload terakhir pada table tb_upload
             $id_upload_terakhir = $this->m_upload->cek_id_upload();
             $id_upload = $id_upload_terakhir['id'] + 1;
 
@@ -78,5 +79,38 @@ class Upload extends BaseController
             session()->setFlashdata('message', '<div class="alert alert-danger" role="alert"><b>Failed!</b> Ukuran file terlalu besar atau Anda belum memilih file yang akan diupload!</div>');
             return redirect()->to('/Upload');
         }
+    }
+
+    public function tambah_media($id)
+    {
+        $files = $this->request->getFiles();
+        if ($files) {
+            foreach ($files['media'] as $key => $img) {
+                $randomName = $img->getRandomName();
+                $data_galeri = [
+                    'id_upload' => $id,
+                    'file' => $randomName
+                ];
+                $this->m_upload->insert_galeri($data_galeri);
+                $img->move('upload/galeri', $randomName);
+            }
+            session()->setFlashdata('upload', 'Ditambahkan');
+            return redirect()->to('/Upload');
+        } else {
+            session()->setFlashdata('message', '<div class="alert alert-danger" role="alert"><b>Failed!</b> Ukuran file terlalu besar atau Anda belum memilih file yang akan diupload!</div>');
+            return redirect()->to('/Upload');
+        }
+    }
+
+    public function delete($id)
+    {
+        $files = $this->m_upload->get_galeri($id);
+        foreach ($files as $row) {
+            unlink('upload/galeri/' . $row['file']);
+        }
+        $this->m_upload->delete_upload($id);
+        $this->m_upload->delete_galeri($id);
+        session()->setFlashdata('upload', 'Dihapus');
+        return redirect()->to('/Upload');
     }
 }

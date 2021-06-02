@@ -22,6 +22,13 @@ class M_upload extends Model
         return $this->findAll();
     }
 
+    public function get_upload_by_id_produk($id)
+    {
+        $this->where('md5(id_produk)', $id);
+        $this->orderBy('id_upload', 'DESC');
+        return $this->findAll();
+    }
+
     public function get_galeri($id)
     {
         return $this->db->table('tb_galeri')
@@ -39,5 +46,17 @@ class M_upload extends Model
     public function insert_galeri($data)
     {
         return $this->db->table('tb_galeri')->insert($data);
+    }
+
+    public function delete_upload($id)
+    {
+        $this->where('id_upload', $id);
+        return $this->delete();
+    }
+    public function delete_galeri($id)
+    {
+        return $this->table('tb_galeri')
+            ->where('id_upload', $id)
+            ->delete();
     }
 }
