@@ -55,7 +55,7 @@
                                                             <img style="width: 100%; display: block;" src="/upload/galeri/<?= $gal['file']; ?>" alt="image" />
                                                             <div class="mask no-caption">
                                                                 <div class="tools tools-bottom">
-                                                                    <a href="#"><i class="fa fa-trash"></i></a>
+                                                                    <a href="/Upload/delete_one/<?= $gal['id_galeri']; ?>" class="tombol-hapus"><i class="fa fa-trash"></i></a>
                                                                 </div>
                                                             </div>
                                                         </div>

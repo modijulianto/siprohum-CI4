@@ -38,6 +38,14 @@ class M_upload extends Model
             ->get()->getResultArray();
     }
 
+    public function get_galeri_by_id($id)
+    {
+        return $this->db->table('tb_galeri')
+            ->join('tb_upload', 'tb_upload.id_upload=tb_galeri.id_upload')
+            ->where('id_galeri', $id)
+            ->get()->getRowArray();
+    }
+
     public function insert_upload($data)
     {
         return $this->insert($data);
@@ -57,6 +65,12 @@ class M_upload extends Model
     {
         return $this->table('tb_galeri')
             ->where('id_upload', $id)
+            ->delete();
+    }
+    public function delete_galeri_by_id($id)
+    {
+        return $this->db->table('tb_galeri')
+            ->where('id_galeri', $id)
             ->delete();
     }
 }

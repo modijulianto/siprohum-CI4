@@ -141,24 +141,24 @@
                         </button>
                     </div>
                     <div class="col-12 mt-4">
-                        <?php foreach ($galeri as $row) { ?>
-                            <div class="row">
-                                <?php foreach ($row[0] as $gal) { ?>
+                        <div class="row">
+                            <?php if ($galeri != null) { ?>
+                                <?php foreach ($galeri[0] as $row) { ?>
                                     <div class="col-md-55">
                                         <div class="thumbnail">
                                             <div class="image view view-first">
-                                                <img style="width: 100%; display: block;" src="/upload/galeri/<?= $gal['file']; ?>" alt="image" />
+                                                <img style="width: 100%; display: block;" src="/upload/galeri/<?= $row['file']; ?>" alt="image" />
                                                 <div class="mask no-caption">
                                                     <div class="tools tools-bottom">
-                                                        <a href="#"><i class="fa fa-trash"></i></a>
+                                                        <a href="/ProdukHukum/delete_media/<?= $row['id_galeri']; ?>" class="tombol-hapus"><i class="fa fa-trash"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 <?php } ?>
-                            </div>
-                        <?php } ?>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -177,8 +177,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/ProdukHukum/save_media" method="POST" enctype="multipart/form-data" class="form-tambah-media">
-                    <input type="hidden" id="id" name="id">
+                <form action="/ProdukHukum/<?= ($galeri != null) ? 'tambah_media' : 'save_media' ?>" method="POST" enctype="multipart/form-data" class="form-tambah-media">
+                    <input type="hidden" id="id" name="id" value="<?= ($galeri != null) ? $galeri['id_upload'] : ''; ?>">
                     <input type="hidden" id="ket" name="ket" value="<?= $prohum['judul']; ?>">
                     <input type="hidden" id="id_produk" name="id_produk" value="<?= $prohum['id_produk']; ?>">
                     <input type="hidden" id="id_unit" name="id_unit" value="<?= $prohum['id_unit']; ?>">
@@ -186,6 +186,7 @@
                         <label class="col-form-label col-md-2 col-sm-2">Media</label>
                         <div class="col-md col-sm">
                             <input type="file" multiple name="media[]" /> <br>
+                            <font color="red"><?= $validation->getError('media'); ?></font>
                         </div>
                     </div>
                     <div class="row form-group mt-3">

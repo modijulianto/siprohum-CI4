@@ -50,6 +50,19 @@ class Upload extends BaseController
         $ket = $this->request->getVar('keterangan');
         $files = $this->request->getFiles();
 
+        if (!$this->validate([
+            'media' => [
+                'rules' => 'uploaded[media]|mime_in[media,image/jpg,image/jpeg,image/gif,image/png]|max_size[media,2048]',
+                'errors' => [
+                    'uploaded' => 'Harus ada media yang di upload & Ukuran file maksimal 2 MB',
+                    'mime_in' => 'Upload media berformat <i>.jpg, .jpeg, .gif, .png</i>',
+                    'max_size' => 'Ukuran file maksimal 2 MB'
+                ]
+            ],
+        ])) {
+            return redirect()->to('/Upload')->withInput();
+        }
+
         if ($files) {
             // cek id_upload terakhir pada table tb_upload
             $id_upload_terakhir = $this->m_upload->cek_id_upload();
@@ -84,6 +97,20 @@ class Upload extends BaseController
     public function tambah_media($id)
     {
         $files = $this->request->getFiles();
+
+        if (!$this->validate([
+            'media' => [
+                'rules' => 'uploaded[media]|mime_in[media,image/jpg,image/jpeg,image/gif,image/png]|max_size[media,2048]',
+                'errors' => [
+                    'uploaded' => 'Harus ada media yang di upload & Ukuran file maksimal 2 MB',
+                    'mime_in' => 'Upload media berformat <i>.jpg, .jpeg, .gif, .png</i>',
+                    'max_size' => 'Ukuran file maksimal 2 MB'
+                ]
+            ],
+        ])) {
+            return redirect()->to('/Upload')->withInput();
+        }
+
         if ($files) {
             foreach ($files['media'] as $key => $img) {
                 $randomName = $img->getRandomName();
@@ -106,10 +133,23 @@ class Upload extends BaseController
     {
         $files = $this->m_upload->get_galeri($id);
         foreach ($files as $row) {
-            unlink('upload/galeri/' . $row['file']);
+            if (file_exists('upload/galeri/' . $row['file'])) {
+                unlink('upload/galeri/' . $row['file']);
+            }
         }
         $this->m_upload->delete_upload($id);
         $this->m_upload->delete_galeri($id);
+        session()->setFlashdata('upload', 'Dihapus');
+        return redirect()->to('/Upload');
+    }
+
+    public function delete_one($id)
+    {
+        $file = $this->m_upload->get_galeri_by_id($id);
+        if (file_exists('upload/galeri/' . $file['file'])) {
+            unlink('upload/galeri/' . $file['file']);
+        }
+        $this->m_upload->delete_galeri_by_id($id);
         session()->setFlashdata('upload', 'Dihapus');
         return redirect()->to('/Upload');
     }

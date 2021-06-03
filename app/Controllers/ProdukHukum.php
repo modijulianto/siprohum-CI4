@@ -69,6 +69,7 @@ class ProdukHukum extends BaseController
             'meta' => 'Detail Produk Hukum',
             'unit' => $this->m_admin->get_unit(),
             'prohum' => $this->m_prohum->get_produk_hukum_by_id($id),
+            'validation' => $this->validation
         ];
 
         $id_upload = $this->m_upload->get_upload_by_id_produk($id);
@@ -81,10 +82,12 @@ class ProdukHukum extends BaseController
             ];
             $gal = $this->m_upload->get_galeri($up['id_upload']);
             array_push($files, $gal);
-            array_push($array, $files);
+            // array_push($array, $files);
+            $array = $files;
         }
         $data['galeri'] = $array;
 
+        // dd($data['galeri']);
         // dd($array);
         // if ($array) {
         //     echo 'ada data';
@@ -98,6 +101,19 @@ class ProdukHukum extends BaseController
     public function save_media()
     {
         $id_produk = $this->request->getVar('id_produk');
+        if (!$this->validate([
+            'media' => [
+                'rules' => 'uploaded[media]|mime_in[media,image/jpg,image/jpeg,image/gif,image/png]|max_size[media,2048]',
+                'errors' => [
+                    'uploaded' => 'Harus ada media yang di upload & Ukuran file maksimal 2 MB',
+                    'mime_in' => 'Upload media berformat <i>.jpg, .jpeg, .gif, .png</i>',
+                    'max_size' => 'Ukuran file maksimal 2 MB'
+                ]
+            ],
+        ])) {
+            return redirect()->to('/ProdukHukum/detail/' . md5($id_produk))->withInput();
+        }
+
         $id_unit = $this->request->getVar('id_unit');
         $ket = $this->request->getVar('ket');
         $files = $this->request->getFiles();
@@ -131,6 +147,54 @@ class ProdukHukum extends BaseController
             session()->setFlashdata('message', '<div class="alert alert-danger" role="alert"><b>Failed!</b> Ukuran file terlalu besar atau Anda belum memilih file yang akan diupload!</div>');
             return redirect()->to('/ProdukHukum/detail/' . md5($id_produk));
         }
+    }
+
+    public function tambah_media()
+    {
+        $id_produk = $this->request->getVar('id_produk');
+        if (!$this->validate([
+            'media' => [
+                'rules' => 'uploaded[media]|mime_in[media,image/jpg,image/jpeg,image/gif,image/png]|max_size[media,2048]',
+                'errors' => [
+                    'uploaded' => 'Harus ada media yang di upload & Ukuran file maksimal 2 MB',
+                    'mime_in' => 'Upload media berformat <i>.jpg, .jpeg, .gif, .png</i>',
+                    'max_size' => 'Ukuran file maksimal 2 MB'
+                ]
+            ],
+        ])) {
+            return redirect()->to('/ProdukHukum/detail/' . md5($id_produk))->withInput();
+        }
+
+        $id = $this->request->getVar('id');
+        $files = $this->request->getFiles();
+        // dd($files);
+        if ($files) {
+            foreach ($files['media'] as $key => $img) {
+                $randomName = $img->getRandomName();
+                $data_galeri = [
+                    'id_upload' => $id,
+                    'file' => $randomName
+                ];
+                $this->m_upload->insert_galeri($data_galeri);
+                $img->move('upload/galeri', $randomName);
+            }
+            session()->setFlashdata('upload', 'Ditambahkan');
+            return redirect()->to('/ProdukHukum/detail/' . md5($id_produk));
+        } else {
+            session()->setFlashdata('message', '<div class="alert alert-danger" role="alert"><b>Failed!</b> Ukuran file terlalu besar atau Anda belum memilih file yang akan diupload!</div>');
+            return redirect()->to('/ProdukHukum/detail/' . md5($id_produk));
+        }
+    }
+
+    public function delete_media($id)
+    {
+        $file = $this->m_upload->get_galeri_by_id($id);
+        if (file_exists('upload/galeri/' . $file['file'])) {
+            unlink('upload/galeri/' . $file['file']);
+        }
+        $this->m_upload->delete_galeri_by_id($id);
+        session()->setFlashdata('upload', 'Dihapus');
+        return redirect()->to('/ProdukHukum/detail/' . md5($file['id_produk']));
     }
 
     public function find_tentang()
