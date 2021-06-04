@@ -181,7 +181,7 @@
                     <input type="hidden" id="id" name="id" value="<?= ($galeri != null) ? $galeri['id_upload'] : ''; ?>">
                     <input type="hidden" id="ket" name="ket" value="<?= $prohum['judul']; ?>">
                     <input type="hidden" id="id_produk" name="id_produk" value="<?= $prohum['id_produk']; ?>">
-                    <input type="hidden" id="id_unit" name="id_unit" value="<?= $prohum['id_unit']; ?>">
+                    <input type="hidden" id="id_unit" name="id_unit" value="<?= $prohum['id_unit_produk']; ?>">
                     <div class="row form-group mt-3">
                         <label class="col-form-label col-md-2 col-sm-2">Media</label>
                         <div class="col-md col-sm">

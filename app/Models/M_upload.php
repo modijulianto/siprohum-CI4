@@ -18,6 +18,10 @@ class M_upload extends Model
 
     public function get_upload()
     {
+        if (session()->get('role_id') > 1) {
+            $this->where('id_unit', session()->get('id_unit'));
+        }
+
         $this->orderBy('id_upload', 'ASC');
         return $this->findAll();
     }
