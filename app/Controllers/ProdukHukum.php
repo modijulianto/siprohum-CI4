@@ -82,18 +82,9 @@ class ProdukHukum extends BaseController
             ];
             $gal = $this->m_upload->get_galeri($up['id_upload']);
             array_push($files, $gal);
-            // array_push($array, $files);
             $array = $files;
         }
         $data['galeri'] = $array;
-
-        // dd($data['galeri']);
-        // dd($array);
-        // if ($array) {
-        //     echo 'ada data';
-        // } else {
-        //     echo 'gk ada data cok';
-        // }
 
         return view('Detail/detail_produk_hukum', $data);
     }
