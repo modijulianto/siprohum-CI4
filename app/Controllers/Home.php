@@ -3,13 +3,16 @@
 namespace App\Controllers;
 
 use App\Models\M_home;
+use M_upload;
 
 class Home extends BaseController
 {
 	protected $m_home;
+	protected $m_upload;
 	public function __construct()
 	{
 		$this->m_home = new M_home();
+		$this->m_upload = new M_upload();
 	}
 
 	public function index()
@@ -89,6 +92,16 @@ class Home extends BaseController
 		$data['kategori'] = $this->m_home->get_kategori();
 		$data['tahun'] = $this->m_home->get_tahun();
 		$data['status'] = $this->m_home->get_status();
+
+		$id_upload = $this->m_upload->get_upload_by_id_produk($id);
+		$array = [];
+
+		foreach ($id_upload as $up) {
+			$gal = $this->m_upload->get_galeri($up['id_upload']);
+			$array = $gal;
+		}
+		$data['galeri'] = $array;
+
 		return view('Home/Views/produk', $data);
 	}
 
