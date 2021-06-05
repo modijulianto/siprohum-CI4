@@ -46,7 +46,7 @@ class M_upload extends Model
     {
         return $this->db->table('tb_galeri')
             ->join('tb_upload', 'tb_upload.id_upload=tb_galeri.id_upload')
-            ->where('id_galeri', $id)
+            ->where('md5(id_galeri)', $id)
             ->get()->getRowArray();
     }
 
@@ -74,7 +74,7 @@ class M_upload extends Model
     public function delete_galeri_by_id($id)
     {
         return $this->db->table('tb_galeri')
-            ->where('id_galeri', $id)
+            ->where('md5(id_galeri)', $id)
             ->delete();
     }
 }

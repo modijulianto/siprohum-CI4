@@ -143,7 +143,7 @@ class Upload extends BaseController
         return redirect()->to('/Upload');
     }
 
-    public function delete_one($id)
+    public function single_delete($id)
     {
         $file = $this->m_upload->get_galeri_by_id($id);
         if (file_exists('upload/galeri/' . $file['file'])) {

@@ -150,7 +150,7 @@
                                                 <img style="width: 100%; display: block;" src="/upload/galeri/<?= $row['file']; ?>" alt="image" />
                                                 <div class="mask no-caption">
                                                     <div class="tools tools-bottom">
-                                                        <a href="/ProdukHukum/delete_media/<?= $row['id_galeri']; ?>" class="tombol-hapus"><i class="fa fa-trash"></i></a>
+                                                        <a href="/ProdukHukum/delete_media/<?= md5($row['id_galeri']); ?>" class="tombol-hapus"><i class="fa fa-trash"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
