@@ -146,7 +146,7 @@
                         <div class="row">
                             <?php foreach ($galeri as $row) { ?>
                                 <div class="col-lg-3 col-md-3 col-sm-4">
-                                    <img src="/upload/galeri/<?= $row['file']; ?>" class="img-thumbnail" alt="...">
+                                    <a href="/upload/galeri/<?= $row['file']; ?>" data-lightbox="roadtrip" alt="..."><img src="/upload/galeri/<?= $row['file']; ?>" data-lightbox="roadtrip" class="img-thumbnail" alt="..."></a>
                                 </div>
                             <?php } ?>
                         </div>
