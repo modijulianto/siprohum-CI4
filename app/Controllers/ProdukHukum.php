@@ -15,6 +15,7 @@ class ProdukHukum extends BaseController
     protected $m_prohum;
     protected $m_md;
     protected $m_upload;
+    protected $c_upload;
     public function __construct()
     {
         $this->m_auth = new M_auth();
@@ -22,6 +23,7 @@ class ProdukHukum extends BaseController
         $this->m_prohum = new M_produkHukum();
         $this->m_md = new M_masterData();
         $this->m_upload = new M_upload();
+        $this->c_upload = new Upload();
         $this->validation = \Config\Services::validation();
         $this->request = \Config\Services::request();
     }
@@ -420,6 +422,7 @@ class ProdukHukum extends BaseController
     public function delete($id)
     {
         $data = $this->m_prohum->get_produk_hukum_by_id($id);
+        $id_upload =  $this->m_upload->get_upload_by_id_produk($id);
 
         if (session()->get('role_id') == 1) {
             if ($data['file'] != "") {
@@ -427,6 +430,7 @@ class ProdukHukum extends BaseController
                     unlink('upload/produk/' . $data['file']);
                 }
             }
+            $this->c_upload->delete($id_upload[0]['id_upload']);
             $this->m_prohum->delete($data['id_produk']);
             session()->setFlashdata('prohum', 'Dihapus');
             return redirect()->back();
@@ -435,6 +439,7 @@ class ProdukHukum extends BaseController
                 if ($data['file'] != "") {
                     unlink('upload/produk/' . $data['file']);
                 }
+                $this->c_upload->delete($id_upload[0]['id_upload']);
                 $this->m_prohum->delete($data['id_produk']);
                 session()->setFlashdata('prohum', 'Dihapus');
                 return redirect()->back();
