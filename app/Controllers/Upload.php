@@ -70,7 +70,7 @@ class Upload extends BaseController
 
             $data_uploads = [
                 'id_upload' => $id_upload,
-                'id_produk' => '',
+                'id_produk' => null,
                 'id_unit' => session()->get('id_unit'),
                 'ket_upload' => $ket,
             ];

@@ -67,7 +67,7 @@ class M_upload extends Model
     }
     public function delete_galeri($id)
     {
-        return $this->table('tb_galeri')
+        return $this->db->table('tb_galeri')
             ->where('id_upload', $id)
             ->delete();
     }
