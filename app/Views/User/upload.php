@@ -19,19 +19,19 @@
                 <?= session()->getflashdata('message'); ?>
                 <div class="flash-data" data-flashdata="<?= session()->getFlashdata('upload'); ?>"></div>
                 <div class="row">
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <button type="button" id="tombolTambahGaleri" class="btn btn-primary tombolTambahGaleri" data-toggle="modal" data-target="#modalGaleri" style="float: right">
                             <i class="fa fa-plus"></i>
                             Tambah Galeri
                         </button>
-                    </div>
+                    </div> -->
                     <div class="col-12 mt-4">
                         <?php foreach ($galeri as $row) { ?>
                             <div class="row">
                                 <div class="col-12">
                                     <h4><?= $row['ket']; ?> &emsp;
                                         <button type="button" id="tombolTambahMedia" data-id="<?= $row['id_upload']; ?>" class="btn btn-sm rounded btn-transparent border-primary shadow tombolTambahMedia" data-toggle="modal" title="Tambah Media" data-target="#modalMedia">
-                                            <i class="fa fa-plus-square"></i>
+                                            <i class="fa fa-upload"></i>
                                         </button>
                                         <button href="/Upload/delete/<?= $row['id_upload'] ?>" type="button" class="btn btn-transparent border-danger btn-sm shadow tombol-hapus" title="Hapus Galeri"><i class="fa fa-trash"></i></button>
                                     </h4>
@@ -80,7 +80,7 @@
 </div>
 
 <!-- Modal Tambah Galeri -->
-<div class="modal fade" id="modalGaleri" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
+<!-- <div class="modal fade" id="modalGaleri" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -121,7 +121,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Modal Tambah Media -->
 <div class="modal fade" id="modalMedia" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
