@@ -33,6 +33,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
+
                 <div class="row">
                     <div class="col-sm-12">
                         <b>
@@ -144,18 +145,22 @@
                         <div class="row">
                             <?php if ($galeri != null) { ?>
                                 <?php foreach ($galeri[0] as $row) { ?>
-                                    <div class="col-md-55">
-                                        <div class="thumbnail">
-                                            <div class="image view view-first">
-                                                <img style="width: 100%; display: block;" src="/upload/galeri/<?= $row['file']; ?>" alt="image" />
-                                                <div class="mask no-caption">
-                                                    <div class="tools tools-bottom">
-                                                        <a href="/ProdukHukum/delete_media/<?= md5($row['id_galeri']); ?>" class="tombol-hapus"><i class="fa fa-trash"></i></a>
+                                    <?= $row['file']; ?>
+                                    <?php $file = pathinfo($row['file'], PATHINFO_EXTENSION);
+                                    if ($file == "jpg" || "jpeg" || "gif" || "png") { ?>
+                                        <div class="col-md-55">
+                                            <div class="thumbnail">
+                                                <div class="image view view-first">
+                                                    <img style="width: 100%; display: block;" src="/upload/galeri/<?= $row['file']; ?>" alt="image" />
+                                                    <div class="mask no-caption">
+                                                        <div class="tools tools-bottom">
+                                                            <a href="/ProdukHukum/delete_media/<?= md5($row['id_galeri']); ?>" class="tombol-hapus"><i class="fa fa-trash"></i></a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <?php } ?>
                                 <?php } ?>
                             <?php } ?>
                         </div>
@@ -177,23 +182,44 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div class="alert alert-primary" role="alert">
+                    <div class="row">
+                        <div class="col-1 text-center align-middle"><i class="fa fa-info" style="font-size: 35px;"></i></div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-12">Silahkan upload foto berformat <i>.jpg, .jpeg, .gif, .png</i></div>
+                                <div class="col-12">Silahkan upload link video yang berasal dari YouTube</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 <form action="/ProdukHukum/<?= ($galeri != null) ? 'tambah_media' : 'save_media' ?>" method="POST" enctype="multipart/form-data" class="form-tambah-media">
                     <input type="hidden" id="id" name="id" value="<?= ($galeri != null) ? $galeri['id_upload'] : ''; ?>">
                     <input type="hidden" id="ket" name="ket" value="<?= $prohum['judul']; ?>">
                     <input type="hidden" id="id_produk" name="id_produk" value="<?= $prohum['id_produk']; ?>">
                     <input type="hidden" id="id_unit" name="id_unit" value="<?= $prohum['id_unit_produk']; ?>">
                     <div class="row form-group mt-3">
-                        <label class="col-form-label col-md-2 col-sm-2">Media</label>
+                        <label class="col-form-label col-md-2 col-sm-2">Foto</label>
                         <div class="col-md col-sm">
                             <input type="file" multiple name="media[]" /> <br>
                             <font color="red"><?= $validation->getError('media'); ?></font>
                         </div>
                     </div>
-                    <div class="row form-group mt-3">
-                        <div class="input-group">
+                    <div class="row form-group mt-3 fieldGroup">
+                        <label class="col-form-label col-md-2 col-sm-2">Link Video</label>
+                        <div class="input-group col-md-10 col-sm-10">
+                            <input type="text" name="video[]" class="form-control" placeholder="Masukkan link video" />
+                            <a href="javascript:void(0)" class="btn btn-success addMore ml-1"><i class="fa fa-plus"></i></a>
                         </div>
                     </div>
-
+                    <div class="row form-group fieldGroupCopy mt-3" style="display: none;">
+                        <label class="col-form-label col-md-2 col-sm-2"></label>
+                        <div class="input-group col-md-10 col-sm-10">
+                            <input type="text" name="video[]" class="form-control" placeholder="Masukkan link video" />
+                            <a href="javascript:void(0)" class="btn btn-danger remove ml-1"><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -204,4 +230,25 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        // membatasi jumlah inputan
+        var maxGroup = 5;
+
+        //melakukan proses multiple input 
+        $(".addMore").click(function() {
+            if ($('body').find('.fieldGroup').length < maxGroup) {
+                var fieldHTML = '<div class="fieldGroup">' + $(".fieldGroupCopy").html() + '</div>';
+                $('body').find('.fieldGroup:last').after(fieldHTML);
+            } else {
+                alert('Maximum ' + maxGroup + ' groups are allowed.');
+            }
+        });
+
+        //remove fields group
+        $("body").on("click", ".remove", function() {
+            $(this).parents(".fieldGroup").remove();
+        });
+    });
+</script>
 <?= $this->endSection('content'); ?>

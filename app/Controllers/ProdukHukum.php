@@ -110,12 +110,24 @@ class ProdukHukum extends BaseController
         $id_unit = $this->request->getVar('id_unit');
         $ket = $this->request->getVar('ket');
         $files = $this->request->getFiles();
+        $video = $this->request->getVar('video');
+
+        // cek id_upload terakhir pada table tb_upload
+        $id_upload_terakhir = $this->m_upload->cek_id_upload();
+        $id_upload = $id_upload_terakhir['id'] + 1;
+
+        if ($video) {
+            foreach ($video as $vid) {
+                $link_embed = str_replace('watch?v=', 'embed/', $vid);
+                $data_link = [
+                    'id_upload' => $id_upload,
+                    'file' => $link_embed
+                ];
+                $this->m_upload->insert_galeri($data_link);
+            }
+        }
 
         if ($files) {
-            // cek id_upload terakhir pada table tb_upload
-            $id_upload_terakhir = $this->m_upload->cek_id_upload();
-            $id_upload = $id_upload_terakhir['id'] + 1;
-
             $data_uploads = [
                 'id_upload' => $id_upload,
                 'id_produk' => $id_produk,
@@ -137,7 +149,7 @@ class ProdukHukum extends BaseController
             session()->setFlashdata('upload', 'Ditambahkan');
             return redirect()->to('/ProdukHukum/detail/' . md5($id_produk));
         } else {
-            session()->setFlashdata('message', '<div class="alert alert-danger" role="alert"><b>Failed!</b> Ukuran file terlalu besar atau Anda belum memilih file yang akan diupload!</div>');
+            session()->setFlashdata('message', '<div class="alert alert-danger" role="alert"><b>Failed!</b> Anda belum memilih file yang akan diupload atau Ukuran file terlalu besar!</div>');
             return redirect()->to('/ProdukHukum/detail/' . md5($id_produk));
         }
     }
