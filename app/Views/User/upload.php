@@ -59,11 +59,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- <div class="caption">
-                                                            <p><strong>Image Name</strong>
-                                                            </p>
-                                                            <p>Snow and Ice Incoming</p>
-                                                        </div> -->
                                                     </div>
                                                 </div>
                                             <?php } ?>

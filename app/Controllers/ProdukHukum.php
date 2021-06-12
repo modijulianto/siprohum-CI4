@@ -96,7 +96,7 @@ class ProdukHukum extends BaseController
         $id_produk = $this->request->getVar('id_produk');
         if (!$this->validate([
             'media' => [
-                'rules' => 'uploaded[media]|mime_in[media,image/jpg,image/jpeg,image/gif,image/png]|max_size[media,2048]',
+                'rules' => 'mime_in[media,image/jpg,image/jpeg,image/gif,image/png]|max_size[media,2048]',
                 'errors' => [
                     'uploaded' => 'Harus ada media yang di upload & Ukuran file maksimal 2 MB',
                     'mime_in' => 'Upload media berformat <i>.jpg, .jpeg, .gif, .png</i>',
@@ -109,25 +109,16 @@ class ProdukHukum extends BaseController
 
         $id_unit = $this->request->getVar('id_unit');
         $ket = $this->request->getVar('ket');
-        $files = $this->request->getFiles();
-        $video = $this->request->getVar('video');
+        $files = $this->request->getFileMultiple('media');
+        $video = $_POST['video'];
 
         // cek id_upload terakhir pada table tb_upload
         $id_upload_terakhir = $this->m_upload->cek_id_upload();
         $id_upload = $id_upload_terakhir['id'] + 1;
 
-        if ($video) {
-            foreach ($video as $vid) {
-                $link_embed = str_replace('watch?v=', 'embed/', $vid);
-                $data_link = [
-                    'id_upload' => $id_upload,
-                    'file' => $link_embed
-                ];
-                $this->m_upload->insert_galeri($data_link);
-            }
-        }
 
-        if ($files) {
+        if ($files[0]->getError() != 4 || $video[0] != "") {
+            // input ke tb_upload
             $data_uploads = [
                 'id_upload' => $id_upload,
                 'id_produk' => $id_produk,
@@ -135,15 +126,32 @@ class ProdukHukum extends BaseController
                 'ket_upload' => $ket,
             ];
             $this->m_upload->insert_upload($data_uploads);
+            // end input tb_upload
 
-            foreach ($files['media'] as $key => $img) {
-                $randomName = $img->getRandomName();
-                $data_galeri = [
-                    'id_upload' => $id_upload,
-                    'file' => $randomName
-                ];
-                $this->m_upload->insert_galeri($data_galeri);
-                $img->move('upload/galeri', $randomName);
+            // 
+            if ($video[0] != "") {
+                foreach ($video as $vid) {
+                    $link_embed = str_replace('watch?v=', 'embed/', $vid);
+                    $data_link = [
+                        'id_upload' => $id_upload,
+                        'file' => $link_embed,
+                        'jenis' => "video"
+                    ];
+                    $this->m_upload->insert_galeri($data_link);
+                }
+            }
+
+            if ($files[0]->getError() != 4) {
+                foreach ($files as $img) {
+                    $randomName = $img->getRandomName();
+                    $data_galeri = [
+                        'id_upload' => $id_upload,
+                        'file' => $randomName,
+                        'jenis' => "gambar"
+                    ];
+                    $this->m_upload->insert_galeri($data_galeri);
+                    $img->move('upload/galeri', $randomName);
+                }
             }
 
             session()->setFlashdata('upload', 'Ditambahkan');
@@ -159,7 +167,7 @@ class ProdukHukum extends BaseController
         $id_produk = $this->request->getVar('id_produk');
         if (!$this->validate([
             'media' => [
-                'rules' => 'uploaded[media]|mime_in[media,image/jpg,image/jpeg,image/gif,image/png]|max_size[media,2048]',
+                'rules' => 'mime_in[media,image/jpg,image/jpeg,image/gif,image/png]|max_size[media,2048]',
                 'errors' => [
                     'uploaded' => 'Harus ada media yang di upload & Ukuran file maksimal 2 MB',
                     'mime_in' => 'Upload media berformat <i>.jpg, .jpeg, .gif, .png</i>',
@@ -171,22 +179,40 @@ class ProdukHukum extends BaseController
         }
 
         $id = $this->request->getVar('id');
-        $files = $this->request->getFiles();
-        // dd($files);
-        if ($files) {
-            foreach ($files['media'] as $key => $img) {
-                $randomName = $img->getRandomName();
-                $data_galeri = [
-                    'id_upload' => $id,
-                    'file' => $randomName
-                ];
-                $this->m_upload->insert_galeri($data_galeri);
-                $img->move('upload/galeri', $randomName);
+        $files = $this->request->getFileMultiple('media');
+        // dd($files[0]->getError());
+        $video = $_POST['video'];
+        // dd($video);
+        if ($files[0]->getError() != 4 || $video[0] != "") {
+            if ($video[0] != "") {
+                foreach ($video as $vid) {
+                    $link_embed = str_replace('watch?v=', 'embed/', $vid);
+                    $data_link = [
+                        'id_upload' => $id,
+                        'file' => $link_embed,
+                        'jenis' => "video"
+                    ];
+                    $this->m_upload->insert_galeri($data_link);
+                }
             }
+
+            if ($files[0]->getError() != 4) {
+                foreach ($files as $img) {
+                    $randomName = $img->getRandomName();
+                    $data_galeri = [
+                        'id_upload' => $id,
+                        'file' => $randomName,
+                        'jenis' => "gambar"
+                    ];
+                    $this->m_upload->insert_galeri($data_galeri);
+                    $img->move('upload/galeri', $randomName);
+                }
+            }
+
             session()->setFlashdata('upload', 'Ditambahkan');
             return redirect()->to('/ProdukHukum/detail/' . md5($id_produk));
         } else {
-            session()->setFlashdata('message', '<div class="alert alert-danger" role="alert"><b>Failed!</b> Ukuran file terlalu besar atau Anda belum memilih file yang akan diupload!</div>');
+            session()->setFlashdata('message', '<div class="alert alert-danger" role="alert"><b>Failed!</b> Anda belum memilih file yang akan diupload atau Ukuran file terlalu besar!</div>');
             return redirect()->to('/ProdukHukum/detail/' . md5($id_produk));
         }
     }
@@ -194,10 +220,23 @@ class ProdukHukum extends BaseController
     public function delete_media($id)
     {
         $file = $this->m_upload->get_galeri_by_id($id);
-        if (file_exists('upload/galeri/' . $file['file'])) {
-            unlink('upload/galeri/' . $file['file']);
+        print_r($file);
+        if ($file != null) {
+            if ($file['jenis'] == "gambar") {
+                if (file_exists('upload/galeri/' . $file['file'])) {
+                    unlink('upload/galeri/' . $file['file']);
+                }
+            }
         }
         $this->m_upload->delete_galeri_by_id($id);
+
+        // cek apakah masih ada data dengan id_upload yang sama seperti pada data file diatas
+        // jika sudah tidak ada, maka data pada tb_upload di hapus
+        $cek_galeri = $this->m_upload->get_galeri($file['id_upload']);
+        if ($cek_galeri == null) {
+            $this->m_upload->delete_upload($file['id_upload']);
+        }
+
         session()->setFlashdata('upload', 'Dihapus');
         return redirect()->to('/ProdukHukum/detail/' . md5($file['id_produk']));
     }

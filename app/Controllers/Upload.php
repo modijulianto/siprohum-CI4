@@ -133,8 +133,10 @@ class Upload extends BaseController
     {
         $files = $this->m_upload->get_galeri($id);
         foreach ($files as $row) {
-            if (file_exists('upload/galeri/' . $row['file'])) {
-                unlink('upload/galeri/' . $row['file']);
+            if ($row['jenis'] == "gambar") {
+                if (file_exists('upload/galeri/' . $row['file'])) {
+                    unlink('upload/galeri/' . $row['file']);
+                }
             }
         }
         $this->m_upload->delete_upload($id);
@@ -146,8 +148,10 @@ class Upload extends BaseController
     public function single_delete($id)
     {
         $file = $this->m_upload->get_galeri_by_id($id);
-        if (file_exists('upload/galeri/' . $file['file'])) {
-            unlink('upload/galeri/' . $file['file']);
+        if ($file['jenis'] == "gambar") {
+            if (file_exists('upload/galeri/' . $file['file'])) {
+                unlink('upload/galeri/' . $file['file']);
+            }
         }
         $this->m_upload->delete_galeri_by_id($id);
         session()->setFlashdata('upload', 'Dihapus');

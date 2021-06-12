@@ -144,24 +144,81 @@
                     <div class="col-12 mt-4">
                         <div class="row">
                             <?php if ($galeri != null) { ?>
-                                <?php foreach ($galeri[0] as $row) { ?>
-                                    <?= $row['file']; ?>
-                                    <?php $file = pathinfo($row['file'], PATHINFO_EXTENSION);
-                                    if ($file == "jpg" || "jpeg" || "gif" || "png") { ?>
-                                        <div class="col-md-55">
-                                            <div class="thumbnail">
-                                                <div class="image view view-first">
-                                                    <img style="width: 100%; display: block;" src="/upload/galeri/<?= $row['file']; ?>" alt="image" />
-                                                    <div class="mask no-caption">
-                                                        <div class="tools tools-bottom">
-                                                            <a href="/ProdukHukum/delete_media/<?= md5($row['id_galeri']); ?>" class="tombol-hapus"><i class="fa fa-trash"></i></a>
-                                                        </div>
-                                                    </div>
+                                <div class="col-lg-12 col-md-12 mb-5">
+                                    <div class="row">
+                                        <!-- VIDEO -->
+                                        <div class="col-12">
+                                            <h4>VIDEO</h4>
+
+                                        </div>
+                                        <div class="col">
+                                            <hr>
+                                        </div>
+                                        <div class="col-1">
+                                            <button class="btn btn-sm btn-transparent button-collapse" type="button" data-toggle="collapse" data-target="#collapseVideo" aria-expanded="false" aria-controls="collapseVideo">
+                                                <i class="fa fa-chevron-down"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="collapse" id="collapseVideo">
+                                                <div class="row">
+                                                    <?php foreach ($galeri[0] as $row) { ?>
+                                                        <?php if ($row['jenis'] == "video") { ?>
+                                                            <div class="col-md-4 mb-4">
+                                                                <div class="row">
+                                                                    <div class="col-12 text-center"><iframe src="<?= $row['file']; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                                                                    <div class="col-12 text-center"><a href="/ProdukHukum/delete_media/<?= md5($row['id_galeri']); ?>" class="btn btn-sm btn-danger tombol-hapus" style="width: 100%;"><i class="fa fa-trash"></i></a></div>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
-                                    <?php } ?>
-                                <?php } ?>
+                                        <!-- END VIDEO -->
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="row">
+                                        <!-- GAMBAR -->
+                                        <div class="col-12">
+                                            <h4>GAMBAR</h4>
+
+                                        </div>
+                                        <div class="col">
+                                            <hr>
+                                        </div>
+                                        <div class="col-1">
+                                            <button class="btn btn-sm btn-transparent button-collapse" type="button" data-toggle="collapse" data-target="#collapseGambar" aria-expanded="false" aria-controls="collapseGambar">
+                                                <i class="fa fa-chevron-down"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="collapse" id="collapseGambar">
+                                                <div class="row">
+                                                    <?php foreach ($galeri[0] as $row) { ?>
+                                                        <?php if ($row['jenis'] == "gambar") { ?>
+                                                            <div class="col-md-55">
+                                                                <div class="thumbnail">
+                                                                    <div class="image view view-first">
+                                                                        <img style="width: 100%; display: block;" src="/upload/galeri/<?= $row['file']; ?>" alt="image" />
+                                                                        <div class="mask no-caption">
+                                                                            <div class="tools tools-bottom">
+                                                                                <a href="/ProdukHukum/delete_media/<?= md5($row['id_galeri']); ?>" class="tombol-hapus"><i class="fa fa-trash"></i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END GAMBAR -->
+                                    </div>
+                                </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -182,7 +239,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-primary" role="alert">
+                <div class="alert alert-primary mb-3" role="alert">
                     <div class="row">
                         <div class="col-1 text-center align-middle"><i class="fa fa-info" style="font-size: 35px;"></i></div>
                         <div class="col">
@@ -194,6 +251,7 @@
                     </div>
 
                 </div>
+                <hr>
                 <form action="/ProdukHukum/<?= ($galeri != null) ? 'tambah_media' : 'save_media' ?>" method="POST" enctype="multipart/form-data" class="form-tambah-media">
                     <input type="hidden" id="id" name="id" value="<?= ($galeri != null) ? $galeri['id_upload'] : ''; ?>">
                     <input type="hidden" id="ket" name="ket" value="<?= $prohum['judul']; ?>">
@@ -213,19 +271,18 @@
                             <a href="javascript:void(0)" class="btn btn-success addMore ml-1"><i class="fa fa-plus"></i></a>
                         </div>
                     </div>
-                    <div class="row form-group fieldGroupCopy mt-3" style="display: none;">
-                        <label class="col-form-label col-md-2 col-sm-2"></label>
-                        <div class="input-group col-md-10 col-sm-10">
-                            <input type="text" name="video[]" class="form-control" placeholder="Masukkan link video" />
-                            <a href="javascript:void(0)" class="btn btn-danger remove ml-1"><i class="fa fa-trash"></i></a>
-                        </div>
-                    </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Tambah Media</button>
                     </div>
                 </form>
+                <div class="row form-group fieldGroupCopy mt-3" style="display: none;">
+                    <label class="col-form-label col-md-2 col-sm-2"></label>
+                    <div class="input-group col-md-10 col-sm-10">
+                        <input type="text" name="video[]" class="form-control" placeholder="Masukkan link video" />
+                        <a href="javascript:void(0)" class="btn btn-danger remove ml-1"><i class="fa fa-trash"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
