@@ -267,7 +267,7 @@
                     <div class="row form-group mt-3 fieldGroup">
                         <label class="col-form-label col-md-2 col-sm-2">Link Video</label>
                         <div class="input-group col-md-10 col-sm-10">
-                            <input type="text" name="video[]" class="form-control" placeholder="Masukkan link video" />
+                            <input type="text" name="video[]" autocomplete="off" class="form-control" placeholder="Masukkan link video" />
                             <a href="javascript:void(0)" class="btn btn-success addMore ml-1"><i class="fa fa-plus"></i></a>
                         </div>
                     </div>
@@ -279,7 +279,7 @@
                 <div class="row form-group fieldGroupCopy mt-3" style="display: none;">
                     <label class="col-form-label col-md-2 col-sm-2"></label>
                     <div class="input-group col-md-10 col-sm-10">
-                        <input type="text" name="video[]" class="form-control" placeholder="Masukkan link video" />
+                        <input type="text" name="video[]" autocomplete="off" class="form-control" placeholder="Masukkan link video" />
                         <a href="javascript:void(0)" class="btn btn-danger remove ml-1"><i class="fa fa-trash"></i></a>
                     </div>
                 </div>
