@@ -117,6 +117,7 @@
                                     <li><a href="/ProdukHukum"><i class="fa fa-book"></i> DATA PRODUK HUKUM </a></li>
                                     <li><a href="/Tentang"><i class="fa fa-info"></i> Tentang </a></li>
                                 <?php } ?>
+                                <li><a href="/Upload"><i class="fa fa-image"></i> GALERI </a></li>
                                 <li><a href="/Profile"><i class="fa fa-user"></i> MY PROFILE </a></li>
                                 <li><a href="/ChangePassword"><i class="fa fa-key"></i> CHANGE PASSWORD </a></li>
                             </ul>

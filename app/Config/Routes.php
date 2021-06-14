@@ -53,6 +53,9 @@ $routes->get('/Jdih/produk/(:any)', 'Home::produk/$1');
 $routes->get('/Dashboard', 'User::index', ['filter' => 'auth']);
 $routes->get('/Dashboard/(:any)', 'User::$1', ['filter' => 'auth']);
 
+$routes->get('/Upload', 'Upload::index', ['filter' => 'auth']);
+$routes->get('/Upload/(:any)', 'Upload::$1', ['filter' => 'auth']);
+
 $routes->get('/Profile', 'User::my_profile', ['filter' => 'auth']);
 $routes->post('/Profile/(:any)', 'User::$1', ['filter' => 'auth']);
 $routes->get('/Profile/(:any)', 'User::$1', ['filter' => 'auth']);
@@ -82,6 +85,8 @@ $routes->get('/ProdukHukum/update/(:any)', 'ProdukHukum::update/$1', ['filter' =
 $routes->get('/ProdukHukum/delete/(:any)', 'ProdukHukum::delete/$1', ['filter' => 'auth']);
 $routes->get('/ProdukHukum/detail/(:any)', 'ProdukHukum::detail/$1', ['filter' => 'auth']);
 $routes->get('/ProdukHukum', 'ProdukHukum::index', ['filter' => 'auth']);
+$routes->get('/ProdukHukum/save_media', 'ProdukHukum::save_media', ['filter' => 'auth']);
+$routes->get('/ProdukHukum/delete_media/(:any)', 'ProdukHukum::delete_media/$1', ['filter' => 'auth']);
 // Untuk halaman admin
 $routes->get('/ProdukHukum/(:any)', 'ProdukHukum::produk_hukum/$1', ['filter' => 'isAdmin']);
 

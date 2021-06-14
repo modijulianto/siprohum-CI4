@@ -3,13 +3,16 @@
 namespace App\Controllers;
 
 use App\Models\M_home;
+use M_upload;
 
 class Home extends BaseController
 {
 	protected $m_home;
+	protected $m_upload;
 	public function __construct()
 	{
 		$this->m_home = new M_home();
+		$this->m_upload = new M_upload();
 	}
 
 	public function index()
@@ -21,7 +24,7 @@ class Home extends BaseController
 		$data['kategori'] = $this->m_home->get_kategori();
 		$data['tahun'] = $this->m_home->get_tahun();
 		$data['status'] = $this->m_home->get_status();
-		return view('Home/Views/beranda', $data);
+		return view('Home/Content/beranda', $data);
 	}
 
 	public function statistik()
@@ -31,7 +34,7 @@ class Home extends BaseController
 		$data['unit'] = $this->m_home->get_unit();
 		$data['jenis'] = $this->m_home->get_statistik_by_jenis();
 		$data['tahun'] = $this->m_home->get_statistik_by_tahun();
-		return view('Home/Views/statistik', $data);
+		return view('Home/Content/statistik', $data);
 	}
 
 	public function unit($id)
@@ -46,7 +49,7 @@ class Home extends BaseController
 		$data['kategori'] = $this->m_home->get_kategori();
 		$data['tahun'] = $this->m_home->get_tahun();
 		$data['status'] = $this->m_home->get_status();
-		return view('Home/Views/unit', $data);
+		return view('Home/Content/unit', $data);
 	}
 
 	public function kategori($id)
@@ -61,7 +64,7 @@ class Home extends BaseController
 		$data['kategori'] = $this->m_home->get_kategori();
 		$data['tahun'] = $this->m_home->get_tahun();
 		$data['status'] = $this->m_home->get_status();
-		return view('Home/Views/kategori', $data);
+		return view('Home/Content/kategori', $data);
 	}
 
 	public function cari()
@@ -75,7 +78,7 @@ class Home extends BaseController
 		$data['kategori'] = $this->m_home->get_kategori();
 		$data['tahun'] = $this->m_home->get_tahun();
 		$data['status'] = $this->m_home->get_status();
-		return view('Home/Views/hasil_cari', $data);
+		return view('Home/Content/hasil_cari', $data);
 	}
 
 	public function produk($id)
@@ -89,7 +92,21 @@ class Home extends BaseController
 		$data['kategori'] = $this->m_home->get_kategori();
 		$data['tahun'] = $this->m_home->get_tahun();
 		$data['status'] = $this->m_home->get_status();
-		return view('Home/Views/produk', $data);
+
+		$id_upload = $this->m_upload->get_upload_by_id_produk($id);
+		$array = [];
+
+		foreach ($id_upload as $up) {
+			$vid = $this->m_upload->get_galeri_video($up['id_upload']);
+			$gal = $this->m_upload->get_galeri_gambar($up['id_upload']);
+			array_push($array, $vid);
+			array_push($array, $gal);
+			// $array = $gal;
+		}
+		$data['galeri'] = $array;
+		// dd($data['galeri']);
+
+		return view('Home/Content/produk', $data);
 	}
 
 	//--------------------------------------------------------------------

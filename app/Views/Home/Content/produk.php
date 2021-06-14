@@ -9,11 +9,11 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row mb-4">
     <div class="col-md-6 mt-5">
         <div class="row">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-book"></i>&ensp; DOKUMEN PRODUK HUKUM</p>
+                <p class="pl-3"><i class="fa fa-book"></i>&ensp;<b> DOKUMEN PRODUK HUKUM </b></p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
@@ -42,7 +42,7 @@
     <div class="col-md-6 mt-5">
         <div class="row mb-5">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-book"></i>&ensp; DETAIL PRODUK HUKUM</p>
+                <p class="pl-3"><i class="fa fa-book"></i>&ensp;<b> DETAIL PRODUK HUKUM </b></p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
@@ -75,7 +75,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text" id="btnGroupAddonJudul"><i class="fa fa-bookmark"></i></div>
                             </div>
-                            <input type="text" class="form-control" style="background: rgba(233, 236, 239, 0.307);" readonly value="<?= $prohum['judul']; ?>" aria-label="Input group example" aria-describedby="btnGroupAddonJudul">
+                            <textarea name="" id="" class="form-control" style="background: rgba(233, 236, 239, 0.307);" aria-label="Input group example" rows="2" aria-describedby="btnGroupAddonTentang" readonly><?= $prohum['judul']; ?></textarea>
                         </div>
                         <hr>
                         <b>
@@ -128,6 +128,44 @@
                             <a href="/upload/produk/<?= $prohum['file']; ?>" download="<?= $prohum['file']; ?>" class="form-control" style="background: rgba(233, 236, 239, 0.307);">
                                 <font size="3" color="black">Download</font>
                             </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-md-12 text-secondary">
+                <p class="pl-3"><i class="fa fa-book"></i>&ensp;<b> GALERI </b></p>
+                <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <?php if ($galeri[0] != '') { ?>
+                                    <div class="row">
+                                        <?php foreach ($galeri[0] as $vid) { ?>
+                                            <div class="col-md-4 mb-4">
+                                                <iframe style="width: max-content;" src="<?= $vid['file']; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <?php if ($galeri[1] != '') { ?>
+                                    <div class="card-columns">
+                                        <?php foreach ($galeri[1] as $gal) { ?>
+                                            <div class="card">
+                                                <a href="/upload/galeri/<?= $gal['file']; ?>" data-lightbox="roadtrip" alt="..."><img src="/upload/galeri/<?= $gal['file']; ?>" data-lightbox="roadtrip" class="img-thumbnail" alt="..."></a>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>

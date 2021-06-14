@@ -13,6 +13,8 @@
     <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom Style -->
     <link href="/build/css/custom-home.css" rel="stylesheet">
+    <!-- Lightbox 2 -->
+    <link href="/lightbox2-2.11.3/src/css/lightbox.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="/vendors/jquery/dist/jquery.min.js"></script>
 
@@ -55,6 +57,8 @@
         </footer>
     </div>
 
+    <!-- Lightbox2 -->
+    <script src="/lightbox2-2.11.3/src/js/lightbox.js"></script>
     <!-- Bootstrap -->
     <script src="/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom Style -->
