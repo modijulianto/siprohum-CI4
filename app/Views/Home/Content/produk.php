@@ -144,11 +144,28 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <?php foreach ($galeri as $row) { ?>
-                                <div class="col-lg-3 col-md-3 col-sm-4">
-                                    <a href="/upload/galeri/<?= $row['file']; ?>" data-lightbox="roadtrip" alt="..."><img src="/upload/galeri/<?= $row['file']; ?>" data-lightbox="roadtrip" class="img-thumbnail" alt="..."></a>
-                                </div>
-                            <?php } ?>
+                            <div class="col-lg-12 col-md-12">
+                                <?php if ($galeri[0] != '') { ?>
+                                    <div class="row">
+                                        <?php foreach ($galeri[0] as $vid) { ?>
+                                            <div class="col-md-4 mb-4">
+                                                <iframe style="width: max-content;" src="<?= $vid['file']; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <?php if ($galeri[1] != '') { ?>
+                                    <div class="card-columns">
+                                        <?php foreach ($galeri[1] as $gal) { ?>
+                                            <div class="card">
+                                                <a href="/upload/galeri/<?= $gal['file']; ?>" data-lightbox="roadtrip" alt="..."><img src="/upload/galeri/<?= $gal['file']; ?>" data-lightbox="roadtrip" class="img-thumbnail" alt="..."></a>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>
