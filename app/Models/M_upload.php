@@ -42,6 +42,26 @@ class M_upload extends Model
             ->get()->getResultArray();
     }
 
+    public function get_galeri_gambar($id)
+    {
+        return $this->db->table('tb_galeri')
+            // ->join('tb_upload', 'tb_upload.id_upload=tb_galeri.id_upload')
+            ->where('id_upload', $id)
+            ->where('jenis', "gambar")
+            ->orderBy('id_upload', 'ASC')
+            ->get()->getResultArray();
+    }
+
+    public function get_galeri_video($id)
+    {
+        return $this->db->table('tb_galeri')
+            // ->join('tb_upload', 'tb_upload.id_upload=tb_galeri.id_upload')
+            ->where('id_upload', $id)
+            ->where('jenis', "video")
+            ->orderBy('id_upload', 'ASC')
+            ->get()->getResultArray();
+    }
+
     public function get_galeri_by_id($id)
     {
         return $this->db->table('tb_galeri')

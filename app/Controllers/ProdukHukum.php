@@ -220,7 +220,6 @@ class ProdukHukum extends BaseController
     public function delete_media($id)
     {
         $file = $this->m_upload->get_galeri_by_id($id);
-        print_r($file);
         if ($file != null) {
             if ($file['jenis'] == "gambar") {
                 if (file_exists('upload/galeri/' . $file['file'])) {

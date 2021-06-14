@@ -48,20 +48,40 @@
                                 <div class="col-12">
                                     <div class="collapse" id="collapse<?= $row['id_upload']; ?>">
                                         <div class="row">
-                                            <?php foreach ($row[0] as $gal) { ?>
-                                                <div class="col-md-55">
-                                                    <div class="thumbnail">
-                                                        <div class="image view view-first">
-                                                            <img style="width: 100%; display: block;" src="/upload/galeri/<?= $gal['file']; ?>" alt="image" />
-                                                            <div class="mask no-caption">
-                                                                <div class="tools tools-bottom">
-                                                                    <a href="/Upload/single_delete/<?= md5($gal['id_galeri']); ?>" class="tombol-hapus"><i class="fa fa-trash"></i></a>
+                                            <div class="col-md-12">
+                                                <?php if ($row[0] != '') { ?>
+                                                    <div class="row">
+                                                        <?php foreach ($row[0] as $vid) { ?>
+                                                            <div class="col-md-4 mb-4">
+                                                                <div class="row">
+                                                                    <div class="col-12 text-center"><iframe src="<?= $vid['file']; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                                                                    <div class="col-12 text-center"><a href="/Upload/single_delete/<?= md5($vid['id_galeri']); ?>" class="btn btn-sm btn-danger tombol-hapus" style="width: 100%;"><i class="fa fa-trash"></i></a></div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        <?php } ?>
                                                     </div>
-                                                </div>
-                                            <?php } ?>
+                                                <?php } ?>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <?php if ($row[1] != '') { ?>
+                                                    <div class="row">
+                                                        <?php foreach ($row[1] as $gal) { ?>
+                                                            <div class="col-md-55">
+                                                                <div class="thumbnail">
+                                                                    <div class="image view view-first">
+                                                                        <img style="width: 100%; display: block;" src="/upload/galeri/<?= $gal['file']; ?>" alt="image" />
+                                                                        <div class="mask no-caption">
+                                                                            <div class="tools tools-bottom">
+                                                                                <a href="/Upload/single_delete/<?= md5($gal['id_galeri']); ?>" class="tombol-hapus"><i class="fa fa-trash"></i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+                                                    </div>
+                                                <?php } ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

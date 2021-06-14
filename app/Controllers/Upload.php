@@ -36,11 +36,14 @@ class Upload extends BaseController
                 'id_upload' => $up['id_upload'],
                 'ket' => $up['ket_upload']
             ];
-            $gal = $this->m_upload->get_galeri($up['id_upload']);
+            $vid = $this->m_upload->get_galeri_video($up['id_upload']);
+            $gal = $this->m_upload->get_galeri_gambar($up['id_upload']);
+            array_push($files, $vid);
             array_push($files, $gal);
             array_push($array, $files);
         }
         $data['galeri'] = $array;
+        // dd($data['galeri']);
 
         return view('User/upload', $data);
     }
@@ -154,6 +157,14 @@ class Upload extends BaseController
             }
         }
         $this->m_upload->delete_galeri_by_id($id);
+
+        // cek apakah masih ada data dengan id_upload yang sama seperti pada data file diatas
+        // jika sudah tidak ada, maka data pada tb_upload di hapus
+        $cek_galeri = $this->m_upload->get_galeri($file['id_upload']);
+        if ($cek_galeri == null) {
+            $this->m_upload->delete_upload($file['id_upload']);
+        }
+
         session()->setFlashdata('upload', 'Dihapus');
         return redirect()->to('/Upload');
     }
