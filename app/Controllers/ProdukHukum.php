@@ -475,7 +475,7 @@ class ProdukHukum extends BaseController
 
     public function delete($id)
     {
-        $data = $this->m_prohum->get_produk_hukum_by_id_opr($id);
+        $data = $this->m_prohum->get_produk_hukum_by_id($id);
         $id_upload =  $this->m_upload->get_upload_by_id_produk($id);
 
         if (session()->get('role_id') == 1) {
