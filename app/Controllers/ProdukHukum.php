@@ -466,12 +466,16 @@ class ProdukHukum extends BaseController
 
         session()->setFlashdata('prohum', 'Diubah');
 
-        return redirect()->to('/ProdukHukum/' . md5($this->request->getVar('id_unit')));
+        if (session()->get('role_id') == 1) {
+            return redirect()->to('/ProdukHukum/' . md5($this->request->getVar('id_unit')));
+        } else {
+            return redirect()->to('/ProdukHukum');
+        }
     }
 
     public function delete($id)
     {
-        $data = $this->m_prohum->get_produk_hukum_by_id($id);
+        $data = $this->m_prohum->get_produk_hukum_by_id_opr($id);
         $id_upload =  $this->m_upload->get_upload_by_id_produk($id);
 
         if (session()->get('role_id') == 1) {
