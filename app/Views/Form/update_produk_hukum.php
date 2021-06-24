@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div class="page-title">
     <div class="title_left">
-        <h3>INPUT DATA PRODUK HUKUM</h3>
+        <h3>UPDATE DATA PRODUK HUKUM</h3>
     </div>
 </div>
 
@@ -13,7 +13,7 @@
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>INPUT DATA PRODUK HUKUM</h2>
+                <h2>UPDATE DATA PRODUK HUKUM</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -53,19 +53,15 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Tentang<font color="red">*</font></label>
                                 <div class="col-md-8 col-sm-8">
-                                    <select class="form-control" name="tentang" id="tentang"></select>
+                                    <select class="form-control" name="tentang" id="tentang">
+                                        <option value="<?= $prohum['id_tentang']; ?>" selected><?= $prohum['nama_tentang']; ?></option>
+                                    </select>
                                 </div>
                                 <div class="col-md-2 col-sm-2">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modalTentangBaru"><i class="fa fa-plus"></i> Tentang Baru</button>
                                 </div>
                             </div>
                             <input type="hidden" name="old_tentang" id="old_tentang" value="<?= $prohum['id_tentang']; ?>">
-                            <div class="row form-group">
-                                <label class="col-form-label col-md-2 col-sm-2"></label>
-                                <div class="col-md col-sm">
-                                    <textarea class="form-control" name="view-tentang" id="view-tentang" cols="30" style="width:100%" rows="5" readonly><?= $prohum['nama_tentang']; ?></textarea>
-                                </div>
-                            </div><br><br>
                             <div class="form-group row">
                                 <label class="control-label col-md-2 col-sm-2">Kategori</label>
                                 <div class="col-md col-sm ">
