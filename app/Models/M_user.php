@@ -11,15 +11,20 @@ class M_user extends Model
     protected $useTimeStamps = FALSE;
     protected $allowedFields = ['name', 'image', 'password'];
 
-    public function getStatus()
+    public function get_prohum_berlaku()
     {
-        $status = $this->db->table('tb_produk')
-            ->select('status')
-            ->select('COUNT(status) AS jumlah')
-            ->groupBy('status')
-            ->orderBy('status', 'ASC')->get();
+        return $this->db->table('tb_produk')
+            ->selectCount('id_produk', 'jumlah')
+            ->where('status', "Berlaku")
+            ->get()->getRowArray();
+    }
 
-        return $status->getResultArray();
+    public function get_prohum_tidak_berlaku()
+    {
+        return $this->db->table('tb_produk')
+            ->selectCount('id_produk', 'jumlah')
+            ->where('status', "Tidak Berlaku")
+            ->get()->getRowArray();
     }
 
     public function getJmlAdmin()
