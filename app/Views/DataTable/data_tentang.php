@@ -21,7 +21,7 @@
             <div class="x_content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <button type="button" class="btn btn-primary tombolTambahTentang" data-toggle="modal" data-target=".bs-example-modal-lg" style="float: right;"><i class="fa fa-plus"></i> Add Tentang</button>
+                        <button type="button" class="btn btn-primary tombolTambahTentang" data-toggle="modal" data-target=".bs-example-modal-lg" style="float: right;"><i class="fa fa-plus"></i> Tambah Tentang</button>
                         <div class="card-box table-responsive">
                             <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                 <?= session()->getflashdata('message'); ?>

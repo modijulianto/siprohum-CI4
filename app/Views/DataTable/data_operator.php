@@ -29,7 +29,7 @@
                         </a>
                         <button type="button" id="tombolTambahOperator" class="btn btn-primary tombolTambahOperator" data-toggle="modal" data-target="#modalOperator" style="float: right">
                             <i class="fa fa-plus"></i>
-                            Add Operator
+                            Tambah Operator
                         </button>
                         <div class="card-box table-responsive">
                             <table id="datatable" class="table table-striped table-bordered" style="width:100%">

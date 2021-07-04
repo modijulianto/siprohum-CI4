@@ -28,7 +28,7 @@
                         </a>
                         <button type="button" id="tombolTambahAdmin" class="btn btn-primary tombolTambahAdmin" data-toggle="modal" data-target="#modalAdmin" style="float: right">
                             <i class="fa fa-plus"></i>
-                            Add Admin
+                            Tambah Admin
                         </button>
                         <div class="card-box table-responsive">
                             <table id="datatable" class="table table-striped table-bordered" style="width:100%">

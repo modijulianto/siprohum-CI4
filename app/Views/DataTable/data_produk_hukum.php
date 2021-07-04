@@ -26,7 +26,7 @@
                         </a>
                         <a href="/ProdukHukum/add" class="btn btn-primary" style="float: right">
                             <i class="fa fa-plus"></i>
-                            Add Produk Hukum
+                            Tambah Produk Hukum
                         </a>
                         <ul class="nav nav-tabs bar_tabs" style="margin-top: 100px;" id="myTab" role="tablist">
                             <li class="nav-item">
