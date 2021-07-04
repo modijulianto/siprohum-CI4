@@ -378,8 +378,8 @@ class ProdukHukum extends BaseController
     {
         $data = [
             'akun' => $this->m_auth->getAkun(session()->get('email')),
-            'title' => 'Tambah Data Produk Hukum',
-            'meta' => 'Tambah Data Produk Hukum',
+            'title' => 'Update Data Produk Hukum',
+            'meta' => 'Update Data Produk Hukum',
             'prohum' => $this->m_prohum->get_produk_hukum_by_id($id),
             'unit' => $this->m_admin->get_unit(),
             'kat' => $this->m_md->get_kategori(),
