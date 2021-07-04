@@ -277,7 +277,7 @@ class ProdukHukum extends BaseController
         if (!$this->validate([
             'tentangBaru' => [
                 'rules' => 'required',
-                'errors' => ['required' => 'Nama harus diisi']
+                'errors' => ['required' => 'Tentang harus diisi']
             ],
         ])) {
             return redirect()->to('/ProdukHukum/add')->withInput();

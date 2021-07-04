@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div class="page-title">
     <div class="title_left">
-        <h3>INPUT DATA PRODUK HUKUM</h3>
+        <h3>TAMBAH DATA PRODUK HUKUM</h3>
     </div>
 </div>
 
@@ -13,7 +13,7 @@
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>INPUT DATA PRODUK HUKUM</h2>
+                <h2>TAMBAH DATA PRODUK HUKUM</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -49,11 +49,11 @@
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="col-form-label col-md-2 col-sm-2">Tentang<font color="red">*</font></label>
-                                <div class="col-md-8 col-sm-8">
+                                <label class="col-form-label col-2">Tentang<font color="red">*</font></label>
+                                <div class="col-8">
                                     <select class="form-control" name="tentang" id="tentang" required></select>
                                 </div>
-                                <div class="col-md-2 col-sm-2">
+                                <div class="col-2">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modalTentangBaru"><i class="fa fa-plus"></i> Tentang Baru</button>
                                 </div>
                             </div>
@@ -107,10 +107,14 @@
                     </div>
                 </div>
                 <hr>
-                <center>
-                    <h2 class="label-filePdf" hidden>~ PDF VIEWER ~</h2><br>
-                    <embed type="application/pdf" hidden src="" width="800" height="500" class="file-preview"></embed>
-                </center>
+                <div class="row">
+                    <div class="col-12">
+                        <center>
+                            <h2 class="label-filePdf" hidden>~ PDF VIEWER ~</h2><br>
+                            <embed type="application/pdf" hidden src="" width="100%" height="500" class="file-preview"></embed>
+                        </center>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -121,7 +125,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="judulModal">Input Data</h4>
+                <h4 class="modal-title" id="judulModal">Tambah Tentang Baru</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                 </button>
             </div>
