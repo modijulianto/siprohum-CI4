@@ -25,7 +25,7 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Nomor<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="text" class="form-control" name="nomor" id="nomor" placeholder="Masukkan nomor produk hukum" required="required" value="<?= $prohum['no']; ?>" />
+                                    <input type="text" class="form-control" autocomplete="off" name="nomor" id="nomor" placeholder="Masukkan nomor produk hukum" required="required" value="<?= $prohum['no']; ?>" />
                                     <div class="text-danger">
                                         <?= $validation->getError('nomor'); ?>
                                     </div>
@@ -34,7 +34,7 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Tahun<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="text" class="form-control" name="tahun" id="tahun" placeholder="Masukkan tahun produk hukum" required="required" value="<?= $prohum['tahun']; ?>" />
+                                    <input type="text" class="form-control" autocomplete="off" name="tahun" id="tahun" placeholder="Masukkan tahun produk hukum" required="required" value="<?= $prohum['tahun']; ?>" />
                                     <div class="text-danger">
                                         <?= $validation->getError('tahun'); ?>
                                     </div>
@@ -44,7 +44,7 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Judul<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="text" class="form-control" name="judul" id="judul" placeholder="Masukkan judul produk hukum" required="required" value="<?= $prohum['judul']; ?>" />
+                                    <textarea name="judul" id="judul" class="form-control" placeholder="Masukkan judul produk hukum" rows="5" required><?= $prohum['judul']; ?></textarea>
                                     <div class="text-danger">
                                         <?= $validation->getError('judul'); ?>
                                     </div>
@@ -75,7 +75,7 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Keterangan<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="Masukkan keterangan produk hukum" required="required" value="<?= (isset($prohum['keterangan'])) ? $prohum['keterangan'] : set_value('keterangan'); ?>" />
+                                    <input type="text" class="form-control" autocomplete="off" name="keterangan" id="keterangan" placeholder="Masukkan keterangan produk hukum" required="required" value="<?= (isset($prohum['keterangan'])) ? $prohum['keterangan'] : set_value('keterangan'); ?>" />
                                     <div class="text-danger">
                                         <?= $validation->getError('keterangan'); ?>
                                     </div>
