@@ -34,6 +34,7 @@ class M_home extends Model
     public function get_prohum_terbaru()
     {
         return $this->db->table('tb_produk')
+            ->where('validasi', 1)
             ->orderBy('tahun', 'DESC')
             ->join('tb_tentang', 'tb_tentang.id_tentang=tb_produk.id_tentang')
             ->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit')
@@ -95,6 +96,7 @@ class M_home extends Model
         $this->join('tb_jenis_produk', 'tb_jenis_produk.id_jenis=tb_kategori.id_jenis');
         $this->join('tb_tentang', 'tb_tentang.id_tentang=tb_produk.id_tentang');
         $this->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit');
+        $this->where('validasi', 1);
         $this->where('md5(tb_produk.id_unit)', $id);
         return $this->paginate(10, 'tb_produk');
     }
@@ -107,6 +109,7 @@ class M_home extends Model
         $this->join('tb_jenis_produk', 'tb_jenis_produk.id_jenis=tb_kategori.id_jenis');
         $this->join('tb_tentang', 'tb_tentang.id_tentang=tb_produk.id_tentang');
         $this->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit');
+        $this->where('validasi', 1);
         $this->where('md5(tb_produk.id_kategori)', $id);
         return $this->paginate(10, 'tb_produk');
     }
@@ -117,6 +120,7 @@ class M_home extends Model
         $this->join('tb_jenis_produk', 'tb_jenis_produk.id_jenis=tb_kategori.id_jenis');
         $this->join('tb_tentang', 'tb_tentang.id_tentang=tb_produk.id_tentang');
         $this->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit');
+        $this->where('validasi', 1);
         $this->orderBy('tahun', 'DESC');
         $this->where('md5(id_produk)', $id);
         return $this->first();
@@ -147,6 +151,7 @@ class M_home extends Model
     public function get_jml_produk_by_kategori($id_kategori)
     {
         return $this->db->table('tb_produk')
+            ->where('validasi', 1)
             ->where('id_kategori', $id_kategori)
             ->countAllResults();
     }
