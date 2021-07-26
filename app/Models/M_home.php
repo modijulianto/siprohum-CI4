@@ -20,6 +20,7 @@ class M_home extends Model
         $this->like('tb_produk.id_unit', $cari['id_unit']);
         $this->like('id_kategori', $cari['id_kategori']);
         $this->like('status', $cari['status']);
+        $this->where('validasi', 1);
         return $this->paginate(10, 'tb_produk');
     }
 
