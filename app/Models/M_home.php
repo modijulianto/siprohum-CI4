@@ -12,9 +12,15 @@ class M_home extends Model
 
     public function cari($cari)
     {
+        $pecah = explode(" ", $cari['prohum']);
+
         $this->join('tb_tentang', 'tb_tentang.id_tentang=tb_produk.id_tentang');
         $this->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit');
-        $this->like('judul', $cari['prohum']);
+
+        foreach ($pecah as $val) {
+            $this->orLike('judul', $val);
+            $this->orLike('nama_tentang', $val);
+        }
         $this->like('no', $cari['no']);
         $this->like('tahun', $cari['tahun']);
         $this->like('tb_produk.id_unit', $cari['id_unit']);
@@ -58,9 +64,19 @@ class M_home extends Model
             ->join('tb_jenis_produk', 'tb_jenis_produk.id_jenis=tb_kategori.id_jenis')
             ->select('nama_jenis')
             ->select('COUNT(IF(status="Berlaku",tb_produk.id_produk,NULL)) AS berlaku')
-            ->select('COUNT(IF(status="Tidak Berlaku",tb_produk.id_produk,NULL)) AS tidak_berlaku')
             ->groupBy('tb_kategori.id_jenis')
             ->orderBy('tb_kategori.id_jenis', 'ASC')
+            ->get()->getResultArray();
+    }
+
+    public function get_statistik_by_kategori()
+    {
+        return $this->db->table('tb_produk')
+            ->join('tb_kategori', 'tb_produk.id_kategori=tb_kategori.id_kategori')
+            ->select('nama_kategori')
+            ->select('COUNT(IF(status="Berlaku",tb_produk.id_produk,NULL)) AS berlaku')
+            ->groupBy('tb_produk.id_kategori')
+            ->orderBy('tb_produk.id_kategori', 'ASC')
             ->get()->getResultArray();
     }
 
@@ -69,7 +85,6 @@ class M_home extends Model
         return $this->db->table('tb_produk')
             ->select('tahun')
             ->select('COUNT(IF(status="Berlaku", tahun, NULL)) AS berlaku')
-            ->select('COUNT(IF(status="Tidak Berlaku", tahun, NULL)) AS tidak_berlaku')
             ->groupBy('tahun')
             ->orderBy('tahun', 'ASC')
             ->get()->getResultArray();
@@ -137,7 +152,7 @@ class M_home extends Model
         return $this->db->table('tb_produk')
             ->select('tahun')
             ->groupBy('tahun')
-            ->orderBy('tahun', 'ASC')
+            ->orderBy('tahun', 'DESC')
             ->get()->getResultArray();
     }
 

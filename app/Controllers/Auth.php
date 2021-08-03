@@ -2,14 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Models\M_admin;
 use App\Models\M_auth;
 
 class Auth extends BaseController
 {
     protected $m_auth;
+    protected $m_admin;
     public function __construct()
     {
         $this->m_auth = new M_auth();
+        $this->m_admin = new M_admin();
         $session = \Config\Services::session();
     }
 
@@ -107,6 +110,13 @@ class Auth extends BaseController
     public function blocked()
     {
         return view('Auth/blocked');
+    }
+
+    public function forbidden()
+    {
+        $data['akun'] = $this->m_auth->getAkun(session()->get('email'));
+        $data['unit'] = $this->m_admin->get_unit();
+        return view('Auth/forbidden', $data);
     }
 
     public function logout()

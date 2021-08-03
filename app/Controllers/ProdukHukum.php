@@ -366,6 +366,7 @@ class ProdukHukum extends BaseController
             'keterangan' => $this->request->getVar('keterangan'),
             'file' => $namaFile,
             'id_unit' => session()->get('id_unit'),
+            'created_by' => session()->get('email'),
             'validasi' => $valid
         ]);
 
@@ -386,7 +387,11 @@ class ProdukHukum extends BaseController
             'validation' => $this->validation,
         ];
 
-        return view('Form/update_produk_hukum', $data);
+        if ($data['prohum']['validasi'] == 1) {
+            return redirect()->to('/Auth/forbidden');
+        } else {
+            return view('Form/update_produk_hukum', $data);
+        }
     }
 
     public function save_update()

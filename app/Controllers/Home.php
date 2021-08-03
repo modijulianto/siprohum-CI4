@@ -33,6 +33,7 @@ class Home extends BaseController
 		$data['title_navbar'] = 'Statistik';
 		$data['unit'] = $this->m_home->get_unit();
 		$data['jenis'] = $this->m_home->get_statistik_by_jenis();
+		$data['kategori'] = $this->m_home->get_statistik_by_kategori();
 		$data['tahun'] = $this->m_home->get_statistik_by_tahun();
 		return view('Home/Content/statistik', $data);
 	}

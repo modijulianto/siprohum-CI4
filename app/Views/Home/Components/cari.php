@@ -19,7 +19,6 @@
                     <div class="form-group">
                         <label for="tahun">Tahun</label>
                         <select name="tahun" id="tahun" class="form-control custom-select">
-                            <option value="">Semua</option>
                             <?php foreach ($tahun as $row) { ?>
                                 <option value="<?= $row['tahun']; ?>"><?= $row['tahun']; ?></option>
                             <?php } ?>
@@ -32,7 +31,6 @@
                     <div class="form-group">
                         <label for="id_unit">Unit</label>
                         <select name="id_unit" id="id_unit" class="form-control custom-select">
-                            <option value="">Semua</option>
                             <?php foreach ($unit as $row) { ?>
                                 <option value="<?= $row['id_unit']; ?>"><?= $row['nama_unit']; ?></option>
                             <?php } ?>
@@ -54,7 +52,6 @@
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control custom-select">
-                            <option value="">Semua</option>
                             <?php foreach ($status as $row) { ?>
                                 <option value="<?= $row['status']; ?>"><?= $row['status']; ?></option>
                             <?php } ?>

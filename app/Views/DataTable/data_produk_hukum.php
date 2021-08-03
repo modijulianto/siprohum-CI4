@@ -24,17 +24,21 @@
                             <i class="fa fa-download"></i>
                             Export
                         </a>
-                        <a href="/ProdukHukum/add" class="btn btn-primary" style="float: right">
-                            <i class="fa fa-plus"></i>
-                            Tambah Produk Hukum
-                        </a>
+                        <?php if (session()->get('role_id') != 1) { ?>
+                            <a href="/ProdukHukum/add" class="btn btn-primary" style="float: right">
+                                <i class="fa fa-plus"></i>
+                                Tambah Produk Hukum
+                            </a>
+                        <?php } ?>
                         <ul class="nav nav-tabs bar_tabs" style="margin-top: 100px;" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="tervalidasi-tab" data-toggle="tab" href="#tervalidasi" role="tab" aria-controls="tervalidasi" aria-selected="true">Tervalidasi</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="blmTervalidasi-tab" data-toggle="tab" href="#blmTervalidasi" role="tab" aria-controls="blmTervalidasi" aria-selected="false">Belum Tervalidasi</a>
-                            </li>
+                            <?php if ($akun['role_id'] != 1) { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="blmTervalidasi-tab" data-toggle="tab" href="#blmTervalidasi" role="tab" aria-controls="blmTervalidasi" aria-selected="false">Belum Tervalidasi</a>
+                                </li>
+                            <?php } ?>
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="tervalidasi" role="tabpanel" aria-labelledby="tervalidasi-tab">
@@ -73,8 +77,9 @@
                                                     <td>
                                                         <center>
                                                             <a href="/ProdukHukum/detail/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
-                                                            <a href="/ProdukHukum/update/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></a>
-                                                            <a href="/ProdukHukum/delete/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
+                                                            <?php if ($akun['role_id'] != 1) { ?>
+                                                                <a href="/ProdukHukum/delete/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
+                                                            <?php } ?>
                                                         </center>
                                                     </td>
                                                 </tr>
@@ -83,66 +88,70 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="blmTervalidasi" role="tabpanel" aria-labelledby="blmTervalidasi-tab">
-                                <div class="card-box table-responsive">
-                                    <form action="/ProdukHukum/validasi_prohum" method="POST">
-                                        <input type="hidden" name="id_unit" value="<?= $request->uri->getSegment(2); ?>">
+                            <?php if ($akun['role_id'] != 1) { ?>
+                                <div class="tab-pane fade" id="blmTervalidasi" role="tabpanel" aria-labelledby="blmTervalidasi-tab">
+                                    <div class="card-box table-responsive">
+                                        <form action="/ProdukHukum/validasi_prohum" method="POST">
+                                            <input type="hidden" name="id_unit" value="<?= $request->uri->getSegment(2); ?>">
 
-                                        <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
-                                            <div class="flash-data" data-flashdata="<?= session()->getFlashdata('prohum'); ?>"></div>
-                                            <br><br><br>
-                                            <thead>
-                                                <tr>
-                                                    <?php if ($akun['role_id'] == 1) { ?>
-                                                        <th>
-                                                            <center><i class="fa fa-check-square-o"></i></center>
-                                                        </th>
-                                                    <?php } ?>
-                                                    <th class="text-center">Unit</th>
-                                                    <th class="text-center">No</th>
-                                                    <th class="text-center">Judul</th>
-                                                    <th class="text-center">Tentang</th>
-                                                    <th class="text-center">Kategori</th>
-                                                    <th class="text-center">Tahun</th>
-                                                    <th class="text-center">Keterangan</th>
-                                                    <th class="text-center">Status</th>
-                                                    <th class="text-center">Actions</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <?php foreach ($prohum_blmValid as $val) { ?>
+                                            <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
+                                                <div class="flash-data" data-flashdata="<?= session()->getFlashdata('prohum'); ?>"></div>
+                                                <br><br><br>
+                                                <thead>
                                                     <tr>
                                                         <?php if ($akun['role_id'] == 1) { ?>
-                                                            <td class="a-center ">
-                                                                <input type="checkbox" class="flat" name="id[]" value="<?= $val['id_produk']; ?>">
-                                                            </td>
+                                                            <th>
+                                                                <center><i class="fa fa-check-square-o"></i></center>
+                                                            </th>
                                                         <?php } ?>
-                                                        <td><?= $val['nama_unit']; ?></td>
-                                                        <td><?= $val['no']; ?></td>
-                                                        <td><?= $val['judul']; ?></td>
-                                                        <td><?= (str_word_count($val['nama_tentang'])) > 10 ? substr($val['nama_tentang'], 0, 100) . " [..]" : $val['nama_tentang']; ?></td>
-                                                        <td><?= $val['nama_kategori']; ?></td>
-                                                        <td><?= $val['tahun']; ?></td>
-                                                        <td><?= $val['keterangan']; ?></td>
-                                                        <td><?= $val['status']; ?></td>
-                                                        <td>
-                                                            <center>
-                                                                <a href="/ProdukHukum/detail/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
-                                                                <a href="/ProdukHukum/update/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></a>
-                                                                <a href="/ProdukHukum/delete/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
-                                                            </center>
-                                                        </td>
+                                                        <th class="text-center">Unit</th>
+                                                        <th class="text-center">No</th>
+                                                        <th class="text-center">Judul</th>
+                                                        <th class="text-center">Tentang</th>
+                                                        <th class="text-center">Kategori</th>
+                                                        <th class="text-center">Tahun</th>
+                                                        <th class="text-center">Keterangan</th>
+                                                        <th class="text-center">Status</th>
+                                                        <th class="text-center">Actions</th>
                                                     </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                        <?php if ($akun['role_id'] == 1) { ?>
-                                            <button type="submit" class="btn btn-primary mt-5"><i class="fa fa-check-square-o"></i> Validasi</button>
-                                        <?php } ?>
-                                    </form>
+                                                </thead>
+
+                                                <tbody>
+                                                    <?php foreach ($prohum_blmValid as $val) { ?>
+                                                        <tr>
+                                                            <?php if ($akun['role_id'] == 1) { ?>
+                                                                <td class="a-center ">
+                                                                    <input type="checkbox" class="flat" name="id[]" value="<?= $val['id_produk']; ?>">
+                                                                </td>
+                                                            <?php } ?>
+                                                            <td><?= $val['nama_unit']; ?></td>
+                                                            <td><?= $val['no']; ?></td>
+                                                            <td><?= $val['judul']; ?></td>
+                                                            <td><?= (str_word_count($val['nama_tentang'])) > 10 ? substr($val['nama_tentang'], 0, 100) . " [..]" : $val['nama_tentang']; ?></td>
+                                                            <td><?= $val['nama_kategori']; ?></td>
+                                                            <td><?= $val['tahun']; ?></td>
+                                                            <td><?= $val['keterangan']; ?></td>
+                                                            <td><?= $val['status']; ?></td>
+                                                            <td>
+                                                                <center>
+                                                                    <a href="/ProdukHukum/detail/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+                                                                    <?php if ($akun['role_id'] != 1) { ?>
+                                                                        <a href="/ProdukHukum/update/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></a>
+                                                                        <a href="/ProdukHukum/delete/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
+                                                                    <?php } ?>
+                                                                </center>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                            <?php if ($akun['role_id'] == 1) { ?>
+                                                <button type="submit" class="btn btn-primary mt-5"><i class="fa fa-check-square-o"></i> Validasi</button>
+                                            <?php } ?>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

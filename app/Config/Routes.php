@@ -80,9 +80,9 @@ $routes->get('/MasterData/kategori/', 'MasterData::kategori', ['filter' => 'isAd
 $routes->get('/MasterData/kategori/(:any)', 'MasterData::$1', ['filter' => 'isAdmin']);
 
 // Untuk halaman operator
-$routes->get('/ProdukHukum/add', 'ProdukHukum::add', ['filter' => 'auth']);
-$routes->get('/ProdukHukum/update/(:any)', 'ProdukHukum::update/$1', ['filter' => 'auth']);
-$routes->get('/ProdukHukum/delete/(:any)', 'ProdukHukum::delete/$1', ['filter' => 'auth']);
+$routes->get('/ProdukHukum/add', 'ProdukHukum::add', ['filter' => 'authproduk']);
+$routes->get('/ProdukHukum/update/(:any)', 'ProdukHukum::update/$1', ['filter' => 'authproduk']);
+$routes->get('/ProdukHukum/delete/(:any)', 'ProdukHukum::delete/$1', ['filter' => 'authproduk']);
 $routes->get('/ProdukHukum/detail/(:any)', 'ProdukHukum::detail/$1', ['filter' => 'auth']);
 $routes->get('/ProdukHukum', 'ProdukHukum::index', ['filter' => 'auth']);
 $routes->get('/ProdukHukum/save_media', 'ProdukHukum::save_media', ['filter' => 'auth']);
