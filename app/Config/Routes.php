@@ -66,8 +66,8 @@ $routes->post('/ChangePassword/(:any)', 'User::save_change_password', ['filter' 
 $routes->get('/Admin', 'Admin::index', ['filter' => 'isAdmin']);
 $routes->get('/Admin/(:any)', 'Admin::$1', ['filter' => 'isAdmin']);
 
-$routes->get('/Operator', 'Operator::index', ['filter' => 'isAdmin']);
-$routes->get('/Operator/(:any)', 'Operator::$1', ['filter' => 'isAdmin']);
+$routes->get('/Validator', 'Validator::index', ['filter' => 'isAdmin']);
+$routes->get('/Validator/(:any)', 'Validator::$1', ['filter' => 'isAdmin']);
 
 $routes->get('/Unit', 'Unit::index', ['filter' => 'isAdmin']);
 $routes->get('/Unit/(:any)', 'Unit::$1', ['filter' => 'isAdmin']);
@@ -78,6 +78,10 @@ $routes->get('/MasterData/jenis/(:any)', 'MasterData::$1', ['filter' => 'isAdmin
 
 $routes->get('/MasterData/kategori/', 'MasterData::kategori', ['filter' => 'isAdmin']);
 $routes->get('/MasterData/kategori/(:any)', 'MasterData::$1', ['filter' => 'isAdmin']);
+
+// Untuk Validator
+$routes->get('/Operator', 'Operator::index', ['filter' => 'isValidator']);
+$routes->get('/Operator/(:any)', 'Operator::$1', ['filter' => 'isValidator']);
 
 // Untuk halaman operator
 $routes->get('/ProdukHukum/add', 'ProdukHukum::add', ['filter' => 'authproduk']);

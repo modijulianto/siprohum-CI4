@@ -5,11 +5,12 @@ namespace App\Controllers;
 use App\Models\M_admin;
 use App\Models\M_auth;
 
-class Operator extends BaseController
+class Validator extends BaseController
 {
     protected $m_admin;
     protected $m_auth;
-    function __construct()
+
+    public function __construct()
     {
         $this->m_admin = new M_admin();
         $this->m_auth = new M_auth();
@@ -20,26 +21,33 @@ class Operator extends BaseController
     {
         $data = [
             'akun' => $this->m_auth->getAkun(session()->get('email')),
-            'title' => 'Data Operator',
-            'meta' => 'Data Operator',
+            'title' => 'Data Validator',
+            'meta' => 'Data Validator',
             'unit' => $this->m_admin->get_unit(),
-            'opr' => $this->m_admin->get_operator(),
+            'validator' => $this->m_admin->get_validator(),
             'validation' => $this->validation
         ];
 
-        return view('DataTable/data_operator', $data);
+        return view('DataTable/data_validator', $data);
     }
 
     public function save()
     {
         if (!$this->validate([
-            'nama' => 'required',
+            'nama' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Nama harus diisi']
+            ],
+            'id_unit' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Unit harus dipilih']
+            ],
             'email' => [
                 'rules' => 'required|valid_email|is_unique[tb_user.email]',
                 'errors' => ['is_unique' => 'Email sudah terdaftar']
             ],
-            'operator' => [
-                'rules' => 'is_image[operator]|mime_in[operator,image/jpg,image/jpeg,image/png,image/JPG,image/JPEG,image/PNG]',
+            'validator' => [
+                'rules' => 'is_image[validator]|mime_in[validator,image/jpg,image/jpeg,image/png,image/JPG,image/JPEG,image/PNG]',
                 'errors' => [
                     'is_image' => 'File tidak valid, upload gambar.',
                     'mime_in' => 'Format gambar harus <i>jpg, jpeg, png, JPG, JPEG</i>.'
@@ -60,11 +68,11 @@ class Operator extends BaseController
                 ]
             ],
         ])) {
-            return redirect()->to('/Operator')->withInput();
+            return redirect()->to('/Validator')->withInput();
         }
 
         // ambil data file gambar
-        $fileFoto = $this->request->getFile('operator');
+        $fileFoto = $this->request->getFile('validator');
         if ($fileFoto->getError() == 4) {
             $namaFoto = "default.jpeg";
         } else {
@@ -79,40 +87,18 @@ class Operator extends BaseController
             'email' => $this->request->getVar('email'),
             'image' => $namaFoto,
             'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-            'role_id' => 2,
-            'id_unit' => 1,
+            'role_id' => 3,
+            'id_unit' => $this->request->getVar('id_unit'),
             'is_active' => 1,
             'date_created' => time(),
         ]);
 
-        session()->setFlashdata('operator', 'Ditambahkan');
+        session()->setFlashdata('validator', 'Ditambahkan');
 
-        return redirect()->to('/Operator');
+        return redirect()->to('/Validator');
     }
 
-    public function activate()
-    {
-        $data['active'] = $this->m_admin->get_user_wh($_POST['id']);
-        $is_active = $data['active']['is_active'];
-
-        if ($is_active == 1) {
-            $this->m_admin->save([
-                'id' => $_POST['id'],
-                'is_active' => 0
-            ]);
-            $msg = ['nonaktif' => "Dinonaktifkan."];
-        } else {
-            $this->m_admin->save([
-                'id' => $_POST['id'],
-                'is_active' => 1
-            ]);
-            $msg = ['aktif' => "Diaktifkan."];
-        }
-
-        echo json_encode($msg);
-    }
-
-    public function update_operator()
+    public function update_validator()
     {
         echo json_encode($this->m_admin->get_user_wh($_POST['id']));
     }
@@ -121,18 +107,18 @@ class Operator extends BaseController
     {
         if (!$this->validate([
             'nama' => 'required',
-            'operator' => [
-                'rules' => 'is_image[operator]|mime_in[operator,image/jpg,image/jpeg,image/png,image/JPG,image/JPEG,image/PNG]',
+            'validator' => [
+                'rules' => 'is_image[validator]|mime_in[validator,image/jpg,image/jpeg,image/png,image/JPG,image/JPEG,image/PNG]',
                 'errors' => [
                     'is_image' => 'File tidak valid, upload gambar.',
                     'mime_in' => 'Format gambar harus <i>jpg, jpeg, png, JPG, JPEG</i>.'
                 ]
             ],
         ])) {
-            return redirect()->to('/Operator')->withInput();
+            return redirect()->to('/Validator')->withInput();
         }
 
-        $fileFoto = $this->request->getFile('operator');
+        $fileFoto = $this->request->getFile('validator');
         $old_image = $this->request->getVar('old_image');
 
         // cek gambar, apakah tetap gambar yang lama
@@ -153,11 +139,12 @@ class Operator extends BaseController
             'id' => $this->request->getVar('id'),
             'name' => $this->request->getVar('nama'),
             'image' => $namaFoto,
+            'id_unit' => $this->request->getVar('id_unit')
         ]);
 
-        session()->setFlashdata('operator', 'Diubah');
+        session()->setFlashdata('validator', 'Diubah');
 
-        return redirect()->to('/Operator');
+        return redirect()->to('/Validator');
     }
 
     public function delete($id)
@@ -166,18 +153,15 @@ class Operator extends BaseController
 
         if (md5($data['id_user']) != $id) {
             $user = $this->m_admin->get_user_md5($id);
-            // dd($user);
-
             // cek jika file gambar default.jpeg
             if ($user['image'] != 'default.jpeg') {
-                // hapus foto operator
+                // hapus foto validator
                 if (file_exists('upload/' . $user['image'])) {
                     unlink('upload/' . $user['image']);
                 }
             }
-
             $this->m_admin->delete($user['id']);
-            session()->setFlashdata('operator', 'Dihapus');
+            session()->setFlashdata('validator', 'Dihapus');
         } else {
             session()->setFlashdata('message', '
             <script>
@@ -187,6 +171,6 @@ class Operator extends BaseController
             </script>
             ');
         }
-        return redirect()->to('/Operator');
+        return redirect()->to('/Validator');
     }
 }

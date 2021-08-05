@@ -14,6 +14,7 @@ class Filters extends BaseConfig
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
 		'auth' => \App\Filters\Auth::class,
 		'isAdmin' => \App\Filters\IsAdmin::class,
+		'isValidator' => \App\Filters\IsValidator::class,
 		'authproduk' => [
 			\App\Filters\Auth::class,
 			\App\Filters\Produk::class

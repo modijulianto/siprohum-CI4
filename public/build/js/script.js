@@ -43,6 +43,28 @@ $(function () {
 	});
 	// END AJAX OPERATOR
 
+	// AJAX OPERATOR
+	$(".tombolTambahValidator").on("click", function () {
+		$("#judulModal").html("Input Data Validator");
+		$(".modal-footer button[type=submit]").html("Tambah Data");
+		$(".modal-body form").attr("action", "/Validator/save");
+		// alert($('.modal-body form').attr('action'));
+
+		// show form input
+		$("#labelPasswordValidator").show();
+		$("#passwordValidator").show();
+		$("#labelRetypePasswordValidator").show();
+		$("#retypePasswordValidator").show();
+		$("#labelEmailValidator").show();
+		$("#emailValidator").show();
+
+		$("#id").val("");
+		$("#nama").val("");
+		$("#emailValidator").val("");
+		$("#passwordValidator").val("");
+	});
+	// END AJAX OPERATOR
+
 	// AJAX UNIT
 	$(".tombolTambahUnit").on("click", function () {
 		$("#judulModal").html("Input Data Unit");

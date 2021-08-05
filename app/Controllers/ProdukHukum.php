@@ -272,6 +272,28 @@ class ProdukHukum extends BaseController
         }
     }
 
+    public function ganti_status()
+    {
+        $prohum = $this->m_prohum->get_prohum_by_id($_POST['id']);
+        $status = $prohum['status'];
+
+        if ($status == "Berlaku") {
+            $this->m_prohum->save([
+                'id_produk' => $_POST['id'],
+                'status' => "Tidak Berlaku"
+            ]);
+            $msg = ['tidak_berlaku' => "Tidak Berlaku."];
+        } else {
+            $this->m_prohum->save([
+                'id_produk' => $_POST['id'],
+                'status' => "Berlaku"
+            ]);
+            $msg = ['berlaku' => "Berlaku."];
+        }
+
+        echo json_encode($msg);
+    }
+
     public function save_tentang_baru()
     {
         if (!$this->validate([
@@ -332,10 +354,6 @@ class ProdukHukum extends BaseController
                 'rules' => 'required',
                 'errors' => ['required' => 'Keterangan produk hukum harus diisi']
             ],
-            'status' => [
-                'rules' => 'required',
-                'errors' => ['required' => 'Status produk hukum harus diisi']
-            ],
             'produk' => [
                 'rules' => 'mime_in[produk,application/pdf,application/doc,application/docx]',
                 'errors' => ['mime_in' => 'Upload file produk hukum berformat <i>.pdf, .doc,</i> atau <i>.docx</i>']
@@ -362,7 +380,6 @@ class ProdukHukum extends BaseController
             'id_tentang' => $this->request->getVar('tentang'),
             'judul' => $this->request->getVar('judul'),
             'tahun' => $this->request->getVar('tahun'),
-            'status' => $this->request->getVar('status'),
             'keterangan' => $this->request->getVar('keterangan'),
             'file' => $namaFile,
             'id_unit' => session()->get('id_unit'),

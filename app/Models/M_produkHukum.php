@@ -44,6 +44,12 @@ class M_produkHukum extends Model
         return $this->findAll();
     }
 
+    public function get_prohum_by_id($id)
+    {
+        $this->where('id_produk', $id);
+        return $this->first();
+    }
+
     public function get_produk_hukum_by_id($id)
     {
         $this->select('*');

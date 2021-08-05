@@ -76,13 +76,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-2 col-sm-2">Status</label>
-                                <div class="col-md col-sm ">
-                                    <input type="radio" class="flat" name="status" value="Berlaku"> Berlaku <br>
-                                    <input type="radio" class="flat" name="status" value="Tidak Berlaku"> Tidak Berlaku
-                                </div>
-                            </div>
 
                             <div class="custom-file">
                                 <div class="row form-group">

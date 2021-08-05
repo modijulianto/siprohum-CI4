@@ -37,13 +37,27 @@ class M_admin extends Model
     {
         $this->join('tb_unit', 'tb_unit.id_unit=tb_user.id_unit');
         $this->orderBy('id', 'DESC');
-        $this->where(['role_id' => 2]);
+        $this->where(['role_id' => 2, 'tb_user.id_unit' => session()->get('id_unit')]);
         return $this->findAll();
     }
 
     public function get_num_rows_operator()
     {
         $this->where(['role_id' => 2]);
+        return $this->countAllResults();
+    }
+
+    public function get_validator()
+    {
+        $this->join('tb_unit', 'tb_unit.id_unit=tb_user.id_unit');
+        $this->orderBy('id', 'DESC');
+        $this->where(['role_id' => 3]);
+        return $this->findAll();
+    }
+
+    public function get_num_rows_validator()
+    {
+        $this->where(['role_id' => 3]);
         return $this->countAllResults();
     }
 

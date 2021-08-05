@@ -55,7 +55,7 @@
                                                 <th class="text-center">Kategori</th>
                                                 <th class="text-center">Tahun</th>
                                                 <th class="text-center">Keterangan</th>
-                                                <th class="text-center">Status</th>
+                                                <th class="text-center">Status Berlaku</th>
                                                 <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
@@ -73,12 +73,26 @@
                                                     <td><?= $val['nama_kategori']; ?></td>
                                                     <td><?= $val['tahun']; ?></td>
                                                     <td><?= $val['keterangan']; ?></td>
-                                                    <td><?= $val['status']; ?></td>
+                                                    <td>
+                                                        <?php if ($akun['role_id'] == 3) { ?>
+                                                            <center><input type="checkbox" class="js-switch ganti-status" data-id="<?= $val['id_produk']; ?>" <?= ($val['status'] == "Berlaku") ? 'checked' : ''; ?> /></center>
+                                                        <?php } else { ?>
+                                                            <?= $val['status']; ?>
+                                                        <?php } ?>
+                                                    </td>
                                                     <td>
                                                         <center>
                                                             <a href="/ProdukHukum/detail/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
-                                                            <?php if ($akun['role_id'] != 1) { ?>
+                                                            <?php if ($akun['role_id'] == 3) { ?>
                                                                 <a href="/ProdukHukum/delete/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        <i class="fa fa-gear"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" href="/ProdukHukum/unvalidation/<?= md5($val['id_produk']); ?>">Batal Validasi</a>
+                                                                    </div>
+                                                                </div>
                                                             <?php } ?>
                                                         </center>
                                                     </td>
@@ -99,7 +113,7 @@
                                                 <br><br><br>
                                                 <thead>
                                                     <tr>
-                                                        <?php if ($akun['role_id'] == 1) { ?>
+                                                        <?php if ($akun['role_id'] == 3) { ?>
                                                             <th>
                                                                 <center><i class="fa fa-check-square-o"></i></center>
                                                             </th>
@@ -111,7 +125,6 @@
                                                         <th class="text-center">Kategori</th>
                                                         <th class="text-center">Tahun</th>
                                                         <th class="text-center">Keterangan</th>
-                                                        <th class="text-center">Status</th>
                                                         <th class="text-center">Actions</th>
                                                     </tr>
                                                 </thead>
@@ -119,7 +132,7 @@
                                                 <tbody>
                                                     <?php foreach ($prohum_blmValid as $val) { ?>
                                                         <tr>
-                                                            <?php if ($akun['role_id'] == 1) { ?>
+                                                            <?php if ($akun['role_id'] == 3) { ?>
                                                                 <td class="a-center ">
                                                                     <input type="checkbox" class="flat" name="id[]" value="<?= $val['id_produk']; ?>">
                                                                 </td>
@@ -131,11 +144,10 @@
                                                             <td><?= $val['nama_kategori']; ?></td>
                                                             <td><?= $val['tahun']; ?></td>
                                                             <td><?= $val['keterangan']; ?></td>
-                                                            <td><?= $val['status']; ?></td>
                                                             <td>
                                                                 <center>
                                                                     <a href="/ProdukHukum/detail/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
-                                                                    <?php if ($akun['role_id'] != 1) { ?>
+                                                                    <?php if ($akun['role_id'] == 2) { ?>
                                                                         <a href="/ProdukHukum/update/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></a>
                                                                         <a href="/ProdukHukum/delete/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
                                                                     <?php } ?>
@@ -145,7 +157,7 @@
                                                     <?php } ?>
                                                 </tbody>
                                             </table>
-                                            <?php if ($akun['role_id'] == 1) { ?>
+                                            <?php if ($akun['role_id'] == 3) { ?>
                                                 <button type="submit" class="btn btn-primary mt-5"><i class="fa fa-check-square-o"></i> Validasi</button>
                                             <?php } ?>
                                         </form>
@@ -251,5 +263,42 @@
             $('.modal-body form').attr('action', '/Export/pdf_prohum');
         });
     })
+
+    $('.ganti-status').on('change', function() {
+        // alert($(this).data('id'));
+        // $('#activate').attr('disabled');
+
+        const id = $(this).data('id');
+
+        $.ajax({
+            url: '/ProdukHukum/ganti_status',
+            data: {
+                id: id
+            },
+            method: 'post',
+            dataType: 'json',
+            beforeSend: function() {
+                $($(this).data('id')).attr('disabled');
+            },
+            success: function(response) {
+                $($(this).data('id')).removeAttr('disabled');
+                if (response.berlaku) {
+                    new PNotify({
+                        title: "Berlaku",
+                        text: "Status produk hukum berlaku",
+                        type: 'success',
+                        styling: 'bootstrap3'
+                    });
+                } else {
+                    new PNotify({
+                        title: "Tidak Berlaku",
+                        text: "Status produk hukum tidak berlaku",
+                        type: 'success',
+                        styling: 'bootstrap3'
+                    });
+                }
+            }
+        });
+    });
 </script>
 <?= $this->endSection('content'); ?>
