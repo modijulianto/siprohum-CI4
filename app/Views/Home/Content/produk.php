@@ -145,7 +145,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
-                                <?php if ($galeri[0] != '') { ?>
+                                <?php if (isset($galeri[0]) != '') { ?>
                                     <div class="row">
                                         <?php foreach ($galeri[0] as $vid) { ?>
                                             <div class="col-md-4 mb-4">
@@ -156,7 +156,7 @@
                                 <?php } ?>
                             </div>
                             <div class="col-lg-12 col-md-12">
-                                <?php if ($galeri[1] != '') { ?>
+                                <?php if (isset($galeri[1]) != '') { ?>
                                     <div class="card-columns">
                                         <?php foreach ($galeri[1] as $gal) { ?>
                                             <div class="card">

@@ -2,14 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Models\M_admin;
 use App\Models\M_auth;
 
 class Auth extends BaseController
 {
     protected $m_auth;
+    protected $m_admin;
     public function __construct()
     {
         $this->m_auth = new M_auth();
+        $this->m_admin = new M_admin();
         $session = \Config\Services::session();
     }
 
@@ -44,15 +47,15 @@ class Auth extends BaseController
                     session()->set($data);
                     return redirect()->to('/Dashboard');
                 } else {
-                    session()->setFlashdata('registered', '<div class="alert alert-warning" role="alert"><b>Failed!</b> wrong password!</div>');
+                    session()->setFlashdata('registered', '<div class="alert alert-warning" role="alert"><b>Failed!</b> wrong username or password!</div>');
                     return redirect()->to('/Auth');
                 }
             } else {
-                session()->setFlashdata('registered', '<div class="alert alert-warning" role="alert"><b>Failed!</b> your email is not activated!</div>');
+                session()->setFlashdata('registered', '<div class="alert alert-warning" role="alert"><b>Failed!</b> wrong username or password!</div>');
                 return redirect()->to('/Auth');
             }
         } else {
-            session()->setFlashdata('registered', '<div class="alert alert-warning" role="alert"><b>Failed!</b> your email is not registered!</div>');
+            session()->setFlashdata('registered', '<div class="alert alert-warning" role="alert"><b>Failed!</b> wrong username or password!</div>');
             return redirect()->to('/Auth');
         }
     }
@@ -107,6 +110,13 @@ class Auth extends BaseController
     public function blocked()
     {
         return view('Auth/blocked');
+    }
+
+    public function forbidden()
+    {
+        $data['akun'] = $this->m_auth->getAkun(session()->get('email'));
+        $data['unit'] = $this->m_admin->get_unit();
+        return view('Auth/forbidden', $data);
     }
 
     public function logout()

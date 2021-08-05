@@ -272,12 +272,34 @@ class ProdukHukum extends BaseController
         }
     }
 
+    public function ganti_status()
+    {
+        $prohum = $this->m_prohum->get_prohum_by_id($_POST['id']);
+        $status = $prohum['status'];
+
+        if ($status == "Berlaku") {
+            $this->m_prohum->save([
+                'id_produk' => $_POST['id'],
+                'status' => "Tidak Berlaku"
+            ]);
+            $msg = ['tidak_berlaku' => "Tidak Berlaku."];
+        } else {
+            $this->m_prohum->save([
+                'id_produk' => $_POST['id'],
+                'status' => "Berlaku"
+            ]);
+            $msg = ['berlaku' => "Berlaku."];
+        }
+
+        echo json_encode($msg);
+    }
+
     public function save_tentang_baru()
     {
         if (!$this->validate([
             'tentangBaru' => [
                 'rules' => 'required',
-                'errors' => ['required' => 'Nama harus diisi']
+                'errors' => ['required' => 'Tentang harus diisi']
             ],
         ])) {
             return redirect()->to('/ProdukHukum/add')->withInput();
@@ -332,10 +354,6 @@ class ProdukHukum extends BaseController
                 'rules' => 'required',
                 'errors' => ['required' => 'Keterangan produk hukum harus diisi']
             ],
-            'status' => [
-                'rules' => 'required',
-                'errors' => ['required' => 'Status produk hukum harus diisi']
-            ],
             'produk' => [
                 'rules' => 'mime_in[produk,application/pdf,application/doc,application/docx]',
                 'errors' => ['mime_in' => 'Upload file produk hukum berformat <i>.pdf, .doc,</i> atau <i>.docx</i>']
@@ -362,10 +380,10 @@ class ProdukHukum extends BaseController
             'id_tentang' => $this->request->getVar('tentang'),
             'judul' => $this->request->getVar('judul'),
             'tahun' => $this->request->getVar('tahun'),
-            'status' => $this->request->getVar('status'),
             'keterangan' => $this->request->getVar('keterangan'),
             'file' => $namaFile,
             'id_unit' => session()->get('id_unit'),
+            'created_by' => session()->get('email'),
             'validasi' => $valid
         ]);
 
@@ -378,15 +396,19 @@ class ProdukHukum extends BaseController
     {
         $data = [
             'akun' => $this->m_auth->getAkun(session()->get('email')),
-            'title' => 'Tambah Data Produk Hukum',
-            'meta' => 'Tambah Data Produk Hukum',
+            'title' => 'Update Data Produk Hukum',
+            'meta' => 'Update Data Produk Hukum',
             'prohum' => $this->m_prohum->get_produk_hukum_by_id($id),
             'unit' => $this->m_admin->get_unit(),
             'kat' => $this->m_md->get_kategori(),
             'validation' => $this->validation,
         ];
 
-        return view('Form/update_produk_hukum', $data);
+        if ($data['prohum']['validasi'] == 1) {
+            return redirect()->to('/Auth/forbidden');
+        } else {
+            return view('Form/update_produk_hukum', $data);
+        }
     }
 
     public function save_update()
@@ -466,7 +488,11 @@ class ProdukHukum extends BaseController
 
         session()->setFlashdata('prohum', 'Diubah');
 
-        return redirect()->to('/ProdukHukum/' . md5($this->request->getVar('id_unit')));
+        if (session()->get('role_id') == 1) {
+            return redirect()->to('/ProdukHukum/' . md5($this->request->getVar('id_unit')));
+        } else {
+            return redirect()->to('/ProdukHukum');
+        }
     }
 
     public function delete($id)

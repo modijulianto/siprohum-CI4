@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div class="page-title">
     <div class="title_left">
-        <h3>INPUT DATA PRODUK HUKUM</h3>
+        <h3>TAMBAH DATA PRODUK HUKUM</h3>
     </div>
 </div>
 
@@ -13,7 +13,7 @@
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>INPUT DATA PRODUK HUKUM</h2>
+                <h2>TAMBAH DATA PRODUK HUKUM</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -23,7 +23,7 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Nomor<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="text" class="form-control" name="nomor" id="nomor" placeholder="Masukkan nomor produk hukum" required value="<?= old('nomor'); ?>" />
+                                    <input type="text" class="form-control" autocomplete="off" name="nomor" id="nomor" placeholder="Masukkan nomor produk hukum" required value="<?= old('nomor'); ?>" />
                                     <div class="text-danger">
                                         <?= $validation->getError('nomor'); ?>
                                     </div>
@@ -32,7 +32,7 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Tahun<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="number" class="form-control" name="tahun" id="tahun" placeholder="Masukkan tahun produk hukum" required value="<?= old('tahun'); ?>" />
+                                    <input type="number" class="form-control" autocomplete="off" name="tahun" id="tahun" placeholder="Masukkan tahun produk hukum" required value="<?= old('tahun'); ?>" />
                                     <div class="text-danger">
                                         <?= $validation->getError('tahun'); ?>
                                     </div>
@@ -42,18 +42,18 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Judul<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="text" class="form-control" name="judul" id="judul" placeholder="Masukkan judul produk hukum" required value="<?= old('judul'); ?>" />
+                                    <textarea name="judul" id="judul" class="form-control" placeholder="Masukkan judul produk hukum" rows="5" required><?= old('judul'); ?></textarea>
                                     <div class="text-danger">
                                         <?= $validation->getError('judul'); ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="col-form-label col-md-2 col-sm-2">Tentang<font color="red">*</font></label>
-                                <div class="col-md-8 col-sm-8">
+                                <label class="col-form-label col-2">Tentang<font color="red">*</font></label>
+                                <div class="col-8">
                                     <select class="form-control" name="tentang" id="tentang" required></select>
                                 </div>
-                                <div class="col-md-2 col-sm-2">
+                                <div class="col-2">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modalTentangBaru"><i class="fa fa-plus"></i> Tentang Baru</button>
                                 </div>
                             </div>
@@ -70,17 +70,10 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Keterangan<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="Masukkan keterangan produk hukum" required value="<?= old('keterangan'); ?>" />
+                                    <input type="text" class="form-control" autocomplete="off" name="keterangan" id="keterangan" placeholder="Masukkan keterangan produk hukum" required value="<?= old('keterangan'); ?>" />
                                     <div class="text-danger">
                                         <?= $validation->getError('keterangan'); ?>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-2 col-sm-2">Status</label>
-                                <div class="col-md col-sm ">
-                                    <input type="radio" class="flat" name="status" value="Berlaku"> Berlaku <br>
-                                    <input type="radio" class="flat" name="status" value="Tidak Berlaku"> Tidak Berlaku
                                 </div>
                             </div>
 
@@ -107,10 +100,14 @@
                     </div>
                 </div>
                 <hr>
-                <center>
-                    <h2 class="label-filePdf" hidden>~ PDF VIEWER ~</h2><br>
-                    <embed type="application/pdf" hidden src="" width="800" height="500" class="file-preview"></embed>
-                </center>
+                <div class="row">
+                    <div class="col-12">
+                        <center>
+                            <h2 class="label-filePdf" hidden>~ PDF VIEWER ~</h2><br>
+                            <embed type="application/pdf" hidden src="" width="100%" height="500" class="file-preview"></embed>
+                        </center>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -121,7 +118,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="judulModal">Input Data</h4>
+                <h4 class="modal-title" id="judulModal">Tambah Tentang Baru</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                 </button>
             </div>

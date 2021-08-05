@@ -11,15 +11,20 @@ class M_user extends Model
     protected $useTimeStamps = FALSE;
     protected $allowedFields = ['name', 'image', 'password'];
 
-    public function getStatus()
+    public function get_prohum_berlaku()
     {
-        $status = $this->db->table('tb_produk')
-            ->select('status')
-            ->select('COUNT(status) AS jumlah')
-            ->groupBy('status')
-            ->orderBy('status', 'ASC')->get();
+        return $this->db->table('tb_produk')
+            ->selectCount('id_produk', 'jumlah')
+            ->where('status', "Berlaku")
+            ->get()->getRowArray();
+    }
 
-        return $status->getResultArray();
+    public function get_prohum_tidak_berlaku()
+    {
+        return $this->db->table('tb_produk')
+            ->selectCount('id_produk', 'jumlah')
+            ->where('status', "Tidak Berlaku")
+            ->get()->getRowArray();
     }
 
     public function getJmlAdmin()
@@ -81,13 +86,24 @@ class M_user extends Model
 
     public function getKatProduk()
     {
-        return $this->db->table('tb_produk')
-            ->join('tb_kategori', 'tb_produk.id_kategori=tb_kategori.id_kategori')
-            ->select('nama_kategori')
-            ->select('COUNT(IF(status="Berlaku",tb_produk.id_kategori,NULL)) AS berlaku')
-            ->select('COUNT(IF(status="Tidak Berlaku",tb_produk.id_kategori,NULL)) AS tidak_berlaku')
-            ->where('tb_produk.id_unit', session()->get('id_unit'))
-            ->groupBy('tb_produk.id_kategori')
-            ->orderBy('tb_produk.id_kategori', 'ASC')->get()->getResultArray();
+
+        if (session()->get('role_id') == 1) {
+            return $this->db->table('tb_produk')
+                ->join('tb_kategori', 'tb_produk.id_kategori=tb_kategori.id_kategori')
+                ->select('nama_kategori')
+                ->select('COUNT(IF(status="Berlaku",tb_produk.id_kategori,NULL)) AS berlaku')
+                ->select('COUNT(IF(status="Tidak Berlaku",tb_produk.id_kategori,NULL)) AS tidak_berlaku')
+                ->groupBy('tb_produk.id_kategori')
+                ->orderBy('tb_produk.id_kategori', 'ASC')->get()->getResultArray();
+        } else {
+            return $this->db->table('tb_produk')
+                ->join('tb_kategori', 'tb_produk.id_kategori=tb_kategori.id_kategori')
+                ->select('nama_kategori')
+                ->select('COUNT(IF(status="Berlaku",tb_produk.id_kategori,NULL)) AS berlaku')
+                ->select('COUNT(IF(status="Tidak Berlaku",tb_produk.id_kategori,NULL)) AS tidak_berlaku')
+                ->where('tb_produk.id_unit', session()->get('id_unit'))
+                ->groupBy('tb_produk.id_kategori')
+                ->orderBy('tb_produk.id_kategori', 'ASC')->get()->getResultArray();
+        }
     }
 }

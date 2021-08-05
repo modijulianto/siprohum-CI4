@@ -21,7 +21,7 @@
                     <div class="col-sm-12">
                         <button type="button" id="tombolTambahUnit" class="btn btn-primary tombolTambahUnit" data-toggle="modal" data-target="#modalUnit" style="float: right">
                             <i class="fa fa-plus"></i>
-                            Add Unit
+                            Tambah Unit
                         </button>
                         <div class="card-box table-responsive">
                             <table id="datatable" class="table table-striped table-bordered" style="width:100%">

@@ -10,48 +10,57 @@
 </script>
 
 <div class="row">
-    <?php foreach ($status as $sts) { ?>
-        <div class="animated flipInY col-6">
-            <div class="tile-stats">
-                <div class="icon"><i class="fa fa-book"></i></div>
+    <div class="animated flipInY col-6">
+        <div class="tile-stats bg-primary text-light">
+            <div class="icon"><i class="fa fa-book"></i></div>
+            <div class="count">
+                <font size="5">Produk Hukum Berlaku</font>
+            </div>
+            <h4 style="margin-left: 10px">Total : <?= $berlaku['jumlah']; ?></h4>
+        </div>
+    </div>
+    <div class="animated flipInY col-6">
+        <div class="tile-stats bg-primary text-light">
+            <div class="icon"><i class="fa fa-book"></i></div>
+            <div class="count">
+                <font size="5">Produk Hukum Tidak Berlaku</font>
+            </div>
+            <h4 style="margin-left: 10px">Total : <?= $tidak_berlaku['jumlah']; ?></h4>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <?php if ($akun['role_id'] == 1) { ?>
+        <div class="animated flipInY  col-lg-4 col-md-4 col-sm-6">
+            <div class="tile-stats bg-info text-light">
+                <div class="icon"><i class="fa fa-user"></i></div>
                 <div class="count">
-                    <font size="5">Produk Hukum <?= $sts['status']; ?></font>
+                    <font size="5">Admin</font>
                 </div>
-                <h4 style="margin-left: 10px">Total : <?= $sts['jumlah']; ?></h4>
+                <h4 style="margin-left: 10px"><?= $jmlAdm; ?></h4>
+            </div>
+        </div>
+        <div class="animated flipInY col-lg-4 col-md-4 col-sm-6">
+            <div class="tile-stats bg-info text-light">
+                <div class="icon"><i class="fa fa-users"></i></div>
+                <div class="count">
+                    <font size="5">Operator</font>
+                </div>
+                <h4 style="margin-left: 10px"><?= $jmlOpr; ?></h4>
+            </div>
+        </div>
+        <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 ">
+            <div class="tile-stats bg-warning text-light">
+                <div class="icon"><i class="fa fa-remove"></i></div>
+                <div class="count">
+                    <font size="5">Belum Tervalidasi</font>
+                </div>
+                <h4 style="margin-left: 10px"><?= $blmValidasi; ?></h4>
             </div>
         </div>
     <?php } ?>
 </div>
-
-<?php if ($akun['role_id'] == 1) { ?>
-    <div class="animated flipInY  col-lg-4 col-md-4 col-sm-6">
-        <div class="tile-stats">
-            <div class="icon"><i class="fa fa-user"></i></div>
-            <div class="count">
-                <font size="5">Admin</font>
-            </div>
-            <h4 style="margin-left: 10px"><?= $jmlAdm; ?></h4>
-        </div>
-    </div>
-    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6">
-        <div class="tile-stats">
-            <div class="icon"><i class="fa fa-users"></i></div>
-            <div class="count">
-                <font size="5">Operator</font>
-            </div>
-            <h4 style="margin-left: 10px"><?= $jmlOpr; ?></h4>
-        </div>
-    </div>
-    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 ">
-        <div class="tile-stats">
-            <div class="icon"><i class="fa fa-remove"></i></div>
-            <div class="count">
-                <font size="5">Belum Tervalidasi</font>
-            </div>
-            <h4 style="margin-left: 10px"><?= $blmValidasi; ?></h4>
-        </div>
-    </div>
-<?php } ?>
 
 <div class="row">
     <div class="col-md-12 col-sm-12 ">

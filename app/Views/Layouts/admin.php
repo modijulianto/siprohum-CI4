@@ -80,7 +80,15 @@
                         <div class="profile_info">
                             <span>Welcome,</span>
                             <h2><?= $akun['name'] ?></h2>
-                            <span><?= ($akun['role_id'] == 1) ? 'Administrator' : 'Operator' ?></span>
+                            <span>
+                                <?php if ($akun['role_id'] == 1) { ?>
+                                    Administrator
+                                <?php } elseif ($akun['role_id'] == 3) { ?>
+                                    Validator
+                                <?php } else { ?>
+                                    Operator
+                                <?php } ?>
+                            </span>
                             <?php if ($akun['role_id'] != 1) { ?>
                                 <span><?= $akun['nama_singkat'] ?></span>
                             <?php } ?>
@@ -97,7 +105,7 @@
                                 <li><a href="/Dashboard"><i class="fa fa-bar-chart"></i> DASHBOARD </a></li>
                                 <?php if ($akun['role_id'] == 1) { ?>
                                     <li><a href="/Admin"><i class="fa fa-male"></i> DATA ADMIN </a></li>
-                                    <li><a href="/Operator"><i class="fa fa-users"></i> DATA OPERATOR </a></li>
+                                    <li><a href="/Validator"><i class="fa fa-user"></i> DATA VALIDATOR </a></li>
                                     <li><a href="/Unit"><i class="fa fa-institution"></i> DATA UNIT </a></li>
                                     <li><a><i class="fa fa-book"></i> PRODUK HUKUM <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
@@ -114,6 +122,9 @@
                                         </ul>
                                     </li>
                                 <?php } else { ?>
+                                    <?php if ($akun['role_id'] == 3) { ?>
+                                        <li><a href="/Operator"><i class="fa fa-users"></i> DATA OPERATOR </a></li>
+                                    <?php } ?>
                                     <li><a href="/ProdukHukum"><i class="fa fa-book"></i> DATA PRODUK HUKUM </a></li>
                                     <li><a href="/Tentang"><i class="fa fa-info"></i> Tentang </a></li>
                                 <?php } ?>

@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div class="page-title">
     <div class="title_left">
-        <h3>INPUT DATA PRODUK HUKUM</h3>
+        <h3>UPDATE DATA PRODUK HUKUM</h3>
     </div>
 </div>
 
@@ -13,7 +13,7 @@
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>INPUT DATA PRODUK HUKUM</h2>
+                <h2>UPDATE DATA PRODUK HUKUM</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -25,7 +25,7 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Nomor<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="text" class="form-control" name="nomor" id="nomor" placeholder="Masukkan nomor produk hukum" required="required" value="<?= $prohum['no']; ?>" />
+                                    <input type="text" class="form-control" autocomplete="off" name="nomor" id="nomor" placeholder="Masukkan nomor produk hukum" required="required" value="<?= $prohum['no']; ?>" />
                                     <div class="text-danger">
                                         <?= $validation->getError('nomor'); ?>
                                     </div>
@@ -34,7 +34,7 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Tahun<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="text" class="form-control" name="tahun" id="tahun" placeholder="Masukkan tahun produk hukum" required="required" value="<?= $prohum['tahun']; ?>" />
+                                    <input type="text" class="form-control" autocomplete="off" name="tahun" id="tahun" placeholder="Masukkan tahun produk hukum" required="required" value="<?= $prohum['tahun']; ?>" />
                                     <div class="text-danger">
                                         <?= $validation->getError('tahun'); ?>
                                     </div>
@@ -44,7 +44,7 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Judul<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="text" class="form-control" name="judul" id="judul" placeholder="Masukkan judul produk hukum" required="required" value="<?= $prohum['judul']; ?>" />
+                                    <textarea name="judul" id="judul" class="form-control" placeholder="Masukkan judul produk hukum" rows="5" required><?= $prohum['judul']; ?></textarea>
                                     <div class="text-danger">
                                         <?= $validation->getError('judul'); ?>
                                     </div>
@@ -53,19 +53,15 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Tentang<font color="red">*</font></label>
                                 <div class="col-md-8 col-sm-8">
-                                    <select class="form-control" name="tentang" id="tentang"></select>
+                                    <select class="form-control" name="tentang" id="tentang">
+                                        <option value="<?= $prohum['id_tentang']; ?>" selected><?= $prohum['nama_tentang']; ?></option>
+                                    </select>
                                 </div>
                                 <div class="col-md-2 col-sm-2">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modalTentangBaru"><i class="fa fa-plus"></i> Tentang Baru</button>
                                 </div>
                             </div>
                             <input type="hidden" name="old_tentang" id="old_tentang" value="<?= $prohum['id_tentang']; ?>">
-                            <div class="row form-group">
-                                <label class="col-form-label col-md-2 col-sm-2"></label>
-                                <div class="col-md col-sm">
-                                    <textarea class="form-control" name="view-tentang" id="view-tentang" cols="30" style="width:100%" rows="5" readonly><?= $prohum['nama_tentang']; ?></textarea>
-                                </div>
-                            </div><br><br>
                             <div class="form-group row">
                                 <label class="control-label col-md-2 col-sm-2">Kategori</label>
                                 <div class="col-md col-sm ">
@@ -79,7 +75,7 @@
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Keterangan<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="Masukkan keterangan produk hukum" required="required" value="<?= (isset($prohum['keterangan'])) ? $prohum['keterangan'] : set_value('keterangan'); ?>" />
+                                    <input type="text" class="form-control" autocomplete="off" name="keterangan" id="keterangan" placeholder="Masukkan keterangan produk hukum" required="required" value="<?= (isset($prohum['keterangan'])) ? $prohum['keterangan'] : set_value('keterangan'); ?>" />
                                     <div class="text-danger">
                                         <?= $validation->getError('keterangan'); ?>
                                     </div>
@@ -128,7 +124,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="judulModal">Input Data</h4>
+                <h4 class="modal-title" id="judulModal">Tambah Tentang Baru</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                 </button>
             </div>

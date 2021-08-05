@@ -2,7 +2,7 @@ $(function () {
 	// AJAX ADMINISTRATOR
 	$(".tombolTambahAdmin").on("click", function () {
 		$("#judulModal").html("Input Data Administrator");
-		$(".modal-footer button[type=submit]").html("Add Data");
+		$(".modal-footer button[type=submit]").html("Tambah Data");
 		$(".modal-body form").attr("action", "/Admin/save");
 		// alert($('.modal-body form').attr('action'));
 
@@ -24,7 +24,7 @@ $(function () {
 	// AJAX OPERATOR
 	$(".tombolTambahOperator").on("click", function () {
 		$("#judulModal").html("Input Data Operator");
-		$(".modal-footer button[type=submit]").html("Add Data");
+		$(".modal-footer button[type=submit]").html("Tambah Data");
 		$(".modal-body form").attr("action", "/Operator/save");
 		// alert($('.modal-body form').attr('action'));
 
@@ -43,10 +43,32 @@ $(function () {
 	});
 	// END AJAX OPERATOR
 
+	// AJAX OPERATOR
+	$(".tombolTambahValidator").on("click", function () {
+		$("#judulModal").html("Input Data Validator");
+		$(".modal-footer button[type=submit]").html("Tambah Data");
+		$(".modal-body form").attr("action", "/Validator/save");
+		// alert($('.modal-body form').attr('action'));
+
+		// show form input
+		$("#labelPasswordValidator").show();
+		$("#passwordValidator").show();
+		$("#labelRetypePasswordValidator").show();
+		$("#retypePasswordValidator").show();
+		$("#labelEmailValidator").show();
+		$("#emailValidator").show();
+
+		$("#id").val("");
+		$("#nama").val("");
+		$("#emailValidator").val("");
+		$("#passwordValidator").val("");
+	});
+	// END AJAX OPERATOR
+
 	// AJAX UNIT
 	$(".tombolTambahUnit").on("click", function () {
 		$("#judulModal").html("Input Data Unit");
-		$(".modal-footer button[type=submit]").html("Add Data");
+		$(".modal-footer button[type=submit]").html("Tambah Data");
 		$(".modal-body form").attr("action", "/Unit/save");
 
 		$("#id").val("");
@@ -57,7 +79,7 @@ $(function () {
 	// AJAX JENIS PRODUK
 	$(".tombolTambahJenis").on("click", function () {
 		$("#judulModal").html("Input Data Jenis Produk");
-		$(".modal-footer button[type=submit]").html("Add Data");
+		$(".modal-footer button[type=submit]").html("Tambah Data");
 		$(".modal-body form").attr("action", "/MasterData/save_jenis");
 
 		$("#id").val("");
@@ -68,7 +90,7 @@ $(function () {
 	// AJAX KATEGORI
 	$(".tombolTambahKategori").on("click", function () {
 		$("#judulModal").html("Input Data Kategori");
-		$(".modal-footer button[type=submit]").html("Add Data");
+		$(".modal-footer button[type=submit]").html("Tambah Data");
 		$(".modal-body form").attr("action", "/MasterData/save_kategori");
 
 		$("#id").val("");
@@ -79,7 +101,7 @@ $(function () {
 	// AJAX TENTANG
 	$(".tombolTambahTentang").on("click", function () {
 		$("#judulModal").html("Input Data Tentang");
-		$(".modal-footer button[type=submit]").html("Add Data");
+		$(".modal-footer button[type=submit]").html("Tambah Data");
 		$(".modal-body form").attr("action", "/MasterData/save_tentang");
 
 		$("#id").val("");

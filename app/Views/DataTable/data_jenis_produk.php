@@ -23,7 +23,7 @@
                     <div class="col-sm-12">
                         <button type="button" id="tombolTambahJenis" class="btn btn-primary tombolTambahJenis" data-toggle="modal" data-target="#modalJenis" style="float: right">
                             <i class="fa fa-plus"></i>
-                            Add Jenis
+                            Tambah Jenis
                         </button>
                         <div class="card-box table-responsive">
                             <table id="datatable" class="table table-striped table-bordered" style="width:100%">

@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font Awesome -->
-    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <style>
         .font-trn {
             font-family: 'Times New Roman', Times, serif;
@@ -15,7 +13,7 @@
 
 <body>
     <!-- KOP -->
-    <?= $this->include('export/pdf/kop') ?>
+    <?= $this->include('Export/Pdf/kop') ?>
     <!-- END KOP -->
 
     <hr height="2px">

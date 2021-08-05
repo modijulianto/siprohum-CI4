@@ -80,7 +80,7 @@ class Operator extends BaseController
             'image' => $namaFoto,
             'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
             'role_id' => 2,
-            'id_unit' => 1,
+            'id_unit' => session()->get('id_unit'),
             'is_active' => 1,
             'date_created' => time(),
         ]);
@@ -170,8 +170,10 @@ class Operator extends BaseController
 
             // cek jika file gambar default.jpeg
             if ($user['image'] != 'default.jpeg') {
-                // hapus foto admin
-                unlink('upload/' . $user['image']);
+                // hapus foto operator
+                if (file_exists('upload/' . $user['image'])) {
+                    unlink('upload/' . $user['image']);
+                }
             }
 
             $this->m_admin->delete($user['id']);

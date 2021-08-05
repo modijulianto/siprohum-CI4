@@ -9,7 +9,7 @@ class M_produkHukum extends Model
     protected $table = 'tb_produk';
     protected $primaryKey = 'id_produk';
     protected $useTimestamps = true;
-    protected $allowedFields = ['no', 'id_kategori', 'id_tentang', 'judul', 'tahun', 'status', 'keterangan', 'file', 'id_unit', 'validasi'];
+    protected $allowedFields = ['no', 'id_kategori', 'id_tentang', 'judul', 'tahun', 'status', 'keterangan', 'file', 'id_unit', 'created_by', 'validasi'];
 
     public function get_produk_hukum($id_unit)
     {
@@ -44,15 +44,21 @@ class M_produkHukum extends Model
         return $this->findAll();
     }
 
+    public function get_prohum_by_id($id)
+    {
+        $this->where('id_produk', $id);
+        return $this->first();
+    }
+
     public function get_produk_hukum_by_id($id)
     {
         $this->select('*');
-        $this->select('tb_produk.id_unit AS id_unit_produk');
-        $this->where('md5(tb_produk.id_produk)', $id);
         $this->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit');
         $this->join('tb_tentang', 'tb_tentang.id_tentang=tb_produk.id_tentang');
         $this->join('tb_kategori', 'tb_kategori.id_kategori=tb_produk.id_kategori');
         $this->join('tb_jenis_produk', 'tb_jenis_produk.id_jenis=tb_kategori.id_jenis');
+        $this->select('tb_produk.id_unit AS id_unit_produk');
+        $this->where('md5(tb_produk.id_produk)', $id);
         return $this->first();
     }
 

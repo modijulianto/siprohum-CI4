@@ -152,7 +152,9 @@ class Admin extends BaseController
             // cek jika file gambar default.jpeg
             if ($user['image'] != 'default.jpeg') {
                 // hapus foto admin
-                unlink('upload/' . $user['image']);
+                if (file_exists('upload/' . $user['image'])) {
+                    unlink('upload/' . $user['image']);
+                }
             }
 
             $this->m_admin->delete($user['id']);
