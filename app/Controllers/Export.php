@@ -28,7 +28,6 @@ class Export extends BaseController
         ];
 
         $html = view('Export/Pdf/admin', $data);
-        // $html = "awokawokaowk";
 
         $this->pdf->SetCreator(PDF_CREATOR);
         $this->pdf->SetAuthor('SI Produk Hukum Undiksha');
@@ -56,7 +55,6 @@ class Export extends BaseController
         ];
 
         $html = view('Export/Pdf/operator', $data);
-        // $html = "awokawokaowk";
 
         $this->pdf->SetCreator(PDF_CREATOR);
         $this->pdf->SetAuthor('SI Produk Hukum Undiksha');
@@ -74,6 +72,33 @@ class Export extends BaseController
         $this->response->setContentType('application/pdf');
         //Close and output PDF document
         $this->pdf->Output(date('d-m-Y') . '_Data Operator.pdf', 'D');
+    }
+
+    public function pdf_validator()
+    {
+        $data = [
+            'validator' => $this->m_admin->get_validator(),
+            'tot_opr' => $this->m_admin->get_num_rows_validator()
+        ];
+
+        $html = view('Export/Pdf/validator', $data);
+
+        $this->pdf->SetCreator(PDF_CREATOR);
+        $this->pdf->SetAuthor('SI Produk Hukum Undiksha');
+        $this->pdf->SetTitle('Data Validator');
+        $this->pdf->SetSubject('Laporan Data Validator');
+        $this->pdf->setPrintHeader(false);
+        $this->pdf->setPrintFooter(false);
+        $this->pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
+        $this->pdf->addPage('P');
+        $this->pdf->SetFont('times', '', 12, false);
+
+        // output the HTML content
+        $this->pdf->writeHTML($html);
+        //line ini penting
+        $this->response->setContentType('application/pdf');
+        //Close and output PDF document
+        $this->pdf->Output(date('d-m-Y') . '_Data Validator.pdf', 'D');
     }
 
     public function pdf_prohum()
@@ -138,6 +163,14 @@ class Export extends BaseController
         $data['opr'] = $this->m_admin->get_operator();
         $data['tot_opr'] = $this->m_admin->get_num_rows_operator();
         return view('Export/Excel/operator', $data);
+    }
+
+    public function excel_validator()
+    {
+        $data['title'] = 'Laporan Data Validator';
+        $data['opr'] = $this->m_admin->get_validator();
+        $data['tot_opr'] = $this->m_admin->get_num_rows_validator();
+        return view('Export/Excel/validator', $data);
     }
 
     public function excel_prohum()
