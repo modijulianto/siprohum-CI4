@@ -294,6 +294,15 @@ class ProdukHukum extends BaseController
         echo json_encode($msg);
     }
 
+    public function unvalidation($id_produk)
+    {
+        $this->m_prohum->save([
+            'id_produk' => $id_produk,
+            'validasi' => 0
+        ]);
+        return redirect()->to('/ProdukHukum');
+    }
+
     public function save_tentang_baru()
     {
         if (!$this->validate([

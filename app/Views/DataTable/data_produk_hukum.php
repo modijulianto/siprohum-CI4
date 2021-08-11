@@ -90,7 +90,7 @@
                                                                         <i class="fa fa-gear"></i>
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" href="/ProdukHukum/unvalidation/<?= md5($val['id_produk']); ?>">Batal Validasi</a>
+                                                                        <a class="dropdown-item" href="/ProdukHukum/unvalidation/<?= $val['id_produk']; ?>">Batal Validasi</a>
                                                                     </div>
                                                                 </div>
                                                             <?php } ?>

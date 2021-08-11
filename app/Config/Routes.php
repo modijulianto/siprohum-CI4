@@ -82,6 +82,7 @@ $routes->get('/MasterData/kategori/(:any)', 'MasterData::$1', ['filter' => 'isAd
 // Untuk Validator
 $routes->get('/Operator', 'Operator::index', ['filter' => 'isValidator']);
 $routes->get('/Operator/(:any)', 'Operator::$1', ['filter' => 'isValidator']);
+$routes->get('/ProdukHukum/unvalidation/(:any)', 'ProdukHukum::unvalidation/$1', ['filter' => 'isValidator']);
 
 // Untuk halaman operator
 $routes->get('/ProdukHukum/add', 'ProdukHukum::add', ['filter' => 'authproduk']);
