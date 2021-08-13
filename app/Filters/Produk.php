@@ -12,7 +12,7 @@ class Produk implements FilterInterface
     {
         // jika user yang login adalah admin maka block
         // admin tidak bisa melakukan tambah produk hukum, hanya operator saja yang bisa menambahkannya
-        if (session()->get('role_id') == 1) {
+        if (session()->get('role_id') != 2) {
             return redirect()->to('/Auth/forbidden');
         }
     }

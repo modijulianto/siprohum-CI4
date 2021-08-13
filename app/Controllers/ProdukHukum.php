@@ -323,6 +323,22 @@ class ProdukHukum extends BaseController
         echo json_encode($result);
     }
 
+    public function tambah_pesan()
+    {
+        $simpan = $this->m_prohum->save([
+            'id_produk' => $_POST['id'],
+            'pesan' => $_POST['pesan']
+        ]);
+
+        if ($simpan) {
+            $msg = ['msg' => 'sukses'];
+        } else {
+            $msg = ['msg' => 'gagal'];
+        }
+
+        echo json_encode($msg);
+    }
+
     public function add()
     {
         $data = [

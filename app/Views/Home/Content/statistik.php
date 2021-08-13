@@ -19,7 +19,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th data-graph-stack-group="1">Berlaku</th>
+                            <th data-graph-stack-group="1">Jumlah</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,7 +44,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th data-graph-stack-group="1">Berlaku</th>
+                            <th data-graph-stack-group="1">Jumlah</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,7 +69,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th data-graph-stack-group="1">Berlaku</th>
+                            <th data-graph-stack-group="1">Jumlah</th>
                         </tr>
                     </thead>
                     <tbody>

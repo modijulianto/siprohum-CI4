@@ -9,6 +9,9 @@
 <div class="clearfix"></div>
 <a href="/ProdukHukum/update/<?= md5($prohum['id_produk']) ?>" class="btn btn-success mb-4"><i class="fa fa-pencil">&ensp;<b> EDIT</b></i></a>
 <a href="/ProdukHukum/delete/<?= md5($prohum['id_produk']) ?>" class="btn btn-danger mb-4 tombol-hapus"><i class="fa fa-trash">&ensp;<b> HAPUS</b></i></a>
+<?php if ($prohum['validasi'] == 0) { ?>
+    <button data-toggle="modal" title="Tambah Pesan" data-target="#modalPesan" class="btn btn-info mb-4"><i class="fa fa-comment">&ensp;<b> <?= ($akun['role_id'] == 3) ? 'TAMBAH PESAN' : 'LIHAT PESAN'; ?></b></i></button>
+<?php } ?>
 
 <div class="row">
     <div class="col-md-6 col-sm-6 ">
@@ -136,10 +139,12 @@
                 <div class="flash-data" data-flashdata="<?= session()->getFlashdata('upload'); ?>"></div>
                 <div class="row">
                     <div class="col-12">
-                        <button type="button" id="tombolTambahMedia" class="btn rounded btn-primary shadow tombolTambahMedia" data-toggle="modal" title="Tambah Media" data-target="#modalMedia">
-                            <i class="fa fa-plus"></i>&ensp;
-                            Tambah Media
-                        </button>
+                        <?php if ($prohum['validasi'] == 0) { ?>
+                            <button type="button" id="tombolTambahMedia" class="btn rounded btn-primary shadow tombolTambahMedia" data-toggle="modal" title="Tambah Media" data-target="#modalMedia">
+                                <i class="fa fa-plus"></i>&ensp;
+                                Tambah Media
+                            </button>
+                        <?php } ?>
                     </div>
                     <div class="col-12 mt-4">
                         <div class="row">
@@ -228,61 +233,104 @@
     </div>
 </div>
 
-<!-- Modal Tambah Media -->
-<div class="modal fade" id="modalMedia" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
+<?php if ($prohum['validasi'] == 0) { ?>
+    <!-- Modal Tambah Media -->
+    <div class="modal fade" id="modalMedia" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="judulModal">Tambah Media</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-primary mb-3" role="alert">
+                        <div class="row">
+                            <div class="col-1 text-center align-middle"><i class="fa fa-info" style="font-size: 35px;"></i></div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-12">Silahkan upload foto berformat <i>.jpg, .jpeg, .gif, .png</i></div>
+                                    <div class="col-12">Silahkan upload link video yang berasal dari YouTube</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <form action="/ProdukHukum/<?= ($galeri != null) ? 'tambah_media' : 'save_media' ?>" method="POST" enctype="multipart/form-data" class="form-tambah-media">
+                        <input type="hidden" id="id" name="id" value="<?= ($galeri != null) ? $galeri['id_upload'] : ''; ?>">
+                        <input type="hidden" id="ket" name="ket" value="<?= $prohum['judul']; ?>">
+                        <input type="hidden" id="id_produk" name="id_produk" value="<?= $prohum['id_produk']; ?>">
+                        <input type="hidden" id="id_unit" name="id_unit" value="<?= $prohum['id_unit_produk']; ?>">
+                        <div class="row form-group mt-3">
+                            <label class="col-form-label col-md-2 col-sm-2">Foto</label>
+                            <div class="col-md col-sm">
+                                <input type="file" multiple name="media[]" /> <br>
+                                <font color="red"><?= $validation->getError('media'); ?></font>
+                            </div>
+                        </div>
+                        <div class="row form-group mt-3 fieldGroup">
+                            <label class="col-form-label col-md-2 col-sm-2">Link Video</label>
+                            <div class="input-group col-md-10 col-sm-10">
+                                <input type="text" name="video[]" autocomplete="off" class="form-control" placeholder="Masukkan link video" />
+                                <a href="javascript:void(0)" class="btn btn-success addMore ml-1"><i class="fa fa-plus"></i></a>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Tambah Media</button>
+                        </div>
+                    </form>
+                    <div class="row form-group fieldGroupCopy mt-3" style="display: none;">
+                        <label class="col-form-label col-md-2 col-sm-2"></label>
+                        <div class="input-group col-md-10 col-sm-10">
+                            <input type="text" name="video[]" autocomplete="off" class="form-control" placeholder="Masukkan link video" />
+                            <a href="javascript:void(0)" class="btn btn-danger remove ml-1"><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+<!-- Modal Tambah Pesan -->
+<div class="modal fade" id="modalPesan" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="judulModal">Tambah Media</h5>
+                <h5 class="modal-title" id="judulModal">Tambah Pesan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-primary mb-3" role="alert">
-                    <div class="row">
-                        <div class="col-1 text-center align-middle"><i class="fa fa-info" style="font-size: 35px;"></i></div>
-                        <div class="col">
-                            <div class="row">
-                                <div class="col-12">Silahkan upload foto berformat <i>.jpg, .jpeg, .gif, .png</i></div>
-                                <div class="col-12">Silahkan upload link video yang berasal dari YouTube</div>
-                            </div>
+                <?php if ($akun['role_id'] == 3) { ?>
+                    <div class="alert alert-primary mb-3" role="alert">
+                        <div class="row">
+                            <div class="col-1"><i class="fa fa-info"></i> &emsp;</div>
+                            <div class="col">Kirim pesan kepada Operator jika ada kesalahan dalam penulisan atau data produk hukum tidak valid.</div>
                         </div>
                     </div>
-
-                </div>
-                <hr>
-                <form action="/ProdukHukum/<?= ($galeri != null) ? 'tambah_media' : 'save_media' ?>" method="POST" enctype="multipart/form-data" class="form-tambah-media">
-                    <input type="hidden" id="id" name="id" value="<?= ($galeri != null) ? $galeri['id_upload'] : ''; ?>">
-                    <input type="hidden" id="ket" name="ket" value="<?= $prohum['judul']; ?>">
-                    <input type="hidden" id="id_produk" name="id_produk" value="<?= $prohum['id_produk']; ?>">
-                    <input type="hidden" id="id_unit" name="id_unit" value="<?= $prohum['id_unit_produk']; ?>">
+                    <hr>
+                    <div class="alert-pesan"></div>
                     <div class="row form-group mt-3">
-                        <label class="col-form-label col-md-2 col-sm-2">Foto</label>
+                        <label class="col-form-label col-md-2 col-sm-2">Pesan</label>
                         <div class="col-md col-sm">
-                            <input type="file" multiple name="media[]" /> <br>
-                            <font color="red"><?= $validation->getError('media'); ?></font>
+                            <textarea name="pesan" id="pesan" cols="30" rows="5" class="form-control"><?= $prohum['pesan']; ?></textarea>
                         </div>
                     </div>
-                    <div class="row form-group mt-3 fieldGroup">
-                        <label class="col-form-label col-md-2 col-sm-2">Link Video</label>
-                        <div class="input-group col-md-10 col-sm-10">
-                            <input type="text" name="video[]" autocomplete="off" class="form-control" placeholder="Masukkan link video" />
-                            <a href="javascript:void(0)" class="btn btn-success addMore ml-1"><i class="fa fa-plus"></i></a>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Tambah Media</button>
-                    </div>
-                </form>
-                <div class="row form-group fieldGroupCopy mt-3" style="display: none;">
-                    <label class="col-form-label col-md-2 col-sm-2"></label>
-                    <div class="input-group col-md-10 col-sm-10">
-                        <input type="text" name="video[]" autocomplete="off" class="form-control" placeholder="Masukkan link video" />
-                        <a href="javascript:void(0)" class="btn btn-danger remove ml-1"><i class="fa fa-trash"></i></a>
-                    </div>
-                </div>
+                <?php } elseif ($akun['role_id'] == 2) { ?>
+                    <h6>Pesan dari validator :</h6>
+                    <textarea name="pesan" id="pesan" cols="30" readonly rows="5" class="form-control"><?= $prohum['pesan']; ?></textarea>
+                <?php } ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <?php if ($akun['role_id'] == 3) { ?>
+                    <button type="button" class="btn btn-primary tombol-pesan" data-id="<?= $prohum['id_produk']; ?>">Tambah Pesan</button>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -305,6 +353,36 @@
         //remove fields group
         $("body").on("click", ".remove", function() {
             $(this).parents(".fieldGroup").remove();
+        });
+
+        $('.tombol-pesan').on('click', function() {
+            const id = $(this).data('id');
+            var pesan = $('#pesan').val();
+
+            $.ajax({
+                url: '/ProdukHukum/tambah_pesan',
+                data: {
+                    id: id,
+                    pesan: pesan
+                },
+                dataType: 'json',
+                method: 'post',
+                beforeSend: function() {
+                    $('.tombol-pesan').html('<i class="fa fa-spin fa-spinner"></i>')
+                    $('.tombol-pesan').attr("disabled");
+                },
+                success: function(data) {
+                    if (data.msg == 'sukses') {
+                        $('.alert-pesan').html('<div class="alert alert-success mb-3" role="alert">Pesan berhasil dikirim</div>');
+                    } else {
+                        $('.alert-pesan').html('<div class="alert alert-danger mb-3" role="alert">Pesan gagal dikirim</div>');
+                    }
+                },
+                complete: function() {
+                    $('.tombol-pesan').removeAttr("disabled");
+                    $('.tombol-pesan').html('Tambah Pesan')
+                },
+            });
         });
     });
 </script>

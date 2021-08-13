@@ -24,7 +24,7 @@
                             <i class="fa fa-download"></i>
                             Export
                         </a>
-                        <?php if (session()->get('role_id') != 1) { ?>
+                        <?php if (session()->get('role_id') == 2) { ?>
                             <a href="/ProdukHukum/add" class="btn btn-primary" style="float: right">
                                 <i class="fa fa-plus"></i>
                                 Tambah Produk Hukum
