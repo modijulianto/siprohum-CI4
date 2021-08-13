@@ -73,12 +73,9 @@
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <label class="col-form-label col-md-2 col-sm-2">Keterangan<font color="red">*</font></label>
+                                <label class="col-form-label col-md-2 col-sm-2">Keterangan</label>
                                 <div class="col-md col-sm">
                                     <input type="text" class="form-control" autocomplete="off" name="keterangan" id="keterangan" placeholder="Masukkan keterangan produk hukum" required="required" value="<?= (isset($prohum['keterangan'])) ? $prohum['keterangan'] : set_value('keterangan'); ?>" />
-                                    <div class="text-danger">
-                                        <?= $validation->getError('keterangan'); ?>
-                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row">

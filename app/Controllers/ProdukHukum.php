@@ -359,10 +359,6 @@ class ProdukHukum extends BaseController
                 'rules' => 'required',
                 'errors' => ['required' => 'Tentang produk hukum harus diisi']
             ],
-            'keterangan' => [
-                'rules' => 'required',
-                'errors' => ['required' => 'Keterangan produk hukum harus diisi']
-            ],
             'produk' => [
                 'rules' => 'mime_in[produk,application/pdf,application/doc,application/docx]',
                 'errors' => ['mime_in' => 'Upload file produk hukum berformat <i>.pdf, .doc,</i> atau <i>.docx</i>']
@@ -438,10 +434,6 @@ class ProdukHukum extends BaseController
             'judul' => [
                 'rules' => 'required',
                 'errors' => ['required' => 'Judul produk hukum harus diisi']
-            ],
-            'keterangan' => [
-                'rules' => 'required',
-                'errors' => ['required' => 'Keterangan produk hukum harus diisi']
             ],
             'status' => [
                 'rules' => 'required',
