@@ -21,12 +21,12 @@
                         <?= session()->getFlashdata('message'); ?>
 
                         <a href="/Export/pdf_prohum" data-toggle="modal" data-target="#modalExport" class="btn btn-primary" style="float: left">
-                            <i class="fa fa-download"></i>
+                            <i class="fas fa-download"></i>
                             Export
                         </a>
                         <?php if (session()->get('role_id') == 2) { ?>
                             <a href="/ProdukHukum/add" class="btn btn-primary" style="float: right">
-                                <i class="fa fa-plus"></i>
+                                <i class="fas fa-plus"></i>
                                 Tambah Produk Hukum
                             </a>
                         <?php } ?>
@@ -82,12 +82,12 @@
                                                     </td>
                                                     <td>
                                                         <center>
-                                                            <a href="/ProdukHukum/detail/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+                                                            <a href="/ProdukHukum/detail/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
                                                             <?php if ($akun['role_id'] == 3) { ?>
-                                                                <a href="/ProdukHukum/delete/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
+                                                                <a href="/ProdukHukum/delete/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="fas fa-trash"></i></a>
                                                                 <div class="dropdown">
                                                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <i class="fa fa-gear"></i>
+                                                                        <i class="fas fa-gear"></i>
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item" href="/ProdukHukum/unvalidation/<?= $val['id_produk']; ?>">Batal Validasi</a>
@@ -115,7 +115,7 @@
                                                     <tr>
                                                         <?php if ($akun['role_id'] == 3) { ?>
                                                             <th>
-                                                                <center><i class="fa fa-check-square-o"></i></center>
+                                                                <center><i class="fas fa-check-square-o"></i></center>
                                                             </th>
                                                         <?php } ?>
                                                         <th class="text-center">Unit</th>
@@ -146,10 +146,10 @@
                                                             <td><?= $val['keterangan']; ?></td>
                                                             <td>
                                                                 <center>
-                                                                    <a href="/ProdukHukum/detail/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+                                                                    <a href="/ProdukHukum/detail/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
                                                                     <?php if ($akun['role_id'] == 2) { ?>
-                                                                        <a href="/ProdukHukum/update/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></a>
-                                                                        <a href="/ProdukHukum/delete/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
+                                                                        <a href="/ProdukHukum/update/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
+                                                                        <a href="/ProdukHukum/delete/<?= md5($val['id_produk']) ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="fas fa-trash"></i></a>
                                                                     <?php } ?>
                                                                 </center>
                                                             </td>
@@ -158,7 +158,7 @@
                                                 </tbody>
                                             </table>
                                             <?php if ($akun['role_id'] == 3) { ?>
-                                                <button type="submit" class="btn btn-primary mt-5"><i class="fa fa-check-square-o"></i> Validasi</button>
+                                                <button type="submit" class="btn btn-primary mt-5"><i class="fas fa-check-square-o"></i> Validasi</button>
                                             <?php } ?>
                                         </form>
                                     </div>
@@ -217,8 +217,8 @@
 
                         <div class=" modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" id="excelProhum"><i class="fa fa-download"></i> Excel</button>
-                            <button type="submit" class="btn btn-primary" id="pdfProhum"><i class="fa fa-download"></i> Pdf</button>
+                            <button type="submit" class="btn btn-primary" id="excelProhum"><i class="fas fa-download"></i> Excel</button>
+                            <button type="submit" class="btn btn-primary" id="pdfProhum"><i class="fas fa-download"></i> Pdf</button>
                         </div>
                     </form>
                 </div>

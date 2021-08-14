@@ -20,15 +20,15 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <a href="<?= base_url("Export/excel_operator") ?>" class="btn btn-primary" style="float: left">
-                            <i class="fa fa-download"></i>
+                            <i class="fas fa-download"></i>
                             Excel
                         </a>
                         <a href="<?= base_url("Export/pdf_operator") ?>" class="btn btn-primary" style="float: left">
-                            <i class="fa fa-download"></i>
+                            <i class="fas fa-download"></i>
                             PDF
                         </a>
                         <button type="button" id="tombolTambahOperator" class="btn btn-primary tombolTambahOperator" data-toggle="modal" data-target="#modalOperator" style="float: right">
-                            <i class="fa fa-plus"></i>
+                            <i class="fas fa-plus"></i>
                             Tambah Operator
                         </button>
                         <div class="card-box table-responsive">
@@ -68,8 +68,8 @@
                                             </td>
                                             <td>
                                                 <center>
-                                                    <button type="button" name="ubah" data-toggle="modal" data-target="#modalOperator" id="tombolUbahOperator" class="btn btn-success btn-sm tombolUbahOperator" data-id="<?= $val['id']; ?>"><i class="fa fa-pencil"></i></button>
-                                                    <a href="/Operator/delete/<?= md5($val['id']) ?>"><button href="/Operator/delete/<?= md5($val['id']) ?>" type="button" class="btn btn-danger btn-sm tombol-hapus"><i class="fa fa-trash"></i></button></a>
+                                                    <button type="button" name="ubah" data-toggle="modal" data-target="#modalOperator" id="tombolUbahOperator" class="btn btn-success btn-sm tombolUbahOperator" data-id="<?= $val['id']; ?>"><i class="fas fa-edit"></i></button>
+                                                    <a href="/Operator/delete/<?= md5($val['id']) ?>"><button href="/Operator/delete/<?= md5($val['id']) ?>" type="button" class="btn btn-danger btn-sm tombol-hapus"><i class="fas fa-trash"></i></button></a>
                                                 </center>
                                             </td>
                                         </tr>

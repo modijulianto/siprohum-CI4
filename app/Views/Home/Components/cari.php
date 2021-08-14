@@ -52,9 +52,8 @@
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control custom-select">
-                            <?php foreach ($status as $row) { ?>
-                                <option value="<?= $row['status']; ?>"><?= $row['status']; ?></option>
-                            <?php } ?>
+                            <option value="Berlaku">Berlaku</option>
+                            <option value="Tidak Berlaku">Tidak Berlaku</option>
                         </select>
                     </div>
                 </div>

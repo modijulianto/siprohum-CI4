@@ -21,7 +21,7 @@
                 <div class="row">
                     <!-- <div class="col-12">
                         <button type="button" id="tombolTambahGaleri" class="btn btn-primary tombolTambahGaleri" data-toggle="modal" data-target="#modalGaleri" style="float: right">
-                            <i class="fa fa-plus"></i>
+                            <i class="fas fa-plus"></i>
                             Tambah Galeri
                         </button>
                     </div> -->
@@ -31,9 +31,9 @@
                                 <div class="col-12">
                                     <h4><?= $row['ket']; ?> &emsp;
                                         <button type="button" id="tombolTambahMedia" data-id="<?= $row['id_upload']; ?>" class="btn btn-sm rounded btn-transparent border-primary shadow tombolTambahMedia" data-toggle="modal" title="Tambah Media" data-target="#modalMedia">
-                                            <i class="fa fa-upload"></i>
+                                            <i class="fas fa-upload"></i>
                                         </button>
-                                        <button href="/Upload/delete/<?= $row['id_upload'] ?>" type="button" class="btn btn-transparent border-danger btn-sm shadow tombol-hapus" title="Hapus Galeri"><i class="fa fa-trash"></i></button>
+                                        <button href="/Upload/delete/<?= $row['id_upload'] ?>" type="button" class="btn btn-transparent border-danger btn-sm shadow tombol-hapus" title="Hapus Galeri"><i class="fas fa-trash"></i></button>
                                     </h4>
 
                                 </div>
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-1">
                                     <button class="btn btn-sm btn-transparent button-collapse" type="button" data-toggle="collapse" data-target="#collapse<?= $row['id_upload']; ?>" aria-expanded="false" aria-controls="collapse<?= $row['id_upload']; ?>">
-                                        <i class="fa fa-chevron-down"></i>
+                                        <i class="fas fa-chevron-down"></i>
                                     </button>
                                 </div>
                                 <div class="col-12">
@@ -55,7 +55,7 @@
                                                             <div class="col-md-4 mb-4">
                                                                 <div class="row">
                                                                     <div class="col-12 text-center"><iframe src="<?= $vid['file']; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-                                                                    <div class="col-12 text-center"><a href="/Upload/single_delete/<?= md5($vid['id_galeri']); ?>" class="btn btn-sm btn-danger tombol-hapus" style="width: 100%;"><i class="fa fa-trash"></i></a></div>
+                                                                    <div class="col-12 text-center"><a href="/Upload/single_delete/<?= md5($vid['id_galeri']); ?>" class="btn btn-sm btn-danger tombol-hapus" style="width: 100%;"><i class="fas fa-trash"></i></a></div>
                                                                 </div>
                                                             </div>
                                                         <?php } ?>
@@ -72,7 +72,7 @@
                                                                         <img style="width: 100%; display: block;" src="/upload/galeri/<?= $gal['file']; ?>" alt="image" />
                                                                         <div class="mask no-caption">
                                                                             <div class="tools tools-bottom">
-                                                                                <a href="/Upload/single_delete/<?= md5($gal['id_galeri']); ?>" class="tombol-hapus"><i class="fa fa-trash"></i></a>
+                                                                                <a href="/Upload/single_delete/<?= md5($gal['id_galeri']); ?>" class="tombol-hapus"><i class="fas fa-trash"></i></a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -178,10 +178,10 @@
     // $('.button-collapse').click(function() {
     //     if ($(this).val() == "0") {
     //         $(this).val("1")
-    //         $(this).html('<i class="fa fa-chevron-up"></i>');
+    //         $(this).html('<i class="fas fa-chevron-up"></i>');
     //     } else {
     //         $(this).val("0")
-    //         $(this).html('<i class="fa fa-chevron-down"></i>');
+    //         $(this).html('<i class="fas fa-chevron-down"></i>');
     //     }
     // });
     $('.tombolTambahMedia').click(function() {

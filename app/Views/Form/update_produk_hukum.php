@@ -58,7 +58,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2 col-sm-2">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modalTentangBaru"><i class="fa fa-plus"></i> Tentang Baru</button>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modalTentangBaru"><i class="fas fa-plus"></i> Tentang Baru</button>
                                 </div>
                             </div>
                             <input type="hidden" name="old_tentang" id="old_tentang" value="<?= $prohum['id_tentang']; ?>">

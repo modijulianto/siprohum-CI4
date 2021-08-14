@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-1">
                         <center>
-                            <i class="fa fa-th-large"></i>
+                            <i class="fas fa-th-large"></i>
                         </center>
                     </div>
                     <div class="col-9">

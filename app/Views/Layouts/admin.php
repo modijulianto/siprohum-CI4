@@ -24,6 +24,7 @@
     <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
+    <link href="/vendors/fontawesome/css/all.css" rel="stylesheet">
     <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
@@ -102,19 +103,19 @@
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
                             <ul class="nav side-menu">
-                                <li><a href="/Dashboard"><i class="fa fa-bar-chart"></i> DASHBOARD </a></li>
+                                <li><a href="/Dashboard"><i class="fas fa-chart-bar"></i> DASHBOARD </a></li>
                                 <?php if ($akun['role_id'] == 1) { ?>
-                                    <li><a href="/Admin"><i class="fa fa-male"></i> DATA ADMIN </a></li>
-                                    <li><a href="/Validator"><i class="fa fa-user"></i> DATA VALIDATOR </a></li>
-                                    <li><a href="/Unit"><i class="fa fa-institution"></i> DATA UNIT </a></li>
-                                    <li><a><i class="fa fa-book"></i> PRODUK HUKUM <span class="fa fa-chevron-down"></span></a>
+                                    <li><a href="/Admin"><i class="fas fa-user"></i> DATA ADMIN </a></li>
+                                    <li><a href="/Validator"><i class="fas fa-user"></i> DATA VALIDATOR </a></li>
+                                    <li><a href="/Unit"><i class="fas fa-building"></i> DATA UNIT </a></li>
+                                    <li><a><i class="fas fa-file-alt"></i> PRODUK HUKUM <span class="glyphicon glyphicon-chevron-down float-right"></span></a>
                                         <ul class="nav child_menu">
                                             <?php foreach ($unit as $val) { ?>
                                                 <li><a href="/ProdukHukum/<?= md5($val['id_unit']) ?>"><?= $val['nama_unit']; ?> </a></li>
                                             <?php } ?>
                                         </ul>
                                     </li>
-                                    <li><a><i class="fa fa-th-list"></i> MASTER DATA <span class="fa fa-chevron-down"></span></a>
+                                    <li><a><i class="fas fa-list-alt"></i> MASTER DATA <span class="glyphicon glyphicon-chevron-down float-right"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="/MasterData/jenis">Jenis Produk </a></li>
                                             <li><a href="/MasterData/kategori">Kategori Produk </a></li>
@@ -123,13 +124,13 @@
                                     </li>
                                 <?php } else { ?>
                                     <?php if ($akun['role_id'] == 3) { ?>
-                                        <li><a href="/Operator"><i class="fa fa-users"></i> DATA OPERATOR </a></li>
+                                        <li><a href="/Operator"><i class="fas fa-user"></i> DATA OPERATOR </a></li>
                                     <?php } ?>
-                                    <li><a href="/ProdukHukum"><i class="fa fa-book"></i> DATA PRODUK HUKUM </a></li>
-                                    <li><a href="/Tentang"><i class="fa fa-info"></i> Tentang </a></li>
+                                    <li><a href="/ProdukHukum"><i class="fas fa-file-alt"></i> DATA PRODUK HUKUM </a></li>
+                                    <li><a href="/Tentang"><i class="fas fa-comment-alt"></i> Tentang </a></li>
                                 <?php } ?>
-                                <li><a href="/Upload"><i class="fa fa-image"></i> GALERI </a></li>
-                                <li><a href="/Profile"><i class="fa fa-user"></i> MY PROFILE </a></li>
+                                <li><a href="/Upload"><i class="fas fa-image"></i> GALERI </a></li>
+                                <li><a href="/Profile"><i class="fas fa-user-circle"></i> MY PROFILE </a></li>
                                 <li><a href="/ChangePassword"><i class="fa fa-key"></i> CHANGE PASSWORD </a></li>
                             </ul>
                         </div>
@@ -139,16 +140,16 @@
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">
                         <!-- <a data-toggle="tooltip" data-placement="top" title="Settings">
-                        <span class="fa fa-gears" aria-hidden="true"></span>
+                        <span class="fas fa-gears" aria-hidden="true"></span>
                     </a>
                     <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                        <span class="fa fa-arrows-alt" aria-hidden="true"></span>
+                        <span class="fas fa-arrows-alt" aria-hidden="true"></span>
                     </a> -->
                         <a data-toggle="tooltip" data-placement="top" title="Back to Front" href="/" style="width: 50%;">
                             <span class="fa fa-mail-reply" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="Logout" href="/Auth/logout" style="width: 50%;">
-                            <span class="fa fa-sign-out" aria-hidden="true"></span>
+                            <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
                         </a>
                     </div>
                     <!-- /menu footer buttons -->
@@ -159,7 +160,7 @@
             <div class="top_nav">
                 <div class="nav_menu">
                     <div class="nav toggle">
-                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        <a id="menu_toggle"><i class="fas fa-bars"></i></a>
                     </div>
                     <nav class="nav navbar-nav">
                         <ul class=" navbar-right">
@@ -169,7 +170,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/User/my_profile"> Profile</a>
-                                    <a class="dropdown-item" href="/Auth/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                    <a class="dropdown-item" href="/Auth/logout"><i class="fas fa-sign-out pull-right"></i> Log Out</a>
                                 </div>
                             </li>
 
@@ -195,7 +196,7 @@
             <!-- footer content -->
             <footer>
                 <div class="pull-right">
-                    Copyright &copy; Gentelella | Made with <i class="fa fa-heart"></i> <?= date('Y'); ?>
+                    Copyright &copy; Gentelella | Made with <i class="fas fa-heart"></i> <?= date('Y'); ?>
                 </div>
                 <div class="clearfix"></div>
             </footer>

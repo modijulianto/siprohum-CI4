@@ -21,7 +21,7 @@
             <div class="x_content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <button type="button" class="btn btn-primary tombolTambahTentang" data-toggle="modal" data-target=".bs-example-modal-lg" style="float: right;"><i class="fa fa-plus"></i> Tambah Tentang</button>
+                        <button type="button" class="btn btn-primary tombolTambahTentang" data-toggle="modal" data-target=".bs-example-modal-lg" style="float: right;"><i class="fas fa-plus"></i> Tambah Tentang</button>
                         <div class="card-box table-responsive">
                             <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                 <?= session()->getflashdata('message'); ?>
@@ -45,8 +45,8 @@
                                             <td><?= $val['nama_tentang']; ?></td>
                                             <td>
                                                 <center>
-                                                    <button type="button" name="ubah" data-toggle="modal" data-target=".bs-example-modal-lg" id="tombolUbahTentang" class="btn btn-success btn-sm tombolUbahTentang" data-id="<?= $val['id_tentang']; ?>"><i class="fa fa-pencil"></i></button>
-                                                    <button href="/MasterData/delete_tentang/<?= md5($val['id_tentang']) ?>" type="button" class="btn btn-danger btn-sm tombol-hapus"><i class="fa fa-trash"></i></button>
+                                                    <button type="button" name="ubah" data-toggle="modal" data-target=".bs-example-modal-lg" id="tombolUbahTentang" class="btn btn-success btn-sm tombolUbahTentang" data-id="<?= $val['id_tentang']; ?>"><i class="fas fa-edit"></i></button>
+                                                    <button href="/MasterData/delete_tentang/<?= md5($val['id_tentang']) ?>" type="button" class="btn btn-danger btn-sm tombol-hapus"><i class="fas fa-trash"></i></button>
                                                 </center>
                                             </td>
                                         </tr>

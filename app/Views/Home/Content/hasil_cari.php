@@ -13,14 +13,14 @@
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-book"></i>&ensp; HASIL PENCARIAN</p>
+                <p class="pl-3"><i class="fas fa-book"></i>&ensp; HASIL PENCARIAN</p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
                 <?php foreach ($prohum as $row) { ?>
                     <div class="card prohum mb-3">
                         <div class="media position-relative">
-                            <i class="fa fa-book text-center align-middle" style="max-width: 200px; font-size: 50px; padding: 30px 20px 20px 20px;"></i>
+                            <i class="fas fa-book text-center align-middle" style="max-width: 200px; font-size: 50px; padding: 30px 20px 20px 20px;"></i>
                             <div class="media-body pt-2">
                                 <b><?= $row['judul']; ?> Nomor <?= $row['no']; ?> Tahun <?= $row['tahun']; ?></b>
                                 <div class="text-secondary">
@@ -39,7 +39,7 @@
                 <?php if ($prohum == null) { ?>
                     <div class="card mb-3 bg-transparent">
                         <div class="media position-relative">
-                            <i class="fa fa-times text-center align-middle text-secondary" style="max-width: 200px; font-size: 50px; padding: 20px 20px 20px 20px;"></i>
+                            <i class="fas fa-times text-center align-middle text-secondary" style="max-width: 200px; font-size: 50px; padding: 20px 20px 20px 20px;"></i>
                             <div class="media-body pt-2">
                                 <div class="text-secondary mt-4">
                                     <font size="5">
@@ -58,7 +58,7 @@
     <div class="col-md-4">
         <div class="row mb-5">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-list-ul"></i>&ensp; KATEGORI PRODUK HUKUM</p>
+                <p class="pl-3"><i class="fas fa-list-ul"></i>&ensp; KATEGORI PRODUK HUKUM</p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
@@ -67,7 +67,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-institution"></i>&ensp; UNIT</p>
+                <p class="pl-3"><i class="fas fa-institution"></i>&ensp; UNIT</p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">

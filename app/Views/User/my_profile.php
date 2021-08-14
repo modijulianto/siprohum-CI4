@@ -33,13 +33,13 @@
 
                     <ul class="list-unstyled user_data">
                         <li>
-                            <h4><i class="fa fa-user user-profile-icon"></i> <?= $akun['role']; ?></h4>
+                            <h4><i class="fas fa-user user-profile-icon"></i> <?= $akun['role']; ?></h4>
                         </li>
                         <li class="m-top-xs">
-                            <h4><i class="fa fa-envelope user-profile-icon"></i> <?= $akun['email']; ?></h4>
+                            <h4><i class="fas fa-envelope user-profile-icon"></i> <?= $akun['email']; ?></h4>
                         </li>
                         <li>
-                            <i class="fa fa-calendar user-profile-icon"></i>&ensp;<small>since</small> <?= date('d F Y', $akun['date_created']); ?>
+                            <i class="fas fa-calendar user-profile-icon"></i>&ensp;<small>since</small> <?= date('d F Y', $akun['date_created']); ?>
                         </li>
                     </ul>
 
@@ -61,7 +61,7 @@
                                 <!-- start recent activity -->
                                 <ul class="messages">
                                     <li>
-                                        <!-- <h1><i class="fa fa-user"></i></h1> -->
+                                        <!-- <h1><i class="fas fa-user"></i></h1> -->
                                         <div class="message_wrapper">
                                             <h4 class="heading">NAMA</h4>
                                             <blockquote class="message">

@@ -54,7 +54,7 @@
                                     <select class="form-control" name="tentang" id="tentang" required></select>
                                 </div>
                                 <div class="col-2">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modalTentangBaru"><i class="fa fa-plus"></i> Tentang Baru</button>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modalTentangBaru"><i class="fas fa-plus"></i> Tentang Baru</button>
                                 </div>
                             </div>
                             <div class="form-group row">

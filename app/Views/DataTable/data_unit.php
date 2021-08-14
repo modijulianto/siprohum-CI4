@@ -20,7 +20,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <button type="button" id="tombolTambahUnit" class="btn btn-primary tombolTambahUnit" data-toggle="modal" data-target="#modalUnit" style="float: right">
-                            <i class="fa fa-plus"></i>
+                            <i class="fas fa-plus"></i>
                             Tambah Unit
                         </button>
                         <div class="card-box table-responsive">
@@ -50,8 +50,8 @@
                                             <td><?= $val['nama_singkat']; ?></td>
                                             <td>
                                                 <center>
-                                                    <button type="button" name="ubah" data-toggle="modal" data-target="#modalUnit" id="tombolUbahUnit" class="btn btn-success btn-sm tombolUbahUnit" data-id="<?= $val['id_unit']; ?>"><i class="fa fa-pencil"></i></button>
-                                                    <button href="/Unit/delete/<?= md5($val['id_unit']) ?>" type="button" class="btn btn-danger btn-sm tombol-hapus"><i class="fa fa-trash"></i></button>
+                                                    <button type="button" name="ubah" data-toggle="modal" data-target="#modalUnit" id="tombolUbahUnit" class="btn btn-success btn-sm tombolUbahUnit" data-id="<?= $val['id_unit']; ?>"><i class="fas fa-edit"></i></button>
+                                                    <button href="/Unit/delete/<?= md5($val['id_unit']) ?>" type="button" class="btn btn-danger btn-sm tombol-hapus"><i class="fas fa-trash"></i></button>
                                                 </center>
                                             </td>
                                         </tr>

@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-12 bg-dark text-light pt-2 pb-2 pl-5 ">
             Informasi dan Layanan &emsp;
-            <i class="fa fa-phone">&ensp; (0362) 22570</i> &emsp;
-            <i class="fa fa-envelope-o">&ensp; humas@undiksha.ac.id</i>
+            <i class="fas fa-phone-alt">&ensp; (0362) 22570</i> &emsp;
+            <i class="fas fa-envelope">&ensp; humas@undiksha.ac.id</i>
         </div>
     </div>
 </div>

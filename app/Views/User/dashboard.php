@@ -12,7 +12,7 @@
 <div class="row">
     <div class="animated flipInY col-6">
         <div class="tile-stats bg-primary text-light">
-            <div class="icon"><i class="fa fa-book"></i></div>
+            <div class="icon"><i class="fas fa-book"></i></div>
             <div class="count">
                 <font size="5">Produk Hukum Berlaku</font>
             </div>
@@ -21,7 +21,7 @@
     </div>
     <div class="animated flipInY col-6">
         <div class="tile-stats bg-primary text-light">
-            <div class="icon"><i class="fa fa-book"></i></div>
+            <div class="icon"><i class="fas fa-book"></i></div>
             <div class="count">
                 <font size="5">Produk Hukum Tidak Berlaku</font>
             </div>
@@ -34,7 +34,7 @@
     <?php if ($akun['role_id'] == 1) { ?>
         <div class="animated flipInY  col-lg-4 col-md-4 col-sm-6">
             <div class="tile-stats bg-info text-light">
-                <div class="icon"><i class="fa fa-user"></i></div>
+                <div class="icon"><i class="fas fa-user"></i></div>
                 <div class="count">
                     <font size="5">Admin</font>
                 </div>
@@ -43,7 +43,7 @@
         </div>
         <div class="animated flipInY col-lg-4 col-md-4 col-sm-6">
             <div class="tile-stats bg-info text-light">
-                <div class="icon"><i class="fa fa-users"></i></div>
+                <div class="icon"><i class="fas fa-users"></i></div>
                 <div class="count">
                     <font size="5">Operator</font>
                 </div>
@@ -52,7 +52,7 @@
         </div>
         <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 ">
             <div class="tile-stats bg-warning text-light">
-                <div class="icon"><i class="fa fa-remove"></i></div>
+                <div class="icon"><i class="fas fa-exclamation-circle"></i></div>
                 <div class="count">
                     <font size="5">Belum Tervalidasi</font>
                 </div>

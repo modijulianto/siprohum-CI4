@@ -7,10 +7,10 @@
     </div>
 </div>
 <div class="clearfix"></div>
-<a href="/ProdukHukum/update/<?= md5($prohum['id_produk']) ?>" class="btn btn-success mb-4"><i class="fa fa-pencil">&ensp;<b> EDIT</b></i></a>
-<a href="/ProdukHukum/delete/<?= md5($prohum['id_produk']) ?>" class="btn btn-danger mb-4 tombol-hapus"><i class="fa fa-trash">&ensp;<b> HAPUS</b></i></a>
+<a href="/ProdukHukum/update/<?= md5($prohum['id_produk']) ?>" class="btn btn-success mb-4"><i class="fas fa-pencil">&ensp;<b> EDIT</b></i></a>
+<a href="/ProdukHukum/delete/<?= md5($prohum['id_produk']) ?>" class="btn btn-danger mb-4 tombol-hapus"><i class="fas fa-trash">&ensp;<b> HAPUS</b></i></a>
 <?php if ($prohum['validasi'] == 0) { ?>
-    <button data-toggle="modal" title="Tambah Pesan" data-target="#modalPesan" class="btn btn-info mb-4"><i class="fa fa-comment">&ensp;<b> <?= ($akun['role_id'] == 3) ? 'TAMBAH PESAN' : 'LIHAT PESAN'; ?></b></i></button>
+    <button data-toggle="modal" title="Tambah Pesan" data-target="#modalPesan" class="btn btn-info mb-4"><i class="fas fa-comment">&ensp;<b> <?= ($akun['role_id'] == 3) ? 'TAMBAH PESAN' : 'LIHAT PESAN'; ?></b></i></button>
 <?php } ?>
 
 <div class="row">
@@ -54,7 +54,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonTahun"><i class="fa fa-calendar"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonTahun"><i class="fas fa-calendar"></i></div>
                             </div>
                             <input type="text" class="form-control" style="background: rgba(233, 236, 239, 0.307);" readonly value="<?= $prohum['tahun']; ?>" aria-label="Input group example" aria-describedby="btnGroupAddonTahun">
                         </div>
@@ -64,7 +64,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonJudul"><i class="fa fa-bookmark"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonJudul"><i class="fas fa-bookmark"></i></div>
                             </div>
                             <input type="text" class="form-control" style="background: rgba(233, 236, 239, 0.307);" readonly value="<?= $prohum['judul']; ?>" aria-label="Input group example" aria-describedby="btnGroupAddonJudul">
                         </div>
@@ -74,7 +74,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonTentang"><i class="fa fa-quote-right"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonTentang"><i class="fas fa-quote-right"></i></div>
                             </div>
                             <textarea name="" id="" class="form-control" style="background: rgba(233, 236, 239, 0.307);" aria-label="Input group example" rows="5" aria-describedby="btnGroupAddonTentang" readonly><?= $prohum['nama_tentang']; ?></textarea>
                         </div>
@@ -84,7 +84,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonJenis"><i class="fa fa-quote-right"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonJenis"><i class="fas fa-quote-right"></i></div>
                             </div>
                             <input type="text" style="background: rgba(233, 236, 239, 0.307);" class="form-control" readonly value="<?= $prohum['nama_jenis']; ?>" aria-label="Input group example" aria-describedby="btnGroupAddonJenis">
                         </div>
@@ -94,7 +94,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonKategori"><i class="fa fa-quote-right"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonKategori"><i class="fas fa-quote-right"></i></div>
                             </div>
                             <input type="text" style="background: rgba(233, 236, 239, 0.307);" class="form-control" readonly value="<?= $prohum['nama_kategori']; ?>" aria-label="Input group example" aria-describedby="btnGroupAddonKategori">
                         </div>
@@ -104,7 +104,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonUnit"><i class="fa fa-bank"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonUnit"><i class="fas fa-university"></i></div>
                             </div>
                             <input type="text" style="background: rgba(233, 236, 239, 0.307);" class="form-control" readonly value="<?= $prohum['nama_unit']; ?>" aria-label="Input group example" aria-describedby="btnGroupAddonUnit">
                         </div>
@@ -114,7 +114,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonDokumen"><i class="fa fa-file-pdf-o"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonDokumen"><i class="fas fa-file-alt"></i></div>
                             </div>
                             <a href="/upload/produk/<?= $prohum['file']; ?>" download="<?= $prohum['file']; ?>" class="form-control" style="background: rgba(233, 236, 239, 0.307);">
                                 <font size="3" color="black">Download</font>
@@ -141,7 +141,7 @@
                     <div class="col-12">
                         <?php if ($prohum['validasi'] == 0) { ?>
                             <button type="button" id="tombolTambahMedia" class="btn rounded btn-primary shadow tombolTambahMedia" data-toggle="modal" title="Tambah Media" data-target="#modalMedia">
-                                <i class="fa fa-plus"></i>&ensp;
+                                <i class="fas fa-plus"></i>&ensp;
                                 Tambah Media
                             </button>
                         <?php } ?>
@@ -161,7 +161,7 @@
                                         </div>
                                         <div class="col-1">
                                             <button class="btn btn-sm btn-transparent button-collapse" type="button" data-toggle="collapse" data-target="#collapseVideo" aria-expanded="false" aria-controls="collapseVideo">
-                                                <i class="fa fa-chevron-down"></i>
+                                                <i class="fas fa-chevron-down"></i>
                                             </button>
                                         </div>
                                         <div class="col-12">
@@ -172,7 +172,7 @@
                                                             <div class="col-md-4 mb-4">
                                                                 <div class="row">
                                                                     <div class="col-12 text-center"><iframe src="<?= $row['file']; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-                                                                    <div class="col-12 text-center"><a href="/ProdukHukum/delete_media/<?= md5($row['id_galeri']); ?>" class="btn btn-sm btn-danger tombol-hapus" style="width: 100%;"><i class="fa fa-trash"></i></a></div>
+                                                                    <div class="col-12 text-center"><a href="/ProdukHukum/delete_media/<?= md5($row['id_galeri']); ?>" class="btn btn-sm btn-danger tombol-hapus" style="width: 100%;"><i class="fas fa-trash"></i></a></div>
                                                                 </div>
                                                             </div>
                                                         <?php } ?>
@@ -196,7 +196,7 @@
                                         </div>
                                         <div class="col-1">
                                             <button class="btn btn-sm btn-transparent button-collapse" type="button" data-toggle="collapse" data-target="#collapseGambar" aria-expanded="false" aria-controls="collapseGambar">
-                                                <i class="fa fa-chevron-down"></i>
+                                                <i class="fas fa-chevron-down"></i>
                                             </button>
                                         </div>
                                         <div class="col-12">
@@ -210,7 +210,7 @@
                                                                         <img style="width: 100%; display: block;" src="/upload/galeri/<?= $row['file']; ?>" alt="image" />
                                                                         <div class="mask no-caption">
                                                                             <div class="tools tools-bottom">
-                                                                                <a href="/ProdukHukum/delete_media/<?= md5($row['id_galeri']); ?>" class="tombol-hapus"><i class="fa fa-trash"></i></a>
+                                                                                <a href="/ProdukHukum/delete_media/<?= md5($row['id_galeri']); ?>" class="tombol-hapus"><i class="fas fa-trash"></i></a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -247,7 +247,7 @@
                 <div class="modal-body">
                     <div class="alert alert-primary mb-3" role="alert">
                         <div class="row">
-                            <div class="col-1 text-center align-middle"><i class="fa fa-info" style="font-size: 35px;"></i></div>
+                            <div class="col-1 text-center align-middle"><i class="fas fa-info" style="font-size: 35px;"></i></div>
                             <div class="col">
                                 <div class="row">
                                     <div class="col-12">Silahkan upload foto berformat <i>.jpg, .jpeg, .gif, .png</i></div>
@@ -274,7 +274,7 @@
                             <label class="col-form-label col-md-2 col-sm-2">Link Video</label>
                             <div class="input-group col-md-10 col-sm-10">
                                 <input type="text" name="video[]" autocomplete="off" class="form-control" placeholder="Masukkan link video" />
-                                <a href="javascript:void(0)" class="btn btn-success addMore ml-1"><i class="fa fa-plus"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-success addMore ml-1"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -286,7 +286,7 @@
                         <label class="col-form-label col-md-2 col-sm-2"></label>
                         <div class="input-group col-md-10 col-sm-10">
                             <input type="text" name="video[]" autocomplete="off" class="form-control" placeholder="Masukkan link video" />
-                            <a href="javascript:void(0)" class="btn btn-danger remove ml-1"><i class="fa fa-trash"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-danger remove ml-1"><i class="fas fa-trash"></i></a>
                         </div>
                     </div>
                 </div>
@@ -309,7 +309,7 @@
                 <?php if ($akun['role_id'] == 3) { ?>
                     <div class="alert alert-primary mb-3" role="alert">
                         <div class="row">
-                            <div class="col-1"><i class="fa fa-info"></i> &emsp;</div>
+                            <div class="col-1"><i class="fas fa-info"></i> &emsp;</div>
                             <div class="col">Kirim pesan kepada Operator jika ada kesalahan dalam penulisan atau data produk hukum tidak valid.</div>
                         </div>
                     </div>
@@ -368,7 +368,7 @@
                 dataType: 'json',
                 method: 'post',
                 beforeSend: function() {
-                    $('.tombol-pesan').html('<i class="fa fa-spin fa-spinner"></i>')
+                    $('.tombol-pesan').html('<i class="fas fa-spin fa-spinner"></i>')
                     $('.tombol-pesan').attr("disabled");
                 },
                 success: function(data) {

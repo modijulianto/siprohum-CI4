@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <button type="button" id="tombolTambahKategori" class="btn btn-primary tombolTambahKategori" data-toggle="modal" data-target="#modalKategori" style="float: right">
-                            <i class="fa fa-plus"></i>
+                            <i class="fas fa-plus"></i>
                             Tambah Kategori
                         </button>
                         <div class="card-box table-responsive">
@@ -50,8 +50,8 @@
                                             <td><?= $val['nama_jenis']; ?></td>
                                             <td>
                                                 <center>
-                                                    <button type="button" name="ubah" data-toggle="modal" data-target="#modalKategori" id="tombolUbahKategori" class="btn btn-success btn-sm tombolUbahKategori" data-id="<?= $val['id_kategori']; ?>"><i class="fa fa-pencil"></i></button>
-                                                    <button href="/MasterData/delete_kategori/<?= md5($val['id_kategori']) ?>" type="button" class="btn btn-danger btn-sm tombol-hapus"><i class="fa fa-trash"></i></button>
+                                                    <button type="button" name="ubah" data-toggle="modal" data-target="#modalKategori" id="tombolUbahKategori" class="btn btn-success btn-sm tombolUbahKategori" data-id="<?= $val['id_kategori']; ?>"><i class="fas fa-edit"></i></button>
+                                                    <button href="/MasterData/delete_kategori/<?= md5($val['id_kategori']) ?>" type="button" class="btn btn-danger btn-sm tombol-hapus"><i class="fas fa-trash"></i></button>
                                                 </center>
                                             </td>
                                         </tr>

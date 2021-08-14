@@ -26,7 +26,7 @@
                 </span>
                 <div class="wrap-input100 validate-input m-b-30" data-validate="Password is required">
                     <span class="btn-show-pass">
-                        <i class="fa fa-eye"></i>
+                        <i class="fas fa-eye"></i>
                     </span>
                     <input class="input100" type="password" name="password" id="password">
                     <span class="focus-input100"></span>

@@ -13,7 +13,7 @@
     <div class="col-md-6 mt-5">
         <div class="row">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-book"></i>&ensp;<b> DOKUMEN PRODUK HUKUM </b></p>
+                <p class="pl-3"><i class="fas fa-book"></i>&ensp;<b> DOKUMEN PRODUK HUKUM </b></p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
@@ -25,7 +25,7 @@
                 <?php if ($prohum == null) { ?>
                     <div class="card mb-3 bg-transparent">
                         <div class="media position-relative">
-                            <i class="fa fa-times text-center align-middle text-secondary" style="max-width: 200px; font-size: 50px; padding: 20px 20px 20px 20px;"></i>
+                            <i class="fas fa-times text-center align-middle text-secondary" style="max-width: 200px; font-size: 50px; padding: 20px 20px 20px 20px;"></i>
                             <div class="media-body pt-2">
                                 <div class="text-secondary mt-4">
                                     <font size="5">
@@ -42,7 +42,7 @@
     <div class="col-md-6 mt-5">
         <div class="row mb-5">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-book"></i>&ensp;<b> DETAIL PRODUK HUKUM </b></p>
+                <p class="pl-3"><i class="fas fa-book"></i>&ensp;<b> DETAIL PRODUK HUKUM </b></p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
@@ -63,7 +63,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonTahun"><i class="fa fa-calendar"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonTahun"><i class="fas fa-calendar"></i></div>
                             </div>
                             <input type="text" class="form-control" style="background: rgba(233, 236, 239, 0.307);" readonly value="<?= $prohum['tahun']; ?>" aria-label="Input group example" aria-describedby="btnGroupAddonTahun">
                         </div>
@@ -73,7 +73,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonJudul"><i class="fa fa-bookmark"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonJudul"><i class="fas fa-bookmark"></i></div>
                             </div>
                             <textarea name="" id="" class="form-control" style="background: rgba(233, 236, 239, 0.307);" aria-label="Input group example" rows="2" aria-describedby="btnGroupAddonTentang" readonly><?= $prohum['judul']; ?></textarea>
                         </div>
@@ -83,7 +83,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonTentang"><i class="fa fa-quote-right"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonTentang"><i class="fas fa-quote-right"></i></div>
                             </div>
                             <textarea name="" id="" class="form-control" style="background: rgba(233, 236, 239, 0.307);" aria-label="Input group example" rows="5" aria-describedby="btnGroupAddonTentang" readonly><?= $prohum['nama_tentang']; ?></textarea>
                         </div>
@@ -93,7 +93,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonJenis"><i class="fa fa-quote-right"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonJenis"><i class="fas fa-quote-right"></i></div>
                             </div>
                             <input type="text" style="background: rgba(233, 236, 239, 0.307);" class="form-control" readonly value="<?= $prohum['nama_jenis']; ?>" aria-label="Input group example" aria-describedby="btnGroupAddonJenis">
                         </div>
@@ -103,7 +103,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonKategori"><i class="fa fa-quote-right"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonKategori"><i class="fas fa-quote-right"></i></div>
                             </div>
                             <input type="text" style="background: rgba(233, 236, 239, 0.307);" class="form-control" readonly value="<?= $prohum['nama_kategori']; ?>" aria-label="Input group example" aria-describedby="btnGroupAddonKategori">
                         </div>
@@ -113,7 +113,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonUnit"><i class="fa fa-bank"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonUnit"><i class="fas fa-university"></i></div>
                             </div>
                             <input type="text" style="background: rgba(233, 236, 239, 0.307);" class="form-control" readonly value="<?= $prohum['nama_unit']; ?>" aria-label="Input group example" aria-describedby="btnGroupAddonUnit">
                         </div>
@@ -123,7 +123,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonDokumen"><i class="fa fa-file-pdf-o"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonDokumen"><i class="fas fa-file-alt"></i></div>
                             </div>
                             <a href="/upload/produk/<?= $prohum['file']; ?>" download="<?= $prohum['file']; ?>" class="form-control" style="background: rgba(233, 236, 239, 0.307);">
                                 <font size="3" color="black">Download</font>
@@ -137,7 +137,7 @@
     <div class="col-12">
         <div class="row">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-book"></i>&ensp;<b> GALERI </b></p>
+                <p class="pl-3"><i class="fas fa-photo-video"></i>&ensp;<b> GALERI </b></p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">

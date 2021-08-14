@@ -14,14 +14,14 @@
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-book"></i>&ensp; PRODUK HUKUM TERBARU</p>
+                <p class="pl-3"><i class="fas fa-book"></i>&ensp; PRODUK HUKUM TERBARU</p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">
                 <?php foreach ($baru as $row) { ?>
                     <div class="card prohum mb-3">
                         <div class="media position-relative">
-                            <i class="fa fa-book text-center align-middle" style="max-width: 200px; font-size: 50px; padding: 30px 20px 20px 20px;"></i>
+                            <i class="fas fa-book text-center align-middle" style="max-width: 200px; font-size: 50px; padding: 30px 20px 20px 20px;"></i>
                             <div class="media-body pt-2">
                                 <b><?= $row['judul']; ?> Nomor <?= $row['no']; ?> Tahun <?= $row['tahun']; ?></b>
                                 <div class="text-secondary">
@@ -44,7 +44,7 @@
     <div class="col-md-4">
         <div class="row">
             <div class="col-md-12 text-secondary">
-                <p class="pl-3"><i class="fa fa-institution"></i>&ensp; UNIT</p>
+                <p class="pl-3"><i class="fas fa-university"></i>&ensp; UNIT</p>
                 <hr style="background-color: #288ACB; border-color: #288ACB; border-width: 2px;">
             </div>
             <div class="col-md-12">

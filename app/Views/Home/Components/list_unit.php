@@ -13,7 +13,7 @@
                 <span class="span-unit"></span>
                 <div class="row">
                     <div class="col-1 ">
-                        <i class="fa fa-institution float-left"></i>
+                        <i class="fas fa-university float-left"></i>
                     </div>
                     <div class="col-10 ">
                         <?= $row['nama_unit']; ?>
