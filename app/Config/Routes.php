@@ -92,6 +92,9 @@ $routes->get('/ProdukHukum/detail/(:any)', 'ProdukHukum::detail/$1', ['filter' =
 $routes->get('/ProdukHukum', 'ProdukHukum::index', ['filter' => 'auth']);
 $routes->get('/ProdukHukum/save_media', 'ProdukHukum::save_media', ['filter' => 'auth']);
 $routes->get('/ProdukHukum/delete_media/(:any)', 'ProdukHukum::delete_media/$1', ['filter' => 'auth']);
+
+$routes->get('/ProdukHukum/perjanjian', 'ProdukHukum::perjanjian', ['filter' => 'authproduk']);
+$routes->get('/Pihak/tambah', 'Pihak::tambah', ['filter' => 'authproduk']);
 // Untuk halaman admin
 $routes->get('/ProdukHukum/(:any)', 'ProdukHukum::produk_hukum/$1', ['filter' => 'isAdmin']);
 

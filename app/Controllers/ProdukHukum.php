@@ -7,6 +7,7 @@ use App\Models\M_admin;
 use App\Models\M_produkHukum;
 use App\Models\M_masterData;
 use M_upload;
+use Wildanfuady\WFcart\WFcart;
 
 class ProdukHukum extends BaseController
 {
@@ -26,6 +27,7 @@ class ProdukHukum extends BaseController
         $this->c_upload = new Upload();
         $this->validation = \Config\Services::validation();
         $this->request = \Config\Services::request();
+        $this->cart = new WFcart();
     }
 
     public function index()
@@ -339,6 +341,8 @@ class ProdukHukum extends BaseController
         echo json_encode($msg);
     }
 
+
+    // TAMBAH
     public function add()
     {
         $data = [
@@ -351,6 +355,24 @@ class ProdukHukum extends BaseController
         ];
 
         return view('Form/input_produk_hukum', $data);
+    }
+
+    public function perjanjian()
+    {
+        // $ak = $this->cart->totals();
+        // session()->remove('cart');
+        // dd($this->cart->totals());
+        // dd(session()->get());
+        $data = [
+            'akun' => $this->m_auth->getAkun(session()->get('email')),
+            'title' => 'Tambah Perjanjian Data Produk Hukum',
+            'meta' => 'Tambah Perjanjian Data Produk Hukum',
+            'unit' => $this->m_admin->get_unit(),
+            'kat' => $this->m_md->get_kategori(),
+            'validation' => $this->validation,
+        ];
+
+        return view('Form/input_perjanjian', $data);
     }
 
     public function save()
@@ -412,7 +434,9 @@ class ProdukHukum extends BaseController
 
         return redirect()->to('/ProdukHukum');
     }
+    // END TAMBAH
 
+    // EDIT
     public function update($id)
     {
         $data = [
@@ -511,7 +535,9 @@ class ProdukHukum extends BaseController
             return redirect()->to('/ProdukHukum');
         }
     }
+    // END EDIT
 
+    // DELETE
     public function delete($id)
     {
         $data = $this->m_prohum->get_produk_hukum_by_id($id);
@@ -541,4 +567,5 @@ class ProdukHukum extends BaseController
             }
         }
     }
+    // END DELETE
 }

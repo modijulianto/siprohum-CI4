@@ -25,7 +25,7 @@
                             Export
                         </a>
                         <?php if (session()->get('role_id') == 2) { ?>
-                            <a href="/ProdukHukum/add" class="btn btn-primary" style="float: right">
+                            <a href="#" class="btn btn-primary" style="float: right" data-toggle="modal" data-target="#modalPilihJenis">
                                 <i class="fas fa-plus"></i>
                                 Tambah Produk Hukum
                             </a>
@@ -170,57 +170,95 @@
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal Export -->
-    <div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="judulModal">Export Data Produk Hukum</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="/Export/excel_prohum" method="POST" enctype="multipart/form-data">
-                        <label>Export Berdasarkan</label><br>
-                        <select name="filter" id="filter" class="form-control">
-                            <option value="1">Semua Produk Hukum</option>
-                            <option value="2">Per Tahun</option>
-                        </select>
+<!-- Modal Export -->
+<div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="judulModal">Export Data Produk Hukum</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Export/excel_prohum" method="POST" enctype="multipart/form-data">
+                    <label>Export Berdasarkan</label><br>
+                    <select name="filter" id="filter" class="form-control">
+                        <option value="1">Semua Produk Hukum</option>
+                        <option value="2">Per Tahun</option>
+                    </select>
 
-                        <div id="form-tahun">
-                            <label>Tahun</label><br>
-                            <select name="tahun" id="tahun" class="form-control">
-                                <option value="">-- Pilih --</option>
-                                <?php foreach ($opt_tahun as $val) { ?>
-                                    <option value="<?= $val['tahun']; ?>"><?= $val['tahun']; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-
-
-                        <div class="form-group mt-4">
-                            <hr color="blue" class>
-                            <select name="filterUnit" id="filterUnit" class="form-control">
-                                <option value="1">Semua Unit</option>
-                                <option value="2">Pilih Unit</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group mt-4" id="form-unit">
-                            <!-- <label>Pilih unit : </label><br> -->
-                            <?php foreach ($unit as $val) { ?>
-                                <input type="checkbox" class="flat" value="<?= $val['id_unit']; ?>" name="unit[]">&emsp; <?= $val['nama_unit']; ?> <br>
+                    <div id="form-tahun">
+                        <label>Tahun</label><br>
+                        <select name="tahun" id="tahun" class="form-control">
+                            <option value="">-- Pilih --</option>
+                            <?php foreach ($opt_tahun as $val) { ?>
+                                <option value="<?= $val['tahun']; ?>"><?= $val['tahun']; ?></option>
                             <?php } ?>
-                        </div>
+                        </select>
+                    </div>
 
-                        <div class=" modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" id="excelProhum"><i class="fas fa-download"></i> Excel</button>
-                            <button type="submit" class="btn btn-primary" id="pdfProhum"><i class="fas fa-download"></i> Pdf</button>
-                        </div>
-                    </form>
+
+                    <div class="form-group mt-4">
+                        <hr color="blue" class>
+                        <select name="filterUnit" id="filterUnit" class="form-control">
+                            <option value="1">Semua Unit</option>
+                            <option value="2">Pilih Unit</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-4" id="form-unit">
+                        <!-- <label>Pilih unit : </label><br> -->
+                        <?php foreach ($unit as $val) { ?>
+                            <input type="checkbox" class="flat" value="<?= $val['id_unit']; ?>" name="unit[]">&emsp; <?= $val['nama_unit']; ?> <br>
+                        <?php } ?>
+                    </div>
+
+                    <div class=" modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="excelProhum"><i class="fas fa-download"></i> Excel</button>
+                        <button type="submit" class="btn btn-primary" id="pdfProhum"><i class="fas fa-download"></i> Pdf</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Pilih Jenis -->
+<div class="modal fade" id="modalPilihJenis" tabindex="-1" role="dialog" aria-labelledby="judulModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="judulModal">Pilih Jenis Produk Hukum</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a href="/ProdukHukum/add" class="btn btn-primary" style="width: 100%;">
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <i class="fas fa-book" style="font-size: 300%;"></i>
+                                </div>
+                                <div class="col-12">SK, EDARAN, PERATURAN, dll</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="/ProdukHukum/perjanjian" class="btn btn-success" style="width: 100%;">
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <i class="fas fa-handshake" style="font-size: 300%;"></i>
+                                </div>
+                                <div class="col-12">PERJANJIAN</div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
