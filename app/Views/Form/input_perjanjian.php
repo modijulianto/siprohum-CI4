@@ -92,31 +92,6 @@
                         <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target=".modalPihak"><i class="fas fa-plus"></i> Tambah Pihak</button>
                     </div>
                     <div class="col-sm-12 pihaks">
-                        <div class="alert" style="background-color: #E8F0FE;">
-                            <h6 class="mb-0"><span class="badge badge-secondary badge-lg">Pihak ke- 1</span></h6> <br>
-                            <table border="0">
-                                <tr>
-                                    <td>Nama</td>
-                                    <td>: Putu Modi Julianto</td>
-                                </tr>
-                                <tr>
-                                    <td>Lembaga</td>
-                                    <td>: Universitas Pendidikan Ganesha</td>
-                                </tr>
-                                <tr>
-                                    <td>Bagian</td>
-                                    <td>: Fakultas Teknik dan Kejuruan</td>
-                                </tr>
-                                <tr>
-                                    <td>Jabatan</td>
-                                    <td>: Dekan</td>
-                                </tr>
-                                <tr>
-                                    <td>Alamat</td>
-                                    <td>: Desa Selat</td>
-                                </tr>
-                            </table>
-                        </div>
                         <div class="pihak-pihak"></div>
                     </div>
                 </div>
@@ -227,28 +202,36 @@
 
 
 <script>
-    $('.btnSimpanPihak').click(function() {
-        var nama = $('#namaPihak').val();
-        var lembaga = $('#lembagaPihak').val();
-        var bagian = $('#bagianPihak').val();
-        var jabatan = $('#jabatanPihak').val();
-        var alamat = $('#alamatPihak').val();
-        $.ajax({
-            url: "/Pihak/tambah",
-            method: "POST",
-            data: {
-                nama: nama,
-                lembaga: lembaga,
-                bagian: bagian,
-                jabatan: jabatan,
-                alamat: alamat,
-            },
-            success: function(data) {
-                $('.pihak-pihak').html(data);
-            }
+    $(document).ready(function() {
+        $('.btnSimpanPihak').click(function() {
+            var nama = $('#namaPihak').val();
+            var lembaga = $('#lembagaPihak').val();
+            var bagian = $('#bagianPihak').val();
+            var jabatan = $('#jabatanPihak').val();
+            var alamat = $('#alamatPihak').val();
+            $.ajax({
+                url: "/Pihak/tambah",
+                method: "POST",
+                data: {
+                    nama: nama,
+                    lembaga: lembaga,
+                    bagian: bagian,
+                    jabatan: jabatan,
+                    alamat: alamat,
+                },
+                success: function(data) {
+                    $('.pihak-pihak').html(data);
+                    $('#modalPihak').modal('hide');
+                    $('#namaPihak').val("");
+                    $('#lembagaPihak').val("");
+                    $('#bagianPihak').val("");
+                    $('#jabatanPihak').val("");
+                    $('#alamatPihak').val("");
+                }
+            });
         });
-    });
 
-    $('#pihak-pihak').load("/Pihak/load_pihak");
+        $('.pihak-pihak').load("/Pihak/load_pihak");
+    });
 </script>
 <?= $this->endSection(); ?>
