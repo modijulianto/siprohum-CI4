@@ -14,6 +14,27 @@ class Pihak extends BaseController
 
     public function tambah()
     {
+        // if (!$this->validate([
+        //     'nama' => [
+        //         'rules' => 'required',
+        //         'errors' => ['required' => 'Nama penandatangan harus diisi']
+        //     ],
+        //     'lembaga' => [
+        //         'rules' => 'required',
+        //         'errors' => ['required' => 'Nama lembaga harus diisi']
+        //     ],
+        // ])) {
+        //     return redirect()->to('/ProdukHukum/add')->withInput();
+
+        // }
+
+        $nama = $this->request->getVar('nama');
+        $lembaga = $this->request->getVar('lembaga');
+
+        if ($nama == "" || $lembaga == "") {
+            return $this->fail_add();
+        }
+
         $data = [
             'nama' => $this->request->getVar('nama'),
             'lembaga' => $this->request->getVar('lembaga'),
@@ -23,7 +44,7 @@ class Pihak extends BaseController
         ];
 
         $this->cart->add_cart($data);
-        echo $this->show_pihak();
+        echo json_encode($this->show_pihak());
     }
 
     public function show_pihak()
@@ -65,5 +86,27 @@ class Pihak extends BaseController
     public function load_pihak()
     {
         echo $this->show_pihak();
+    }
+
+    public function fail_add()
+    {
+        $msg = [];
+        $nama = $this->request->getVar('nama');
+        $lembaga = $this->request->getVar('lembaga');
+
+        if ($nama == "") {
+            $msg_nama = [
+                'nama' => "Nama penandatangan harus diisi"
+            ];
+            array_push($msg, $msg_nama);
+        }
+        if ($lembaga == "") {
+            $msg_lembaga = [
+                'lembaga' => "Nama Lembaga harus diisi"
+            ];
+            array_push($msg, $msg_lembaga);
+        }
+
+        echo json_encode($msg);
     }
 }

@@ -164,13 +164,13 @@
                 <div class="row form-group">
                     <label class="col-form-label col-md-2 col-sm-2">Nama<font color="red">*</font></label>
                     <div class="col-md col-sm">
-                        <input name="namaPihak" class="form-control" id="namaPihak" placeholder="Masukkan nama penandatangan">
+                        <input name="namaPihak" class="form-control" id="namaPihak" required placeholder="Masukkan nama penandatangan">
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-form-label col-md-2 col-sm-2">Lembaga<font color="red">*</font></label>
                     <div class="col-md col-sm">
-                        <input name="lembagaPihak" class="form-control" id="lembagaPihak" placeholder="e.g. Undiksha">
+                        <input name="lembagaPihak" class="form-control" id="lembagaPihak" required placeholder="e.g. Undiksha">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -211,7 +211,6 @@
             var alamat = $('#alamatPihak').val();
             $.ajax({
                 url: "/Pihak/tambah",
-                method: "POST",
                 data: {
                     nama: nama,
                     lembaga: lembaga,
@@ -219,14 +218,25 @@
                     jabatan: jabatan,
                     alamat: alamat,
                 },
-                success: function(data) {
-                    $('.pihak-pihak').html(data);
-                    $('#modalPihak').modal('hide');
-                    $('#namaPihak').val("");
-                    $('#lembagaPihak').val("");
-                    $('#bagianPihak').val("");
-                    $('#jabatanPihak').val("");
-                    $('#alamatPihak').val("");
+                method: "POST",
+                dataType: 'json',
+                success: function(response) {
+                    if (response.nama) {
+                        console.log(response);
+                        console.log(response.gagal);
+                        console.log("gagal boss");
+                    } else {
+                        $('#modalPihak').modal('hide');
+                        $('#namaPihak').val("");
+                        $('#lembagaPihak').val("");
+                        $('#bagianPihak').val("");
+                        $('#jabatanPihak').val("");
+                        $('#alamatPihak').val("");
+                    }
+                    console.log(response)
+                    $('.pihak-pihak').html(response);
+                    // console.log(response.sukses);
+                    // console.log(response.sukses);
                 }
             });
         });
