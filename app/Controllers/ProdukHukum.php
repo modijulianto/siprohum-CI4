@@ -6,6 +6,7 @@ use App\Models\M_auth;
 use App\Models\M_admin;
 use App\Models\M_produkHukum;
 use App\Models\M_masterData;
+use App\Models\M_pihak;
 use M_upload;
 use Wildanfuady\WFcart\WFcart;
 
@@ -17,6 +18,7 @@ class ProdukHukum extends BaseController
     protected $m_md;
     protected $m_upload;
     protected $c_upload;
+    protected $m_pihak;
     public function __construct()
     {
         $this->m_auth = new M_auth();
@@ -25,6 +27,7 @@ class ProdukHukum extends BaseController
         $this->m_md = new M_masterData();
         $this->m_upload = new M_upload();
         $this->c_upload = new Upload();
+        $this->m_pihak = new M_pihak();
         $this->validation = \Config\Services::validation();
         $this->request = \Config\Services::request();
         $this->cart = new WFcart();
@@ -359,10 +362,7 @@ class ProdukHukum extends BaseController
 
     public function perjanjian()
     {
-        // $ak = $this->cart->totals();
-        // session()->remove('cart');
-        // dd($this->cart->totals());
-        // dd(session()->get());
+        dd(session()->get('cart'));
         $data = [
             'akun' => $this->m_auth->getAkun(session()->get('email')),
             'title' => 'Tambah Perjanjian Data Produk Hukum',
@@ -373,6 +373,59 @@ class ProdukHukum extends BaseController
         ];
 
         return view('Form/input_perjanjian', $data);
+    }
+
+    public function save_perjanjian()
+    {
+        if (!$this->validate([
+            'nomor' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Nomor produk hukum harus diisi']
+            ],
+            'tahun' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Tahun produk hukum harus diisi',
+                    'numeric' => 'Field tahun hanya boleh diisi dengan angka'
+                ]
+            ],
+            'judul' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Judul produk hukum harus diisi']
+            ],
+            'tentang' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Tentang produk hukum harus diisi']
+            ],
+            'produk' => [
+                'rules' => 'mime_in[produk,application/pdf,application/doc,application/docx]',
+                'errors' => ['mime_in' => 'Upload file produk hukum berformat <i>.pdf, .doc,</i> atau <i>.docx</i>']
+            ],
+        ])) {
+            return redirect()->to('/ProdukHukum/perjanjian')->withInput();
+        }
+
+        $file = $this->request->getFile('produk');
+        // generate nama random untuk nama File
+        $namaFile = $file->getRandomName();
+        // pindahkan file ke folder
+        $file->move('upload/produk', $namaFile);
+
+        $this->m_prohum->save([
+            'no' => $this->request->getVar('nomor'),
+            'id_tentang' => $this->request->getVar('tentang'),
+            'judul' => $this->request->getVar('judul'),
+            'tahun' => $this->request->getVar('tahun'),
+            'keterangan' => $this->request->getVar('keterangan'),
+            'file' => $namaFile,
+            'id_unit' => session()->get('id_unit'),
+            'created_by' => session()->get('email'),
+            'validasi' => 0
+        ]);
+
+        session()->setFlashdata('prohum', 'Ditambahkan');
+
+        return redirect()->to('/ProdukHukum');
     }
 
     public function save()
@@ -427,6 +480,7 @@ class ProdukHukum extends BaseController
             'file' => $namaFile,
             'id_unit' => session()->get('id_unit'),
             'created_by' => session()->get('email'),
+            'perjanjian' => 0,
             'validasi' => $valid
         ]);
 

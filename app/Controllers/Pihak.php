@@ -90,21 +90,25 @@ class Pihak extends BaseController
 
     public function fail_add()
     {
-        $msg = [];
         $nama = $this->request->getVar('nama');
         $lembaga = $this->request->getVar('lembaga');
 
-        if ($nama == "") {
-            $msg_nama = [
-                'nama' => "Nama penandatangan harus diisi"
-            ];
-            array_push($msg, $msg_nama);
-        }
-        if ($lembaga == "") {
-            $msg_lembaga = [
+        if ($nama == "" && $lembaga == "") {
+            $msg = [
+                'gagal' => "Gagal menambahkan pihak",
+                'nama' => "Nama penandatangan harus diisi",
                 'lembaga' => "Nama Lembaga harus diisi"
             ];
-            array_push($msg, $msg_lembaga);
+        } elseif ($nama == "") {
+            $msg = [
+                'gagal' => "Gagal menambahkan pihak",
+                'nama' => "Nama penandatangan harus diisi",
+            ];
+        } elseif ($lembaga == "") {
+            $msg = [
+                'gagal' => "Gagal menambahkan pihak",
+                'lembaga' => "Nama Lembaga harus diisi"
+            ];
         }
 
         echo json_encode($msg);

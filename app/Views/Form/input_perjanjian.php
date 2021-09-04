@@ -17,62 +17,64 @@
             <div class="x_content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="row form-group">
-                            <label class="col-form-label col-md-2 col-sm-2">Nomor<font color="red">*</font></label>
-                            <div class="col-md col-sm">
-                                <input type="text" class="form-control" autocomplete="off" name="nomor" id="nomor" placeholder="Masukkan nomor produk hukum" required value="<?= old('nomor'); ?>" />
-                                <div class="text-danger">
-                                    <?= $validation->getError('nomor'); ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <label class="col-form-label col-md-2 col-sm-2">Tahun<font color="red">*</font></label>
-                            <div class="col-md col-sm">
-                                <input type="number" class="form-control" autocomplete="off" name="tahun" id="tahun" placeholder="Masukkan tahun produk hukum" required value="<?= old('tahun'); ?>" />
-                                <div class="text-danger">
-                                    <?= $validation->getError('tahun'); ?>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row form-group">
-                            <label class="col-form-label col-md-2 col-sm-2">Judul<font color="red">*</font></label>
-                            <div class="col-md col-sm">
-                                <textarea name="judul" id="judul" class="form-control" placeholder="Masukkan judul produk hukum" rows="5" required><?= old('judul'); ?></textarea>
-                                <div class="text-danger">
-                                    <?= $validation->getError('judul'); ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <label class="col-form-label col-2">Tentang<font color="red">*</font></label>
-                            <div class="col-8">
-                                <select class="form-control" name="tentang" id="tentang" required></select>
-                            </div>
-                            <div class="col-2">
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modalTentangBaru"><i class="fas fa-plus"></i> Tentang Baru</button>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <label class="col-form-label col-md-2 col-sm-2">Keterangan</label>
-                            <div class="col-md col-sm">
-                                <input type="text" class="form-control" autocomplete="off" name="keterangan" id="keterangan" placeholder="Masukkan keterangan produk hukum" required value="<?= old('keterangan'); ?>" />
-                            </div>
-                        </div>
-
-                        <div class="custom-file">
+                        <form action="/ProdukHukum/save_perjanjian" method="post">
                             <div class="row form-group">
-                                <label class="col-form-label col-md-2 col-sm-2">File</label>
+                                <label class="col-form-label col-md-2 col-sm-2">Nomor<font color="red">*</font></label>
                                 <div class="col-md col-sm">
-                                    <input type="file" id="produk" name="produk" onchange="previewFile()" class="custom-file-input">
-                                    <label for="produk" class="custom-file-label">Pilih file...</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="nomor" id="nomor" placeholder="Masukkan nomor produk hukum" required value="<?= old('nomor'); ?>" />
                                     <div class="text-danger">
-                                        <?= $validation->getError('produk'); ?>
+                                        <?= $validation->getError('nomor'); ?>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="row form-group">
+                                <label class="col-form-label col-md-2 col-sm-2">Tahun<font color="red">*</font></label>
+                                <div class="col-md col-sm">
+                                    <input type="number" class="form-control" autocomplete="off" name="tahun" id="tahun" placeholder="Masukkan tahun produk hukum" required value="<?= old('tahun'); ?>" />
+                                    <div class="text-danger">
+                                        <?= $validation->getError('tahun'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row form-group">
+                                <label class="col-form-label col-md-2 col-sm-2">Judul<font color="red">*</font></label>
+                                <div class="col-md col-sm">
+                                    <textarea name="judul" id="judul" class="form-control" placeholder="Masukkan judul produk hukum" rows="5" required><?= old('judul'); ?></textarea>
+                                    <div class="text-danger">
+                                        <?= $validation->getError('judul'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-form-label col-2">Tentang<font color="red">*</font></label>
+                                <div class="col-8">
+                                    <select class="form-control" name="tentang" id="tentang" required></select>
+                                </div>
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modalTentangBaru"><i class="fas fa-plus"></i> Tentang Baru</button>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-form-label col-md-2 col-sm-2">Keterangan</label>
+                                <div class="col-md col-sm">
+                                    <input type="text" class="form-control" autocomplete="off" name="keterangan" id="keterangan" placeholder="Masukkan keterangan produk hukum" required value="<?= old('keterangan'); ?>" />
+                                </div>
+                            </div>
+
+                            <div class="custom-file">
+                                <div class="row form-group">
+                                    <label class="col-form-label col-md-2 col-sm-2">File</label>
+                                    <div class="col-md col-sm">
+                                        <input type="file" id="produk" name="produk" onchange="previewFile()" class="custom-file-input">
+                                        <label for="produk" class="custom-file-label">Pilih file...</label>
+                                        <div class="text-danger">
+                                            <?= $validation->getError('produk'); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -165,28 +167,30 @@
                     <label class="col-form-label col-md-2 col-sm-2">Nama<font color="red">*</font></label>
                     <div class="col-md col-sm">
                         <input name="namaPihak" class="form-control" id="namaPihak" required placeholder="Masukkan nama penandatangan">
+                        <div class="validasiNama text-danger"></div>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-form-label col-md-2 col-sm-2">Lembaga<font color="red">*</font></label>
                     <div class="col-md col-sm">
                         <input name="lembagaPihak" class="form-control" id="lembagaPihak" required placeholder="e.g. Undiksha">
+                        <div class="validasiLembaga text-danger"></div>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <label class="col-form-label col-md-2 col-sm-2">Bagian<font color="red">*</font></label>
+                    <label class="col-form-label col-md-2 col-sm-2">Bagian</label>
                     <div class="col-md col-sm">
                         <input name="bagianPihak" class="form-control" id="bagianPihak" placeholder="e.g. Fakultas Teknik dan Kejuruan">
                     </div>
                 </div>
                 <div class="row form-group">
-                    <label class="col-form-label col-md-2 col-sm-2">Jabatan<font color="red">*</font></label>
+                    <label class="col-form-label col-md-2 col-sm-2">Jabatan</label>
                     <div class="col-md col-sm">
                         <input name="jabatanPihak" class="form-control" id="jabatanPihak" placeholder="e.g. Rektor">
                     </div>
                 </div>
                 <div class="row form-group">
-                    <label class="col-form-label col-md-2 col-sm-2">Alamat<font color="red">*</font></label>
+                    <label class="col-form-label col-md-2 col-sm-2">Alamat</label>
                     <div class="col-md col-sm">
                         <input name="alamatPihak" class="form-control" id="alamatPihak" placeholder="Masukan alamat">
                     </div>
@@ -220,12 +224,22 @@
                 },
                 method: "POST",
                 dataType: 'json',
+                beforeSend: function() {
+                    $('.btnSimpanPihak').html('<i class="fas fa-spinner fa-spin"></i>');
+                },
                 success: function(response) {
-                    if (response.nama) {
-                        console.log(response);
-                        console.log(response.gagal);
-                        console.log("gagal boss");
+                    if (response.gagal != null) {
+                        if (response.nama != null) {
+                            $('.validasiNama').html(response.nama)
+                        }
+                        if (response.lembaga != null) {
+                            $('.validasiLembaga').html(response.lembaga)
+                        }
+                        // console.log(response);
+                        // console.log("gagal boss");
                     } else {
+                        $('.validasiNama').html("")
+                        $('.validasiLembaga').html("")
                         $('#modalPihak').modal('hide');
                         $('#namaPihak').val("");
                         $('#lembagaPihak').val("");
@@ -233,11 +247,12 @@
                         $('#jabatanPihak').val("");
                         $('#alamatPihak').val("");
                     }
-                    console.log(response)
+                    // console.log(response.nama);
                     $('.pihak-pihak').html(response);
+                    $('.btnSimpanPihak').html('Tambah Pihak');
                     // console.log(response.sukses);
                     // console.log(response.sukses);
-                }
+                },
             });
         });
 
