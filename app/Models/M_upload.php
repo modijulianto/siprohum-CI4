@@ -30,7 +30,7 @@ class M_upload extends Model
     {
         $this->where('md5(id_produk)', $id);
         $this->orderBy('id_upload', 'DESC');
-        return $this->findAll();
+        return $this->first();
     }
 
     public function get_galeri($id)

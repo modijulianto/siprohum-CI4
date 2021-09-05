@@ -97,9 +97,9 @@ class Home extends BaseController
 		$id_upload = $this->m_upload->get_upload_by_id_produk($id);
 		$array = [];
 
-		foreach ($id_upload as $up) {
-			$vid = $this->m_upload->get_galeri_video($up['id_upload']);
-			$gal = $this->m_upload->get_galeri_gambar($up['id_upload']);
+		if ($id_upload != null) {
+			$vid = $this->m_upload->get_galeri_video($id_upload['id_upload']);
+			$gal = $this->m_upload->get_galeri_gambar($id_upload['id_upload']);
 			array_push($array, $vid);
 			array_push($array, $gal);
 			// $array = $gal;

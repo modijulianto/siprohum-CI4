@@ -79,18 +79,25 @@ class ProdukHukum extends BaseController
             'validation' => $this->validation
         ];
 
-        $id_upload = $this->m_upload->get_upload_by_id_produk($id);
-        $array = [];
+        if ($data['prohum']['id_kategori'] == 1) {
+            $data['pihak'] = $this->m_pihak->get_pihak($data['prohum']['id_produk']);
+        }
 
-        foreach ($id_upload as $up) {
+        $id_upload = $this->m_upload->get_upload_by_id_produk($id);
+        // dd($id_upload);
+
+        $array = [];
+        // foreach ($id_upload as $up) {
+        if ($id_upload != null) {
             $files = [
-                'id_upload' => $up['id_upload'],
-                'ket' => $up['ket_upload']
+                'id_upload' => $id_upload['id_upload'],
+                'ket' => $id_upload['ket_upload']
             ];
-            $gal = $this->m_upload->get_galeri($up['id_upload']);
+            $gal = $this->m_upload->get_galeri($id_upload['id_upload']);
             array_push($files, $gal);
             $array = $files;
         }
+        // }
         $data['galeri'] = $array;
 
         return view('Detail/detail_produk_hukum', $data);
@@ -362,7 +369,7 @@ class ProdukHukum extends BaseController
 
     public function perjanjian()
     {
-        dd(session()->get('cart'));
+        // dd(session()->get('cart'));
         $data = [
             'akun' => $this->m_auth->getAkun(session()->get('email')),
             'title' => 'Tambah Perjanjian Data Produk Hukum',
@@ -377,6 +384,16 @@ class ProdukHukum extends BaseController
 
     public function save_perjanjian()
     {
+        $pihak = session()->get('cart');
+        $jml = count($pihak);
+        if (session()->get('cart') == null) {
+            session()->setFlashdata('message', '<div class="alert alert-warning" role="alert"><b>Perhatian!</b> Silahkan tambahkan minimal 2 pihak!</div>');
+            return redirect()->to('/ProdukHukum/perjanjian')->withInput();
+        } elseif ($jml < 2) {
+            session()->setFlashdata('message', '<div class="alert alert-warning" role="alert"><b>Perhatian!</b> Silahkan tambahkan minimal 2 pihak!</div>');
+            return redirect()->to('/ProdukHukum/perjanjian')->withInput();
+        }
+
         if (!$this->validate([
             'nomor' => [
                 'rules' => 'required',
@@ -399,7 +416,7 @@ class ProdukHukum extends BaseController
             ],
             'produk' => [
                 'rules' => 'mime_in[produk,application/pdf,application/doc,application/docx]',
-                'errors' => ['mime_in' => 'Upload file produk hukum berformat <i>.pdf, .doc,</i> atau <i>.docx</i>']
+                'errors' => ['mime_in' => 'Upload file perjanjian berformat <i>.pdf, .doc,</i> atau <i>.docx</i>']
             ],
         ])) {
             return redirect()->to('/ProdukHukum/perjanjian')->withInput();
@@ -413,6 +430,7 @@ class ProdukHukum extends BaseController
 
         $this->m_prohum->save([
             'no' => $this->request->getVar('nomor'),
+            'id_kategori' => 1,
             'id_tentang' => $this->request->getVar('tentang'),
             'judul' => $this->request->getVar('judul'),
             'tahun' => $this->request->getVar('tahun'),
@@ -422,7 +440,21 @@ class ProdukHukum extends BaseController
             'created_by' => session()->get('email'),
             'validasi' => 0
         ]);
+        $id_produk = $this->m_prohum->getInsertID();
 
+        $i = 1;
+        foreach ($pihak as $row) {
+            $this->m_pihak->save([
+                'id_produk' => $id_produk,
+                'pihak_ke' => $i++,
+                'lembaga' => $row['lembaga'],
+                'bagian' => $row['bagian'],
+                'penandatangan' => $row['nama'],
+                'jabatan_penandatangan' => $row['jabatan'],
+                'alamat' => $row['alamat']
+            ]);
+        }
+        session()->remove('cart');
         session()->setFlashdata('prohum', 'Ditambahkan');
 
         return redirect()->to('/ProdukHukum');
@@ -480,7 +512,6 @@ class ProdukHukum extends BaseController
             'file' => $namaFile,
             'id_unit' => session()->get('id_unit'),
             'created_by' => session()->get('email'),
-            'perjanjian' => 0,
             'validasi' => $valid
         ]);
 
@@ -594,8 +625,13 @@ class ProdukHukum extends BaseController
     // DELETE
     public function delete($id)
     {
-        $data = $this->m_prohum->get_produk_hukum_by_id($id);
+        $data = $this->m_prohum->get_prohum_id_md5($id);
         $id_upload =  $this->m_upload->get_upload_by_id_produk($id);
+        // dd($id_upload);
+
+        if ($data['id_kategori'] == 1) {
+            $this->m_pihak->delete_pihak($data['id_produk']);
+        }
 
         if (session()->get('role_id') == 1) {
             if ($data['file'] != "") {
@@ -603,19 +639,25 @@ class ProdukHukum extends BaseController
                     unlink('upload/produk/' . $data['file']);
                 }
             }
-            $this->c_upload->delete($id_upload[0]['id_upload']);
+            if ($id_upload != null) {
+                $this->c_upload->delete($id_upload['id_upload']);
+            }
             $this->m_prohum->delete($data['id_produk']);
             session()->setFlashdata('prohum', 'Dihapus');
-            return redirect()->back();
+            return redirect()->to('/ProdukHukum');
         } else {
             if ($data['id_unit'] == session()->get('id_unit')) {
                 if ($data['file'] != "") {
-                    unlink('upload/produk/' . $data['file']);
+                    if (file_exists('upload/produk/' . $data['file'])) {
+                        unlink('upload/produk/' . $data['file']);
+                    }
                 }
-                $this->c_upload->delete($id_upload[0]['id_upload']);
+                if ($id_upload != null) {
+                    $this->c_upload->delete($id_upload['id_upload']);
+                }
                 $this->m_prohum->delete($data['id_produk']);
                 session()->setFlashdata('prohum', 'Dihapus');
-                return redirect()->back();
+                return redirect()->to('/ProdukHukum');
             } else {
                 return redirect()->to('/Auth/blocked');
             }

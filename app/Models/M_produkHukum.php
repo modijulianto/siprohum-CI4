@@ -50,6 +50,12 @@ class M_produkHukum extends Model
         return $this->first();
     }
 
+    public function get_prohum_id_md5($id)
+    {
+        $this->where('md5(id_produk)', $id);
+        return $this->first();
+    }
+
     public function get_produk_hukum_by_id($id)
     {
         $this->select('*');

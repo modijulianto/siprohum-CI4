@@ -7,7 +7,7 @@
     </div>
 </div>
 <div class="clearfix"></div>
-<a href="/ProdukHukum/update/<?= md5($prohum['id_produk']) ?>" class="btn btn-success mb-4"><i class="fas fa-pencil">&ensp;<b> EDIT</b></i></a>
+<a href="/ProdukHukum/update/<?= md5($prohum['id_produk']) ?>" class="btn btn-success mb-4"><i class="fas fa-edit">&ensp;<b> EDIT</b></i></a>
 <a href="/ProdukHukum/delete/<?= md5($prohum['id_produk']) ?>" class="btn btn-danger mb-4 tombol-hapus"><i class="fas fa-trash">&ensp;<b> HAPUS</b></i></a>
 <?php if ($prohum['validasi'] == 0) { ?>
     <button data-toggle="modal" title="Tambah Pesan" data-target="#modalPesan" class="btn btn-info mb-4"><i class="fas fa-comment">&ensp;<b> <?= ($akun['role_id'] == 3) ? 'TAMBAH PESAN' : 'LIHAT PESAN'; ?></b></i></button>
@@ -114,7 +114,7 @@
                         </b>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text" id="btnGroupAddonDokumen"><i class="fas fa-file-alt"></i></div>
+                                <div class="input-group-text" id="btnGroupAddonDokumen"><i class="fas fa-download"></i></div>
                             </div>
                             <a href="/upload/produk/<?= $prohum['file']; ?>" download="<?= $prohum['file']; ?>" class="form-control" style="background: rgba(233, 236, 239, 0.307);">
                                 <font size="3" color="black">Download</font>
@@ -127,11 +127,57 @@
     </div>
 </div>
 
+<?php if ($prohum['id_kategori'] == 1) { ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>PIHAK-PIHAK YANG TERLIBAT</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <?php foreach ($pihak as $row) { ?>
+                            <div class="col-md-4">
+                                <div class="alert" style="background-color: #E8F0FE;">
+                                    <h6 class="mb-0"><span class="badge badge-primary badge-lg">Pihak ke- <?= $row['pihak_ke'] ?></span></h6> <br>
+                                    <table border="0">
+                                        <tr>
+                                            <td>Nama</td>
+                                            <td>: <?= $row['penandatangan']  ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lembaga</td>
+                                            <td>: <?= $row['lembaga']  ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bagian</td>
+                                            <td>: <?= $row['bagian']  ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jabatan</td>
+                                            <td>: <?= $row['jabatan_penandatangan']  ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Alamat</td>
+                                            <td>: <?= $row['alamat']  ?></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
 <div class="row">
     <div class="col-md-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Galleri</h2>
+                <h2>GALERI</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
