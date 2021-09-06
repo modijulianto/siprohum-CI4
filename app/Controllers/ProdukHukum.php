@@ -449,8 +449,8 @@ class ProdukHukum extends BaseController
                 'pihak_ke' => $i++,
                 'lembaga' => $row['lembaga'],
                 'bagian' => $row['bagian'],
-                'penandatangan' => $row['nama'],
-                'jabatan_penandatangan' => $row['jabatan'],
+                'penandatangan' => $row['penandatangan'],
+                'jabatan_penandatangan' => $row['jabatan_penandatangan'],
                 'alamat' => $row['alamat']
             ]);
         }
@@ -537,7 +537,15 @@ class ProdukHukum extends BaseController
         if ($data['prohum']['validasi'] == 1) {
             return redirect()->to('/Auth/forbidden');
         } else {
-            return view('Form/update_produk_hukum', $data);
+            if ($data['prohum']['id_kategori'] == 1) {
+                $pihaks = $this->m_pihak->get_pihak($data['prohum']['id_produk']);
+                // dd($pihaks);
+                // dd(session()->get('cart'));
+                $this->cart->readd($pihaks);
+                return view('Form/update_perjanjian', $data);
+            } else {
+                return view('Form/update_produk_hukum', $data);
+            }
         }
     }
 

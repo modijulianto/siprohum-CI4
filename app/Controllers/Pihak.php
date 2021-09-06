@@ -28,18 +28,18 @@ class Pihak extends BaseController
 
         // }
 
-        $nama = $this->request->getVar('nama');
+        $penandatangan = $this->request->getVar('penandatangan');
         $lembaga = $this->request->getVar('lembaga');
 
-        if ($nama == "" || $lembaga == "") {
+        if ($penandatangan == "" || $lembaga == "") {
             return $this->fail_add();
         }
 
         $data = [
-            'nama' => $this->request->getVar('nama'),
+            'penandatangan' => $this->request->getVar('penandatangan'),
             'lembaga' => $this->request->getVar('lembaga'),
             'bagian' => $this->request->getVar('bagian'),
-            'jabatan' => $this->request->getVar('jabatan'),
+            'jabatan_penandatangan' => $this->request->getVar('jabatan_penandatangan'),
             'alamat' => $this->request->getVar('alamat'),
         ];
 
@@ -59,7 +59,7 @@ class Pihak extends BaseController
                 <table border="0">
                     <tr>
                         <td>Nama</td>
-                        <td>: ' . $row['nama'] . '</td>
+                        <td>: ' . $row['penandatangan'] . '</td>
                     </tr>
                     <tr>
                         <td>Lembaga</td>
@@ -71,7 +71,7 @@ class Pihak extends BaseController
                     </tr>
                     <tr>
                         <td>Jabatan</td>
-                        <td>: ' . $row['jabatan'] . '</td>
+                        <td>: ' . $row['jabatan_penandatangan'] . '</td>
                     </tr>
                     <tr>
                         <td>Alamat</td>
@@ -90,19 +90,19 @@ class Pihak extends BaseController
 
     public function fail_add()
     {
-        $nama = $this->request->getVar('nama');
+        $penandatangan = $this->request->getVar('penandatangan');
         $lembaga = $this->request->getVar('lembaga');
 
-        if ($nama == "" && $lembaga == "") {
+        if ($penandatangan == "" && $lembaga == "") {
             $msg = [
                 'gagal' => "Gagal menambahkan pihak",
-                'nama' => "Nama penandatangan harus diisi",
+                'penandatangan' => "Nama penandatangan harus diisi",
                 'lembaga' => "Nama Lembaga harus diisi"
             ];
-        } elseif ($nama == "") {
+        } elseif ($penandatangan == "") {
             $msg = [
                 'gagal' => "Gagal menambahkan pihak",
-                'nama' => "Nama penandatangan harus diisi",
+                'penandatangan' => "Nama penandatangan harus diisi",
             ];
         } elseif ($lembaga == "") {
             $msg = [
