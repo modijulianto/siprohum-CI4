@@ -96,6 +96,36 @@
                         </div>
                         <div class="col-sm-12 pihaks">
                             <div class="pihak-pihak"></div>
+                            <div class="alert" style="background-color: #E8F0FE;">
+                                <h6 class="mb-2"><span class="badge badge-secondary badge-lg">Pihak ke- ' . $no++ . '</span>
+                                    <div class="float-right">
+                                        <button type="button" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </h6>
+                                <table border="0">
+                                    <tr>
+                                        <td>Nama</td>
+                                        <td>: ' . $row['penandatangan'] . '</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lembaga</td>
+                                        <td>: ' . $row['lembaga'] . '</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bagian</td>
+                                        <td>: ' . $row['bagian'] . '</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jabatan</td>
+                                        <td>: ' . $row['jabatan_penandatangan'] . '</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alamat</td>
+                                        <td>: ' . $row['alamat'] . '</td>
+                                    </tr>
+                                </table>
+                            </div>';
                         </div>
                     </div>
                 </div>
