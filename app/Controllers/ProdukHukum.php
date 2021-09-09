@@ -369,7 +369,14 @@ class ProdukHukum extends BaseController
 
     public function perjanjian()
     {
+        // $a = array("Name" => "Peter", "Age" => "41", "Country" => "USA");
+        // print_r(array_values($a));
+        // dd(array_values($a));
         // dd(session()->get('cart'));
+        // dd(session('cart'));
+        // $cart = array_values(session('cart'));
+        // $cart = session('cart');
+        // dd($cart);
         $data = [
             'akun' => $this->m_auth->getAkun(session()->get('email')),
             'title' => 'Tambah Perjanjian Data Produk Hukum',
@@ -384,6 +391,7 @@ class ProdukHukum extends BaseController
 
     public function save_perjanjian()
     {
+        // cek apakah pihak sudah di input atau belum
         $pihak = session()->get('cart');
         $jml = count($pihak);
         if (session()->get('cart') == null) {
@@ -568,10 +576,6 @@ class ProdukHukum extends BaseController
                 'rules' => 'required',
                 'errors' => ['required' => 'Judul produk hukum harus diisi']
             ],
-            'status' => [
-                'rules' => 'required',
-                'errors' => ['required' => 'Status produk hukum harus diisi']
-            ],
             'produk' => [
                 'rules' => 'mime_in[produk,application/pdf,application/doc,application/docx]',
                 'errors' => ['mime_in' => 'Upload file produk hukum berformat <i>.pdf, .doc,</i> atau <i>.docx</i>']
@@ -619,6 +623,113 @@ class ProdukHukum extends BaseController
             'file' => $namaFile,
             // 'id_unit' => session()->get('id_unit')
         ]);
+
+        session()->setFlashdata('prohum', 'Diubah');
+
+        if (session()->get('role_id') == 1) {
+            return redirect()->to('/ProdukHukum/' . md5($this->request->getVar('id_unit')));
+        } else {
+            return redirect()->to('/ProdukHukum');
+        }
+    }
+
+    public function save_update_perjanjian()
+    {
+        // cek apakah pihak sudah di input atau belum
+        $pihak = session()->get('cart');
+        $jml = count($pihak);
+        if (session()->get('cart') == null) {
+            session()->setFlashdata('message', '<div class="alert alert-warning" role="alert"><b>Perhatian!</b> Silahkan tambahkan minimal 2 pihak!</div>');
+            return redirect()->to('/ProdukHukum/perjanjian')->withInput();
+        } elseif ($jml < 2) {
+            session()->setFlashdata('message', '<div class="alert alert-warning" role="alert"><b>Perhatian!</b> Silahkan tambahkan minimal 2 pihak!</div>');
+            return redirect()->to('/ProdukHukum/perjanjian')->withInput();
+        }
+
+        if (!$this->validate([
+            'nomor' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Nomor produk hukum harus diisi']
+            ],
+            'tahun' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Tahun produk hukum harus diisi',
+                    'numeric' => 'Field tahun hanya boleh diisi dengan angka'
+                ]
+            ],
+            'judul' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Judul produk hukum harus diisi']
+            ],
+            'tentang' => [
+                'rules' => 'required',
+                'errors' => ['required' => 'Tentang produk hukum harus diisi']
+            ],
+            'produk' => [
+                'rules' => 'mime_in[produk,application/pdf,application/doc,application/docx]',
+                'errors' => ['mime_in' => 'Upload file perjanjian berformat <i>.pdf, .doc,</i> atau <i>.docx</i>']
+            ],
+        ])) {
+            return redirect()->to('/ProdukHukum/update/' . md5($this->request->getVar('id')))->withInput();
+        }
+
+        $file = $this->request->getFile('produk');
+        $old_produk = $this->request->getVar('old_produk');
+
+        // cek file, apakah tetap file yang lama
+        if ($file->getError() == 4) {
+            $namaFile = $old_produk;
+        } else {
+            // generate nama file random untuk nama foto
+            $namaFile = $file->getRandomName();
+
+            // pindahkan file ke folder
+            $file->move('upload/produk', $namaFile);
+
+            // Hapus file lama
+            if ($old_produk != "") {
+                unlink('upload/produk/' . $old_produk);
+            }
+        }
+
+        $tentangBaru = $this->request->getVar('tentang');
+        $tentangLama = $this->request->getVar('old_tentang');
+        if ($tentangBaru) {
+            $id_tentang = $tentangBaru;
+        } else {
+            $id_tentang = $tentangLama;
+        }
+
+        $this->m_prohum->save([
+            'id_produk' => $this->request->getVar('id'),
+            'no' => $this->request->getVar('nomor'),
+            'id_tentang' => $id_tentang,
+            'judul' => $this->request->getVar('judul'),
+            'tahun' => $this->request->getVar('tahun'),
+            'status' => $this->request->getVar('status'),
+            'keterangan' => $this->request->getVar('keterangan'),
+            'file' => $namaFile,
+            // 'id_unit' => session()->get('id_unit')
+        ]);
+
+        // menghapus pihak-pihak lama sebelum pihak di insert ulang dengan pihak yang baru
+        $this->m_pihak->delete_pihak($this->request->getVar('id'));
+
+        // insert pihak baru
+        $i = 1;
+        foreach ($pihak as $row) {
+            $this->m_pihak->save([
+                'id_produk' => $this->request->getVar('id'),
+                'pihak_ke' => $i++,
+                'lembaga' => $row['lembaga'],
+                'bagian' => $row['bagian'],
+                'penandatangan' => $row['penandatangan'],
+                'jabatan_penandatangan' => $row['jabatan_penandatangan'],
+                'alamat' => $row['alamat']
+            ]);
+        }
+        session()->remove('cart');
 
         session()->setFlashdata('prohum', 'Diubah');
 

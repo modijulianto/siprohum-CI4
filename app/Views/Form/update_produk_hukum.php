@@ -78,13 +78,6 @@
                                     <input type="text" class="form-control" autocomplete="off" name="keterangan" id="keterangan" placeholder="Masukkan keterangan produk hukum" required="required" value="<?= (isset($prohum['keterangan'])) ? $prohum['keterangan'] : set_value('keterangan'); ?>" />
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-2 col-sm-2">Status</label>
-                                <div class="col-md col-sm ">
-                                    <input type="radio" class="flat" <?= ($prohum['status'] == 'Berlaku') ? 'checked' : ''; ?> name="status" value="Berlaku"> Berlaku <br>
-                                    <input type="radio" class="flat" <?= ($prohum['status'] == 'Tidak Berlaku') ? 'checked' : ''; ?> name="status" value="Tidak Berlaku"> Tidak Berlaku
-                                </div>
-                            </div>
                             <div class="custom-file">
                                 <div class="row form-group">
                                     <label class="col-form-label col-md-2 col-sm-2">File</label>

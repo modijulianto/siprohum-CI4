@@ -14,6 +14,9 @@ class Pihak extends BaseController
 
     public function tambah()
     {
+        if ($this->request->getVar('no') != "") {
+            return $this->update_pihak();
+        }
         // if (!$this->validate([
         //     'nama' => [
         //         'rules' => 'required',
@@ -44,18 +47,54 @@ class Pihak extends BaseController
         ];
 
         $this->cart->add_cart($data);
-        echo json_encode($this->show_pihak());
+        $result = [
+            'tambah' => 'Pihak berhasil di tambah',
+            'pihaks' => $this->show_pihak()
+        ];
+        echo json_encode($result);
+    }
+
+    public function update_pihak()
+    {
+        $penandatangan = $this->request->getVar('penandatangan');
+        $lembaga = $this->request->getVar('lembaga');
+
+        if ($penandatangan == "" || $lembaga == "") {
+            return $this->fail_add();
+        }
+
+        $pihak = array_values(session('cart'));
+        $pihak[$_POST['no']] = [
+            'penandatangan' => $_POST['penandatangan'],
+            'lembaga' => $_POST['lembaga'],
+            'bagian' => $_POST['bagian'],
+            'jabatan_penandatangan' => $_POST['jabatan_penandatangan'],
+            'alamat' => $_POST['alamat'],
+        ];
+
+        session()->set('cart', $pihak);
+        $result = [
+            'edit' => 'Pihak berhasil di update',
+            'pihaks' => $this->show_pihak()
+        ];
+        echo json_encode($result);
     }
 
     public function show_pihak()
     {
         $output = '';
         $no = 1;
+        $arr_no = 0;
 
         foreach ($this->cart->totals() as $row) {
             $output .= '
             <div class="alert" style="background-color: #E8F0FE;">
-                <h6 class="mb-0"><span class="badge badge-secondary badge-lg">Pihak ke- ' . $no++ . '</span></h6> <br>
+                <h6 class="mb-2"><span class="badge badge-secondary badge-lg">Pihak ke- ' . $no++ . '</span>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-sm btn-info edit-pihak" data-toggle="modal" data-target=".modalPihak" onclick="edit_pihak(' . $arr_no . ')"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-sm btn-danger hapus-pihak" onclick="hapus_pihak(' . $arr_no++ . ')"><i class="fas fa-trash"></i></button>
+                    </div>
+                </h6>
                 <table border="0">
                     <tr>
                         <td>Nama</td>
@@ -112,5 +151,17 @@ class Pihak extends BaseController
         }
 
         echo json_encode($msg);
+    }
+
+    public function edit_pihak($id)
+    {
+        return json_encode($this->cart->load_pihak_for_edit($id));
+    }
+
+    public function hapus_pihak()
+    {
+        $this->cart->hapus_pihak($_POST['id']);
+
+        return json_encode($this->show_pihak());
     }
 }

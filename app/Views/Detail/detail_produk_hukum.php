@@ -7,10 +7,12 @@
     </div>
 </div>
 <div class="clearfix"></div>
-<a href="/ProdukHukum/update/<?= md5($prohum['id_produk']) ?>" class="btn btn-success mb-4"><i class="fas fa-edit">&ensp;<b> EDIT</b></i></a>
-<a href="/ProdukHukum/delete/<?= md5($prohum['id_produk']) ?>" class="btn btn-danger mb-4 tombol-hapus"><i class="fas fa-trash">&ensp;<b> HAPUS</b></i></a>
-<?php if ($prohum['validasi'] == 0) { ?>
-    <button data-toggle="modal" title="Tambah Pesan" data-target="#modalPesan" class="btn btn-info mb-4"><i class="fas fa-comment">&ensp;<b> <?= ($akun['role_id'] == 3) ? 'TAMBAH PESAN' : 'LIHAT PESAN'; ?></b></i></button>
+<?php if ($akun['role_id'] != 1) { ?>
+    <a href="/ProdukHukum/update/<?= md5($prohum['id_produk']) ?>" class="btn btn-success mb-4"><i class="fas fa-edit">&ensp;<b> EDIT</b></i></a>
+    <a href="/ProdukHukum/delete/<?= md5($prohum['id_produk']) ?>" class="btn btn-danger mb-4 tombol-hapus"><i class="fas fa-trash">&ensp;<b> HAPUS</b></i></a>
+    <?php if ($prohum['validasi'] == 0) { ?>
+        <button data-toggle="modal" title="Tambah Pesan" data-target="#modalPesan" class="btn btn-info mb-4"><i class="fas fa-comment">&ensp;<b> <?= ($akun['role_id'] == 3) ? 'TAMBAH PESAN' : 'LIHAT PESAN'; ?></b></i></button>
+    <?php } ?>
 <?php } ?>
 
 <div class="row">

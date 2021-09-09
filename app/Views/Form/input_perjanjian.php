@@ -19,7 +19,6 @@
                 <div class="x_content">
                     <div class="row">
                         <div class="col-sm-12">
-                            <?php $validation->getErrors(); ?>
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Nomor<font color="red">*</font></label>
                                 <div class="col-md col-sm">
@@ -92,7 +91,7 @@
                 <div class="x_content">
                     <div class="row">
                         <div class="col-sm-12 mb-3">
-                            <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target=".modalPihak"><i class="fas fa-plus"></i> Tambah Pihak</button>
+                            <button type="button" class="btn btn-primary btn-sm float-right tambah-pihak" data-toggle="modal" data-target=".modalPihak"><i class="fas fa-plus"></i> Tambah Pihak</button>
                         </div>
                         <div class="col-sm-12 pihaks">
                             <div class="pihak-pihak"></div>
@@ -100,7 +99,7 @@
                                 <h6 class="mb-2"><span class="badge badge-secondary badge-lg">Pihak ke- ' . $no++ . '</span>
                                     <div class="float-right">
                                         <button type="button" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger hapus-pihak" data-no="1"><i class="fas fa-trash"></i></button>
                                     </div>
                                 </h6>
                                 <table border="0">
@@ -125,7 +124,7 @@
                                         <td>: ' . $row['alamat'] . '</td>
                                     </tr>
                                 </table>
-                            </div>';
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -195,6 +194,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                <input type="text" name="no" id="no">
                 <div class="row form-group">
                     <label class="col-form-label col-md-2 col-sm-2">Nama<font color="red">*</font></label>
                     <div class="col-md col-sm">
@@ -240,6 +240,8 @@
 <script>
     $(document).ready(function() {
         $('.btnSimpanPihak').click(function() {
+            $('.btnSimpanPihak').html("Tambah Pihak");
+            var no = $('#no').val();
             var penandatangan = $('#penandatangan').val();
             var lembaga = $('#lembaga').val();
             var bagian = $('#bagian').val();
@@ -248,6 +250,7 @@
             $.ajax({
                 url: "/Pihak/tambah",
                 data: {
+                    no: no,
                     penandatangan: penandatangan,
                     lembaga: lembaga,
                     bagian: bagian,
@@ -260,6 +263,7 @@
                     $('.btnSimpanPihak').html('<i class="fas fa-spinner fa-spin"></i>');
                 },
                 success: function(response) {
+                    // jika nama penandatangan atau lembaga tidak diisi, maka muncul error
                     if (response.gagal != null) {
                         if (response.penandatangan != null) {
                             $('.validasiPenandatangan').html(response.penandatangan)
@@ -267,8 +271,6 @@
                         if (response.lembaga != null) {
                             $('.validasiLembaga').html(response.lembaga)
                         }
-                        // console.log(response);
-                        // console.log("gagal boss");
                     } else {
                         $('.validasiPenandatangan').html("")
                         $('.validasiLembaga').html("")
@@ -279,13 +281,79 @@
                         $('#jabatan_penandatangan').val("");
                         $('#alamat').val("");
                     }
-                    $('.pihak-pihak').html(response);
+
+                    if (response.tambah) {
+                        new PNotify({
+                            title: "Ditambah",
+                            text: response.tambah,
+                            type: 'success',
+                            styling: 'bootstrap3'
+                        });
+                    } else {
+                        new PNotify({
+                            title: "Diupdate",
+                            text: response.edit,
+                            type: 'success',
+                            styling: 'bootstrap3'
+                        });
+                    }
+
+                    $('.pihak-pihak').html(response.pihaks);
                     $('.btnSimpanPihak').html('Tambah Pihak');
                 },
             });
         });
 
         $('.pihak-pihak').load("/Pihak/load_pihak");
+
+        $('.tambah-pihak').click(function() {
+            $('#no').val("");
+            $('#penandatangan').val("");
+            $('#lembaga').val("");
+            $('#bagian').val("");
+            $('#jabatan_penandatangan').val("");
+            $('#alamat').val("");
+        });
+
     });
+
+    function edit_pihak(id) {
+        // console.log(id);
+        $('.btnSimpanPihak').html("Update Pihak");
+        $.ajax({
+            url: '/Pihak/edit_pihak/' + id,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                $('#no').val(id);
+                $('#penandatangan').val(data.penandatangan);
+                $('#lembaga').val(data.lembaga);
+                $('#bagian').val(data.bagian);
+                $('#jabatan_penandatangan').val(data.jabatan_penandatangan);
+                $('#alamat').val(data.alamat);
+            }
+        });
+    }
+
+    function hapus_pihak(id) {
+        // console.log(id);
+        $.ajax({
+            url: '/Pihak/hapus_pihak',
+            data: {
+                id: id
+            },
+            method: 'POST',
+            dataType: 'json',
+            success: function(data) {
+                new PNotify({
+                    title: "Dihapus",
+                    text: "Pihak berhasil dihapus",
+                    type: 'success',
+                    styling: 'bootstrap3'
+                });
+                $('.pihak-pihak').html(data);
+            }
+        });
+    }
 </script>
 <?= $this->endSection(); ?>

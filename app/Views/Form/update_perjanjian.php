@@ -7,7 +7,7 @@
 </div>
 <div class="clearfix"></div>
 <?= session()->getFlashdata('message'); ?>
-<form action="/ProdukHukum/save_perjanjian" method="post" enctype="multipart/form-data">
+<form action="/ProdukHukum/save_update_perjanjian" method="post" enctype="multipart/form-data">
     <button type="submit" class="btn btn-success mt-3"><i class="fas fa-save"></i> SIMPAN</button>
     <div class="row">
         <div class="col-md-7 col-sm-7 ">
@@ -19,7 +19,7 @@
                 <div class="x_content">
                     <div class="row">
                         <div class="col-sm-12">
-                            <?php $validation->getErrors(); ?>
+                            <input type="text" name="id" id="id" value="<?= $prohum['id_produk']; ?>">
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Nomor<font color="red">*</font></label>
                                 <div class="col-md col-sm">
@@ -59,6 +59,7 @@
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modalTentangBaru"><i class="fas fa-plus"></i> Tentang Baru</button>
                                 </div>
                             </div>
+                            <input type="hidden" name="old_tentang" id="old_tentang" value="<?= $prohum['id_tentang']; ?>">
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Keterangan</label>
                                 <div class="col-md col-sm">
@@ -78,6 +79,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="old_produk" id="old_produk" value="<?= $prohum['file']; ?>">
                         </div>
                     </div>
                 </div>
@@ -167,11 +169,12 @@
                 </button>
             </div>
             <div class="modal-body">
+                <input type="text" name="no" id="no">
                 <div class="row form-group">
                     <label class="col-form-label col-md-2 col-sm-2">Nama<font color="red">*</font></label>
                     <div class="col-md col-sm">
                         <input name="penandatangan" class="form-control" id="penandatangan" required placeholder="Masukkan nama penandatangan">
-                        <div class="validasiNama text-danger"></div>
+                        <div class="validasiPenandatangan text-danger"></div>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -212,6 +215,8 @@
 <script>
     $(document).ready(function() {
         $('.btnSimpanPihak').click(function() {
+            $('.btnSimpanPihak').html("Tambah Pihak");
+            var no = $('#no').val();
             var penandatangan = $('#penandatangan').val();
             var lembaga = $('#lembaga').val();
             var bagian = $('#bagian').val();
@@ -220,6 +225,7 @@
             $.ajax({
                 url: "/Pihak/tambah",
                 data: {
+                    no: no,
                     penandatangan: penandatangan,
                     lembaga: lembaga,
                     bagian: bagian,
@@ -232,6 +238,7 @@
                     $('.btnSimpanPihak').html('<i class="fas fa-spinner fa-spin"></i>');
                 },
                 success: function(response) {
+                    // jika nama penandatangan atau lembaga tidak diisi, maka muncul error
                     if (response.gagal != null) {
                         if (response.penandatangan != null) {
                             $('.validasiPenandatangan').html(response.penandatangan)
@@ -239,8 +246,6 @@
                         if (response.lembaga != null) {
                             $('.validasiLembaga').html(response.lembaga)
                         }
-                        // console.log(response);
-                        // console.log("gagal boss");
                     } else {
                         $('.validasiPenandatangan').html("")
                         $('.validasiLembaga').html("")
@@ -251,13 +256,79 @@
                         $('#jabatan_penandatangan').val("");
                         $('#alamat').val("");
                     }
-                    $('.pihak-pihak').html(response);
+
+                    if (response.tambah) {
+                        new PNotify({
+                            title: "Ditambah",
+                            text: response.tambah,
+                            type: 'success',
+                            styling: 'bootstrap3'
+                        });
+                    } else {
+                        new PNotify({
+                            title: "Diupdate",
+                            text: response.edit,
+                            type: 'success',
+                            styling: 'bootstrap3'
+                        });
+                    }
+
+                    $('.pihak-pihak').html(response.pihaks);
                     $('.btnSimpanPihak').html('Tambah Pihak');
                 },
             });
         });
 
         $('.pihak-pihak').load("/Pihak/load_pihak");
+
+        $('.tambah-pihak').click(function() {
+            $('#no').val("");
+            $('#penandatangan').val("");
+            $('#lembaga').val("");
+            $('#bagian').val("");
+            $('#jabatan_penandatangan').val("");
+            $('#alamat').val("");
+        });
+
     });
+
+    function edit_pihak(id) {
+        // console.log(id);
+        $('.btnSimpanPihak').html("Update Pihak");
+        $.ajax({
+            url: '/Pihak/edit_pihak/' + id,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                $('#no').val(id);
+                $('#penandatangan').val(data.penandatangan);
+                $('#lembaga').val(data.lembaga);
+                $('#bagian').val(data.bagian);
+                $('#jabatan_penandatangan').val(data.jabatan_penandatangan);
+                $('#alamat').val(data.alamat);
+            }
+        });
+    }
+
+    function hapus_pihak(id) {
+        // console.log(id);
+        $.ajax({
+            url: '/Pihak/hapus_pihak',
+            data: {
+                id: id
+            },
+            method: 'POST',
+            dataType: 'json',
+            success: function(data) {
+                new PNotify({
+                    title: "Dihapus",
+                    text: "Pihak berhasil dihapus",
+                    type: 'success',
+                    styling: 'bootstrap3'
+                });
+                $('.pihak-pihak').html(data);
+            }
+        });
+    }
 </script>
 <?= $this->endSection(); ?>
