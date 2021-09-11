@@ -17,17 +17,27 @@ class M_home extends Model
         $this->join('tb_tentang', 'tb_tentang.id_tentang=tb_produk.id_tentang');
         $this->join('tb_unit', 'tb_unit.id_unit=tb_produk.id_unit');
 
-        foreach ($pecah as $val) {
-            $this->orLike('judul', $val);
-            $this->orLike('nama_tentang', $val);
-        }
         $this->like('no', $cari['no']);
-        $this->like('tahun', $cari['tahun']);
         $this->like('tb_produk.id_unit', $cari['id_unit']);
+        $this->like('tahun', $cari['tahun']);
         $this->like('id_kategori', $cari['id_kategori']);
         $this->like('status', $cari['status']);
-        $this->where('validasi', 1);
+        $this->like('validasi', 1);
+        $this->orderBy('tahun', 'DESC');
+
+        $i = 0;
+        foreach ($pecah as $val) {
+            if ($i == 0) {
+                $this->like('judul', $val);
+            } else {
+                $this->orLike('judul', $val);
+            }
+            $i++;
+        }
+
         return $this->paginate(10, 'tb_produk');
+
+        // $this->db->table('')->havingLike()
     }
 
     public function get_unit()

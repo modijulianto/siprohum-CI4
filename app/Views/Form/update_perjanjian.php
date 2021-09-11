@@ -19,7 +19,7 @@
                 <div class="x_content">
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="text" name="id" id="id" value="<?= $prohum['id_produk']; ?>">
+                            <input type="hidden" name="id" id="id" value="<?= $prohum['id_produk']; ?>">
                             <div class="row form-group">
                                 <label class="col-form-label col-md-2 col-sm-2">Nomor<font color="red">*</font></label>
                                 <div class="col-md col-sm">
@@ -169,7 +169,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <input type="text" name="no" id="no">
+                <input type="hidden" name="no" id="no">
                 <div class="row form-group">
                     <label class="col-form-label col-md-2 col-sm-2">Nama<font color="red">*</font></label>
                     <div class="col-md col-sm">

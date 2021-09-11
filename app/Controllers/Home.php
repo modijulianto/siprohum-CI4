@@ -73,6 +73,7 @@ class Home extends BaseController
 		$data['title'] = 'Hasil Pencarian - Sistem Informasi Produk Hukum Undiksha';
 		$data['title_navbar'] = 'Pencarian';
 		$data['prohum'] = $this->m_home->cari($this->request->getVar());
+		// dd($data['prohum']);
 		$data['pager'] = $this->m_home->pager;
 
 		$data['unit'] = $this->m_home->get_unit();
