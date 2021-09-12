@@ -103,6 +103,7 @@ class M_home extends Model
             ->select('COUNT(IF(status="Berlaku", tahun, NULL)) AS berlaku')
             ->groupBy('tahun')
             ->orderBy('tahun', 'ASC')
+            ->where('validasi', 1)
             ->get()->getResultArray();
     }
 
